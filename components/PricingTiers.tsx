@@ -155,6 +155,11 @@ export default function PricingTiers() {
           </p>
         </div>
       </motion.div>
+
+      {/* Pricing Disclaimer */}
+      <div className="mt-8 text-xs text-muted-foreground text-center">
+        <p>Pricing subject to change. Contact Direct Care Indy for current rates and enrollment details.</p>
+      </div>
     </div>
   );
 }

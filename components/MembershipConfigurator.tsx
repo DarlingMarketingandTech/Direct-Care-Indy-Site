@@ -183,6 +183,11 @@ export function MembershipConfigurator() {
                   No matter how many members you add, your household will never pay more than ${FAMILY_CAP}/month.
                 </p>
               </div>
+
+              {/* Pricing Disclaimer */}
+              <div className="text-xs text-gray-600 text-center mt-4">
+                <p>Pricing subject to change. Contact Direct Care Indy for current rates and enrollment details.</p>
+              </div>
             </CardContent>
           </Card>
         </div>

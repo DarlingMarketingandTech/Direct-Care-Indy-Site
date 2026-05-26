@@ -9,6 +9,7 @@ export function SavingsPersonas() {
       pain: "Skips bloodwork due to surprise $200 lab bills.",
       gain: "Gets same-day care for $69/mo. Lab work is wholesale ($5).",
       savings: "$2,400/yr",
+      savingsQualifier: "estimated based on typical usage and pricing",
       personaType: "self_employed_trades" as const,
     },
     {
@@ -16,6 +17,7 @@ export function SavingsPersonas() {
       pain: "Pays $150 every time a kid has a fever.",
       gain: "Unlimited visits for a $250 family cap. No co-pays.",
       savings: "$4,560/yr",
+      savingsQualifier: "estimated based on typical usage and pricing",
       personaType: "high_deductible_family" as const,
     },
     {
@@ -23,6 +25,7 @@ export function SavingsPersonas() {
       pain: "Insurance premiums spiking 15% every year.",
       gain: "Switched to DPC + Wraparound. Premiums stabilized.",
       savings: "$4,700/employee",
+      savingsQualifier: "estimated; actual results vary",
       personaType: "small_business_owner" as const,
     },
   ];
@@ -40,7 +43,10 @@ export function SavingsPersonas() {
             <p className="text-sm text-gray-600 font-medium">Solution: {p.gain}</p>
             <div className="pt-4 border-t border-gray-200">
               <span className="text-xs uppercase text-gray-400">Est. Annual Savings</span>
-              <p className="text-2xl font-bold text-teal-600 mb-4">{p.savings}</p>
+              <p className="text-2xl font-bold text-teal-600 mb-2">{p.savings}</p>
+              {p.savingsQualifier && (
+                <p className="text-xs text-gray-500 mb-4 italic">{p.savingsQualifier}</p>
+              )}
               <PersonaButton
                 persona={p.personaType}
                 action="view_pricing_from_persona"

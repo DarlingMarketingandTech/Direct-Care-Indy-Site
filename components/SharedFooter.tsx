@@ -49,10 +49,12 @@ export function SharedFooter() {
               <span className="font-semibold">Member of the DPC Alliance</span>
             </div>
 
-            <div className="flex items-center gap-2 bg-muted text-muted-foreground px-4 py-2 rounded-full border border-border">
-              <Shield className="w-5 h-5 text-secondary" />
-              <span className="font-semibold">2026 HSA Approved</span>
-            </div>
+            {process.env.NEXT_PUBLIC_HSA_APPROVED === 'true' && (
+              <div className="flex items-center gap-2 bg-muted text-muted-foreground px-4 py-2 rounded-full border border-border">
+                <Shield className="w-5 h-5 text-secondary" />
+                <span className="font-semibold">2026 HSA Approved</span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -115,14 +117,6 @@ export function SharedFooter() {
                   className="text-muted-foreground hover:text-secondary transition-colors"
                 >
                   Partnerships
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/tech-strategy"
-                  className="text-muted-foreground hover:text-secondary transition-colors text-xs opacity-70"
-                >
-                  Admin: Tech Strategy
                 </Link>
               </li>
             </ul>

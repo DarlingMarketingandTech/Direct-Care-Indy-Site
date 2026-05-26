@@ -211,6 +211,22 @@ export default function Home() {
       <section className="section-padding bg-muted/30">
         <div className="content-container">
           <MembershipConfigurator />
+          {/* Pricing Disclaimer */}
+          <div className="mt-6 text-xs text-muted-foreground text-center">
+            <p>Pricing subject to change. Contact Direct Care Indy for current rates and enrollment details.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Insurance Disclaimer */}
+      <section className="section-padding">
+        <div className="content-container">
+          <div className="max-w-3xl mx-auto bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-6 text-center">
+            <p className="text-sm text-blue-900 dark:text-blue-200">
+              <strong>Important:</strong> Direct Care Indy membership is not health insurance.
+              We recommend maintaining insurance coverage for emergencies, hospitalizations, and specialist care.
+            </p>
+          </div>
         </div>
       </section>
 
