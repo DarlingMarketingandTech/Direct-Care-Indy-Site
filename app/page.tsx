@@ -218,6 +218,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Insurance Disclaimer */}
+      <section className="section-padding">
+        <div className="content-container">
+          <div className="max-w-3xl mx-auto bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-6 text-center">
+            <p className="text-sm text-blue-900 dark:text-blue-200">
+              <strong>Important:</strong> Direct Care Indy membership is not health insurance.
+              We recommend maintaining insurance coverage for emergencies, hospitalizations, and specialist care.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Credentials Ribbon */}
       <section className="section-padding">
         <div className="content-container">
