@@ -211,6 +211,10 @@ export default function Home() {
       <section className="section-padding bg-muted/30">
         <div className="content-container">
           <MembershipConfigurator />
+          {/* Pricing Disclaimer */}
+          <div className="mt-6 text-xs text-muted-foreground text-center">
+            <p>Pricing subject to change. Contact Direct Care Indy for current rates and enrollment details.</p>
+          </div>
         </div>
       </section>
 

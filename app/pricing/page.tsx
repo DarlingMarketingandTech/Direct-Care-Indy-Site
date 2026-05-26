@@ -22,6 +22,8 @@ export default function Pricing() {
           <p className="text-xl max-w-2xl mx-auto">
             One flat monthly fee. No hidden costs. No copays. No deductibles.
           </p>
+          {/* Pricing Disclaimer */}
+          <p className="text-sm mt-6 opacity-90">Pricing subject to change. Contact Direct Care Indy for current rates and enrollment details.</p>
         </div>
       </section>
 
