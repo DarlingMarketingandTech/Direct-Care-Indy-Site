@@ -19,21 +19,19 @@ export default function PWAInstallPrompt() {
       window.matchMedia('(display-mode: standalone)').matches ||
       (window.navigator as any).standalone === true;
 
-    const standaloneTimer = window.setTimeout(() => {
-      setIsStandalone(isInStandaloneMode);
-    }, 0);
-
     // Check if user previously dismissed
     const dismissed = localStorage.getItem('pwa-install-dismissed');
     if (dismissed) {
       const dismissedDate = new Date(dismissed);
       const daysSinceDismissed = (Date.now() - dismissedDate.getTime()) / (1000 * 60 * 60 * 24);
       if (daysSinceDismissed < 7) {
-        return () => {
-          window.clearTimeout(standaloneTimer);
-        };
+        return;
       }
     }
+
+    const standaloneTimer = window.setTimeout(() => {
+      setIsStandalone(isInStandaloneMode);
+    }, 0);
 
     // Listen for beforeinstallprompt
     const handleBeforeInstallPrompt = (e: Event) => {

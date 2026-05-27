@@ -21,8 +21,7 @@ This repo displays claims in these locations:
 | **Pricing** | `app/page.tsx`, `app/pricing/page.tsx`, components | See master register | Finance |
 | **Testimonials** | `components/Testimonials.tsx` | Gated (needs approval) | Marketing + Legal |
 | **Savings estimates** | `components/SavingsPersonas.tsx` | Qualified with language | Finance |
-| **HSA/FSA** | `components/HsaBadge.tsx`, HSA badge/pricing-tier surfaces in `components/PricingTiers.tsx` | Env-gated with `NEXT_PUBLIC_HSA_APPROVED` | Legal |
-| **Other HSA/FSA language** | Public app/component/lib metadata and content surfaces outside the HSA badge/pricing-tier gate | Approval-gated unless separately wrapped or removed | Legal |
+| **HSA/FSA** | `components/PricingTiers.tsx`, `components/HsaBadge.tsx`, `components/HsaStatusTracker.tsx`, `app/faq/page.tsx`, `components/SharedFooter.tsx` | Badge/pricing-tier surfaces are env-gated; other HSA/FSA copy remains approval-gated unless separately wrapped, softened, or approved. | Legal |
 | **Lab/pharmacy pricing** | `components/LabPharmacySavingsTable.tsx` | Needs verification | Partnerships |
 | **Employer ROI** | Not implemented (deferred) | N/A | Awaiting decision |
 
