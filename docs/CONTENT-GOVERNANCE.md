@@ -18,7 +18,7 @@ These claims **must be approved and gated** before publishing:
 | **Pricing** | $69–$110 monthly, $250 family cap | Finance | Hardcoded with version control |
 | **Savings estimates** | "$2,400/year", "$4,560/yr" | Finance + Marketing | Add `approved: false` flag + qualifier |
 | **Testimonials** | Customer quotes with savings | Marketing + Legal | Add `approved: false` flag to testimonial object |
-| **HSA/FSA** | "HSA eligible", "Tax-free" | Legal | Gate behind `NEXT_PUBLIC_HSA_APPROVED` env var |
+| **HSA/FSA** | "HSA eligible", "Tax-free" | Legal | Component-level gate in `HsaBadge` behind `NEXT_PUBLIC_HSA_APPROVED` env var |
 | **Medical claims** | "Lower A1C", "Prevent ER visits" | Clinical team | Require clinical approval; soften language |
 | **Insurance positioning** | "Replaces insurance", "Insurance alternative" | Legal | Add: "Not a replacement for health insurance" |
 | **Lab/pharmacy pricing** | "$5 lipid panel", "$3 generic" | Partnerships team | Verify with lab/pharmacy partner; add disclaimer |

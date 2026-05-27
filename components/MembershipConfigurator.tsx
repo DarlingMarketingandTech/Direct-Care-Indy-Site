@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Plus, X, CaretDown } from '@phosphor-icons/react'
@@ -25,13 +25,15 @@ const FAMILY_CAP = 250
 
 export function MembershipConfigurator() {
   const [members, setMembers] = useState<Member[]>([])
+  const memberIdRef = useRef(0)
 
   const addMember = (type: MemberType) => {
     const memberType = MEMBER_TYPES.find(m => m.type === type)
     if (!memberType) return
+    memberIdRef.current += 1
 
     const newMember: Member = {
-      id: `${type}-${Date.now()}-${Math.random()}`,
+      id: `${type}-${memberIdRef.current}`,
       type: memberType.type,
       label: memberType.label,
       price: memberType.price,

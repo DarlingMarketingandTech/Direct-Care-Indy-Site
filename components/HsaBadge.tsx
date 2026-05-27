@@ -3,6 +3,10 @@
 import { Shield, Info } from "lucide-react";
 
 export function HsaBadge() {
+  if (process.env.NEXT_PUBLIC_HSA_APPROVED !== "true") {
+    return null;
+  }
+
   return (
     <div className="inline-flex items-center gap-2 bg-green-50 border border-green-200 px-4 py-2 rounded-lg">
       <Shield className="w-4 h-4 text-green-600" />

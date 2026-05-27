@@ -98,7 +98,7 @@ npm run dev       # Start dev server
 
 - [ ] No unapproved savings amounts displayed
 - [ ] Testimonials gated: Only approved ones show in production
-- [ ] HSA language gated: Badge hidden unless `NEXT_PUBLIC_HSA_APPROVED=true`
+- [ ] HSA language gated: `HsaBadge` returns null unless `NEXT_PUBLIC_HSA_APPROVED=true`
 - [ ] Testimonial qualifiers visible ("estimated", "typical usage")
 - [ ] No HSA tax language in testimonials
 - [ ] No medical guarantees ("will", "prevent", "cure")

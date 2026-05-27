@@ -94,7 +94,7 @@ export function TestimonialsCarousel() {
   // Sync selected index
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
+    queueMicrotask(onSelect);
     emblaApi.on("select", onSelect);
     return () => {
       emblaApi.off("select", onSelect);

@@ -21,7 +21,7 @@ This repo displays claims in these locations:
 | **Pricing** | `app/page.tsx`, `app/pricing/page.tsx`, components | See master register | Finance |
 | **Testimonials** | `components/Testimonials.tsx` | Gated (needs approval) | Marketing + Legal |
 | **Savings estimates** | `components/SavingsPersonas.tsx` | Qualified with language | Finance |
-| **HSA/FSA** | `components/PricingTiers.tsx`, `HsaBadge.tsx` | Gated (env var) | Legal |
+| **HSA/FSA** | `components/PricingTiers.tsx`, `HsaBadge.tsx` | Component-level gated (env var) | Legal |
 | **Lab/pharmacy pricing** | `components/LabPharmacySavingsTable.tsx` | Needs verification | Partnerships |
 | **Employer ROI** | Not implemented (deferred) | N/A | Awaiting decision |
 

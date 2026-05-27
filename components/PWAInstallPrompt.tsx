@@ -19,7 +19,9 @@ export default function PWAInstallPrompt() {
       window.matchMedia('(display-mode: standalone)').matches ||
       (window.navigator as any).standalone === true;
 
-    setIsStandalone(isInStandaloneMode);
+    const standaloneTimer = window.setTimeout(() => {
+      setIsStandalone(isInStandaloneMode);
+    }, 0);
 
     // Check if user previously dismissed
     const dismissed = localStorage.getItem('pwa-install-dismissed');
@@ -42,6 +44,7 @@ export default function PWAInstallPrompt() {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     return () => {
+      window.clearTimeout(standaloneTimer);
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     };
   }, []);

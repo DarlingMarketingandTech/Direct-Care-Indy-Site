@@ -16,6 +16,8 @@ interface Tier {
 }
 
 export default function PricingTiers() {
+  const isHsaApproved = process.env.NEXT_PUBLIC_HSA_APPROVED === "true";
+
   const tiers: Tier[] = [
     {
       name: "Young Adult",
@@ -99,10 +101,12 @@ export default function PricingTiers() {
                 {tier.note && (
                   <p className="text-xs text-gray-800 mt-1 italic">{tier.note}</p>
                 )}
-                <div className="flex justify-center mt-3">
-                  <HsaBadge />
-                </div>
-                {tier.name === "Senior" && (
+                {isHsaApproved && (
+                  <div className="flex justify-center mt-3">
+                    <HsaBadge />
+                  </div>
+                )}
+                {isHsaApproved && tier.name === "Senior" && (
                   <div className="mt-2 inline-flex items-center gap-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-3 py-1 rounded-full text-xs font-semibold border border-green-300 dark:border-green-700">
                     <span>✓</span>
                     <span>Fully HSA-Eligible per 2026 Guidelines</span>
