@@ -21,7 +21,7 @@ This repo displays claims in these locations:
 | **Pricing** | `app/page.tsx`, `app/pricing/page.tsx`, components | See master register | Finance |
 | **Testimonials** | `components/Testimonials.tsx` | Gated (needs approval) | Marketing + Legal |
 | **Savings estimates** | `components/SavingsPersonas.tsx` | Qualified with language | Finance |
-| **HSA/FSA** | `components/PricingTiers.tsx`, `HsaBadge.tsx` | Gated (env var) | Legal |
+| **HSA/FSA** | `components/PricingTiers.tsx`, `components/HsaBadge.tsx`, `components/HsaStatusTracker.tsx`, `app/faq/page.tsx`, `components/SharedFooter.tsx` | Badge/pricing-tier surfaces are env-gated; other HSA/FSA copy remains approval-gated unless separately wrapped, softened, or approved. | Legal |
 | **Lab/pharmacy pricing** | `components/LabPharmacySavingsTable.tsx` | Needs verification | Partnerships |
 | **Employer ROI** | Not implemented (deferred) | N/A | Awaiting decision |
 
@@ -45,6 +45,8 @@ This repo displays claims in these locations:
 `C:\dev\DirectCare-Indy-Claude-OS\00_command_center\claims-and-approval-register.md`
 
 Keep both in sync. When this repo implements a gated claim, mark it in the master register with its gating method and location.
+
+HSA/FSA badge and pricing-tier surfaces are gated behind `NEXT_PUBLIC_HSA_APPROVED`. Other HSA/FSA copy remains approval-gated and should be reviewed before publication.
 
 Example:
 

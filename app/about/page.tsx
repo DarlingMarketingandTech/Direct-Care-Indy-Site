@@ -53,7 +53,7 @@ export default function AboutPage() {
                   <div>
                     <p className="font-semibold">Local Focus, National Standards</p>
                     <p className="text-muted-foreground text-sm">
-                      We're proud to serve the Indianapolis community with healthcare that's accessible, transparent, and delivered to the highest standards.
+                      We&apos;re proud to serve the Indianapolis community with healthcare that&apos;s accessible, transparent, and delivered to the highest standards.
                     </p>
                   </div>
                 </div>

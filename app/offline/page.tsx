@@ -15,7 +15,7 @@ export default function OfflinePage() {
 
         <div className="space-y-3">
           <h1 className="text-3xl font-bold text-slate-900">
-            You're Offline
+            You&apos;re Offline
           </h1>
           <p className="text-lg text-slate-600">
             Please check your internet connection and try again.

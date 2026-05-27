@@ -1,7 +1,7 @@
 export function WhoItsFor() {
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Who It's For</h2>
+      <h2 className="text-2xl font-bold mb-4">Who It&apos;s For</h2>
       <ul className="list-disc pl-5 space-y-2">
         <li>Uninsured or underinsured individuals</li>
         <li>HDHP/HSA holders</li>

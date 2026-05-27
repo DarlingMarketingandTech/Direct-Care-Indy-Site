@@ -18,7 +18,7 @@ These claims **must be approved and gated** before publishing:
 | **Pricing** | $69–$110 monthly, $250 family cap | Finance | Hardcoded with version control |
 | **Savings estimates** | "$2,400/year", "$4,560/yr" | Finance + Marketing | Add `approved: false` flag + qualifier |
 | **Testimonials** | Customer quotes with savings | Marketing + Legal | Add `approved: false` flag to testimonial object |
-| **HSA/FSA** | "HSA eligible", "Tax-free" | Legal | Gate behind `NEXT_PUBLIC_HSA_APPROVED` env var |
+| **HSA/FSA** | "HSA Approved", "Fully HSA-Eligible", "HSA eligible", "FSA eligible", "tax-free", HSA metadata/schema/content copy | Legal | Gate behind `NEXT_PUBLIC_HSA_APPROVED` wherever HSA/FSA public language appears, including `HsaBadge`, or keep approval-gated until reviewed |
 | **Medical claims** | "Lower A1C", "Prevent ER visits" | Clinical team | Require clinical approval; soften language |
 | **Insurance positioning** | "Replaces insurance", "Insurance alternative" | Legal | Add: "Not a replacement for health insurance" |
 | **Lab/pharmacy pricing** | "$5 lipid panel", "$3 generic" | Partnerships team | Verify with lab/pharmacy partner; add disclaimer |
@@ -47,6 +47,8 @@ When claiming something risky, use these patterns instead:
 
 ❌ **Too risky:** "HSA Approved" (unqualified)  
 ✓ **Safer:** "May be eligible for HSA/FSA (subject to plan rules)"
+
+Policy: any HSA/FSA public language should be gated behind `NEXT_PUBLIC_HSA_APPROVED` or approved before publication. The component-level `HsaBadge` gate protects the badge itself, and `PricingTiers` gates its HSA badge and pricing-tier HSA pill. It does not automatically protect HSA/FSA copy elsewhere in app pages, components, metadata, schemas, or content data.
 
 ### Lab/Pharmacy Pricing
 

@@ -128,7 +128,7 @@ export default function HintHealthPortal() {
             <Link href="/join" className="text-teal-600 hover:text-teal-700 font-medium underline">
               Join as a member
             </Link>
-            {' '}and you'll receive portal access within 24 hours.
+            {' '}and you&apos;ll receive portal access within 24 hours.
           </p>
         </div>
       </div>
@@ -167,7 +167,7 @@ export default function HintHealthPortal() {
       <div className="bg-slate-50 rounded-xl p-6 border border-slate-200">
         <h4 className="font-semibold text-slate-900 mb-3">About Hint Health Integration</h4>
         <p className="text-sm text-slate-600 leading-relaxed">
-          Direct Care Indy uses Hint Health's enterprise platform to provide seamless patient-provider
+          Direct Care Indy uses Hint Health&apos;s enterprise platform to provide seamless patient-provider
           communication, appointment scheduling, and secure health record management. All data is
           encrypted end-to-end and fully HIPAA compliant. Your portal account syncs automatically
           with our practice management system for real-time updates.
