@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://directcareindy.com
-
-# Sitemaps
-Sitemap: https://directcareindy.com/sitemap.xml

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Employee Health Benefits for Indianapolis Businesses | Direct Care Indy",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: "Employee Health Benefits for Indianapolis Businesses | Direct Care Indy",
     description: "Protect your crew, not just your bottom line. Employee health benefits that save you money while providing better care.",
     type: "website",
-    url: "https://directcareindy.com/employers"
+    url: absoluteUrl("/employers")
   },
 };
 

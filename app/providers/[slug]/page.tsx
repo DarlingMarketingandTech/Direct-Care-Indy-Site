@@ -9,6 +9,7 @@ import { PhysicianOversightBadge } from "@/components/PhysicianOversightBadge";
 import IndyBreathEasy from "@/components/IndyBreathEasy";
 import { SharedFooter } from "@/components/SharedFooter";
 import { SITE_ASSETS } from "@/lib/images";
+import { absoluteUrl } from "@/lib/site";
 
 interface ProviderPageProps {
   params: Promise<{
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: ProviderPageProps): Promise<M
       type: "profile",
       images: [
         {
-          url: provider.image.startsWith("http") ? provider.image : `https://directcareindy.com${provider.image}`,
+          url: provider.image.startsWith("http") ? provider.image : absoluteUrl(provider.image),
           width: 800,
           height: 600,
           alt: fullName,
@@ -71,9 +72,8 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
   }
 
   const fullName = `${provider.name}, ${provider.credentials}`;
-  const baseUrl = "https://directcareindy.com";
-  const providerUrl = `${baseUrl}/providers/${provider.slug}`;
-  const imageUrl = provider.image.startsWith("http") ? provider.image : `${baseUrl}${provider.image}`;
+  const providerUrl = absoluteUrl(`/providers/${provider.slug}`);
+  const imageUrl = provider.image.startsWith("http") ? provider.image : absoluteUrl(provider.image);
 
   return (
     <>
