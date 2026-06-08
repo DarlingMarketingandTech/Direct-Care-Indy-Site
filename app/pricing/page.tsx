@@ -2,15 +2,16 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import PricingTiers from "@/components/PricingTiers";
 import ComparisonTable from "@/components/ComparisonTable";
-import PortalPreview from "@/components/PortalPreview";
 import { IncludedMatrix } from "@/components/IncludedMatrix";
 import { ValueBanner } from "@/components/ValueBanner";
 import { MarketCostComparison } from "@/components/MarketCostComparison";
-import WholesaleLabSearch from "@/components/WholesaleLabSearch";
 import { PricingCalculator } from "@/components/PricingCalculator";
+import { ComplianceNote } from "@/components/ComplianceNote";
 import { MembershipValue } from "@/components/shared/MembershipValue";
+import { publicClaim } from "@/lib/claims";
 
 export default function Pricing() {
+  const hsaClaim = publicClaim("hsa2026");
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,11 +78,13 @@ export default function Pricing() {
                 </ul>
               </div>
             </div>
-            {/* Compliance Footnote */}
-            <div className="mt-8 bg-yellow-50 dark:bg-yellow-950/30 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 text-center">
-              <p className="text-sm text-yellow-900 dark:text-yellow-200">
-                ⚠️ <strong>Critical 2026 Compliance Note:</strong> To maintain HSA eligibility for patients, our individual fees do not exceed $150/month and family fees do not exceed $300/month.
-              </p>
+            {hsaClaim && (
+              <div className="mt-8 bg-yellow-50 dark:bg-yellow-950/30 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 text-center">
+                <p className="text-sm text-yellow-900 dark:text-yellow-200">{hsaClaim}</p>
+              </div>
+            )}
+            <div className="mt-4 text-center">
+              <ComplianceNote />
             </div>
           </div>
         </div>
@@ -145,20 +148,17 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Portal Preview */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            <PortalPreview />
-          </div>
-        </div>
-      </section>
-
-      {/* Wholesale Lab Directory */}
+      {/* Pricing Transparency Note */}
       <section className="py-16 bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <WholesaleLabSearch />
+            <div className="bg-card rounded-2xl border border-border p-8 text-center">
+              <h3 className="text-2xl font-bold mb-3">Member pricing is shared during enrollment and care planning.</h3>
+              <p className="text-muted-foreground">
+                Public widgets with detailed lab and pharmacy pricing are paused pending final verification.
+              </p>
+              <ComplianceNote />
+            </div>
           </div>
         </div>
       </section>
