@@ -6,8 +6,8 @@ import { ArrowRight, CheckCircle2, HeartPulse, Play, ShieldCheck, Sparkles, Stet
 import { MembershipConfigurator } from "@/components/MembershipConfigurator";
 import { MembershipValue } from "@/components/shared/MembershipValue";
 import { NinetyTenSwitcher } from "@/components/NinetyTenSwitcher";
-import PortalPreview from "@/components/PortalPreview";
 import { SavingsPersonas } from "@/components/SavingsPersonas";
+import { ComplianceNote } from "@/components/ComplianceNote";
 import { ScrollTransition } from "@/components/ScrollTransition";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 
@@ -442,45 +442,45 @@ export default function Home() {
             </p>
           </div>
           <SavingsPersonas />
+          <div className="max-w-4xl mx-auto">
+            <ComplianceNote />
+          </div>
         </div>
       </section>
 
-      {/* Portal Preview and Trust */}
+      {/* Portal Access and Trust */}
       <section className="section-padding">
         <div className="content-container">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <PortalPreview />
-            <div className="space-y-4">
-              <h3 className="heading-3">Member portal you will actually use.</h3>
-              <p className="body-large text-muted-foreground">
-                Secure messaging, lab results, and after-hours triage in one place. Enrollment and login both live in Hint for fewer clicks.
-              </p>
-              <div className="space-y-2 text-foreground">
-                <div className="flex items-center gap-2">
-                  <HeartPulse className="h-5 w-5 text-secondary" />
-                  <span>HIPAA-compliant from enrollment to follow-up.</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-secondary" />
-                  <span>Every form field labeled for screen readers and accessibility.</span>
-                </div>
+          <div className="max-w-4xl mx-auto section-card space-y-4">
+            <h3 className="heading-3">Secure portal access is available for members.</h3>
+            <p className="body-large text-muted-foreground">
+              Enrollment and member login are handled in Hint Health with secure messaging and follow-up workflows.
+            </p>
+            <div className="space-y-2 text-foreground">
+              <div className="flex items-center gap-2">
+                <HeartPulse className="h-5 w-5 text-secondary" />
+                <span>HIPAA-aware systems from enrollment through follow-up.</span>
               </div>
-              <div className="flex gap-3">
-                <Link
-                  href="/join"
-                  className="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-                >
-                  Start enrollment
-                </Link>
-                <a
-                  href={PATIENT_PORTAL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-6 py-3 rounded-lg font-semibold border border-border text-foreground hover:bg-muted transition-colors"
-                >
-                  Patient login
-                </a>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-secondary" />
+                <span>Accessible forms and straightforward login paths for members.</span>
               </div>
+            </div>
+            <div className="flex gap-3">
+              <Link
+                href="/join"
+                className="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
+              >
+                Start enrollment
+              </Link>
+              <a
+                href={PATIENT_PORTAL_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="px-6 py-3 rounded-lg font-semibold border border-border text-foreground hover:bg-muted transition-colors"
+              >
+                Patient login
+              </a>
             </div>
           </div>
         </div>

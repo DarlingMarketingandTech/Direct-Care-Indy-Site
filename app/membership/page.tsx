@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
-import { TierDisplay } from "@/components/membership/TierDisplay";
-import { LabPharmacySavingsTable } from "@/components/LabPharmacySavingsTable";
+import { ComplianceNote } from "@/components/ComplianceNote";
 import { Testimonials } from "@/components/Testimonials";
 import { DPC_CONTENT } from "@/lib/content/dpc";
+import { publicClaim } from "@/lib/claims";
 import { SITE_ASSETS } from "@/lib/images";
 import { ScrollTransition } from "@/components/ScrollTransition";
 
 export default function MembershipPage() {
   const pricingTiers = DPC_CONTENT.pricingTiers;
   const valueProps = DPC_CONTENT.valueProps;
-  const disclaimers = DPC_CONTENT.disclaimers.filter(d => d.required);
+  const insuranceClaim = publicClaim("dpcNotInsurance");
 
   return (
     <div className="min-h-screen bg-background">
@@ -29,21 +29,27 @@ export default function MembershipPage() {
       <section className="section-padding bg-blue-50 dark:bg-blue-950/20">
         <div className="content-container">
           <div className="max-w-3xl mx-auto border border-blue-200 dark:border-blue-900 rounded-lg p-6 text-center">
-            <p className="text-sm text-blue-900 dark:text-blue-200">
-              <strong>Important:</strong> Direct Care Indy membership is not health insurance.
-              We recommend maintaining insurance coverage for emergencies, hospitalizations, and specialist care.
-            </p>
+            {insuranceClaim && <p className="text-sm text-blue-900 dark:text-blue-200"><strong>Important:</strong> {insuranceClaim}</p>}
           </div>
         </div>
       </section>
 
-      {/* Savings Table with Image Accent */}
+      {/* Member Pricing Context */}
       <section className="section-padding bg-muted/30">
         <div className="content-container">
           <ScrollTransition id="membership-savings-accent">
           <div className="grid md:grid-cols-3 gap-8 items-start">
             <div className="md:col-span-2">
-              <LabPharmacySavingsTable />
+              <div className="section-card space-y-4">
+                <h2 className="heading-3">Transparent member pricing without speculative savings tables</h2>
+                <p className="text-muted-foreground">
+                  We review lab and pharmacy rates with members during enrollment and care planning so figures match current partner pricing.
+                </p>
+                <p className="text-muted-foreground">
+                  Detailed public lab widgets are currently paused until verification is finalized.
+                </p>
+                <ComplianceNote />
+              </div>
             </div>
             <div className="space-y-6">
               <div className="group relative aspect-video rounded-xl overflow-hidden border border-border bg-card">
@@ -159,52 +165,17 @@ export default function MembershipPage() {
           <div className="max-w-4xl mx-auto">
             <h2 className="heading-2 mb-6">Transparent Pricing</h2>
             <p className="body-large text-muted-foreground mb-8">
-              Access wholesale prices for medications and lab work. No markups, no hidden fees.
-              We pass the savings directly to you.
+              We share current pricing and service availability with members as part of enrollment and ongoing care.
             </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="section-card">
-                <h3 className="font-semibold mb-4">Medication Pricing</h3>
-                <ul className="space-y-2">
-                  <li className="flex justify-between">
-                    <span>Antibiotics</span>
-                    <span className="font-semibold text-secondary">$3-8</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Chronic medications</span>
-                    <span className="font-semibold text-secondary">$5-15/month</span>
-                  </li>
-                </ul>
-              </div>
-              <div className="section-card">
-                <h3 className="font-semibold mb-4">Lab Work Pricing</h3>
-                <ul className="space-y-2">
-                  <li className="flex justify-between">
-                    <span>Basic labs</span>
-                    <span className="font-semibold text-secondary">$5-12</span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Advanced labs</span>
-                    <span className="font-semibold text-secondary">at cost + 10% processing fee</span>
-                  </li>
-                </ul>
-              </div>
+            <div className="section-card">
+              <h3 className="font-semibold mb-4">What to expect</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>Current pricing reviewed before services are ordered.</li>
+                <li>Member-first recommendations based on your care needs.</li>
+                <li>Updates provided when partner pricing or availability changes.</li>
+              </ul>
+              <ComplianceNote />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Savings Table */}
-      <section className="section-padding bg-muted/30">
-        <div className="content-container">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="heading-2 mb-4">Transparent Pricing Saves You Money</h2>
-              <p className="body-large text-muted-foreground">
-                No hidden fees, no surprise bills. See exactly what you save with our wholesale pricing.
-              </p>
-            </div>
-            <LabPharmacySavingsTable />
           </div>
         </div>
       </section>

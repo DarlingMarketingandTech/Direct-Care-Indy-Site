@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Building2, Users, DollarSign, TrendingUp, Calculator, Mail, Phone, CheckCircle2 } from "lucide-react";
-import { EmployerSavingsCalculator } from "@/components/EmployerSavingsCalculator";
+import { Building2, Users, DollarSign, TrendingUp, Mail, Phone, CheckCircle2 } from "lucide-react";
+import { ComplianceNote } from "@/components/ComplianceNote";
+import { publicClaim } from "@/lib/claims";
 
 export default function EmployersPage() {
-  const [showCalculator, setShowCalculator] = useState(false);
+  const employerSavingsClaim = publicClaim("employerSavings");
   const [demoForm, setDemoForm] = useState({
     companyName: '',
     employeeCount: '',
@@ -45,12 +46,6 @@ Message: ${demoForm.message}`;
             Happier employees, lower turnover, and better productivity.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={() => setShowCalculator(true)}
-              className="bg-secondary text-secondary-foreground px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform interactive-element"
-            >
-              Calculate Your Savings
-            </button>
             <Link
               href="#demo-request"
               className="bg-card text-card-foreground border border-border px-8 py-4 rounded-full font-semibold text-lg hover:bg-card/90 transition-colors interactive-element"
@@ -107,22 +102,19 @@ Message: ${demoForm.message}`;
         </div>
       </section>
 
-      {/* Savings Calculator */}
-      {showCalculator && (
-        <section className="section-padding bg-muted/30">
-          <div className="content-container">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-8">
-                <h2 className="heading-2 mb-4">Calculate Your Employer Savings</h2>
-                <p className="body-large text-muted-foreground">
-                  See how much your company can save by offering DPC instead of traditional insurance.
-                </p>
-              </div>
-              <EmployerSavingsCalculator />
-            </div>
+      {/* Savings Messaging */}
+      <section className="section-padding bg-muted/30">
+        <div className="content-container">
+          <div className="max-w-4xl mx-auto section-card text-center">
+            <h2 className="heading-2 mb-4">Employer savings are reviewed during consultation.</h2>
+            <p className="body-large text-muted-foreground">
+              Public ROI calculators are paused while savings assumptions are under review.
+            </p>
+            {employerSavingsClaim && <p className="text-muted-foreground mt-3">{employerSavingsClaim}</p>}
+            <ComplianceNote />
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* How It Works */}
       <section className="section-padding bg-muted/30">

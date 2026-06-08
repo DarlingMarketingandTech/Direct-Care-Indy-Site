@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { Phone, Shield, TrendingDown, Users, Briefcase } from "lucide-react";
 import { setUserPersona } from "@/lib/persona";
-import { EmployerSavingsCalculator } from "@/components/EmployerSavingsCalculator";
+import { ComplianceNote } from "@/components/ComplianceNote";
 import { OccHealthIntake } from "@/components/OccHealthIntake";
 import { OccHealthPrices } from "@/components/OccHealthPrices";
 import { EmployerDemoForm } from "@/components/EmployerDemoForm";
+import { publicClaim } from "@/lib/claims";
 import { SITE_ASSETS } from "@/lib/images";
 
 export default function Employers() {
+  const employerSavingsClaim = publicClaim("employerSavings");
   useEffect(() => {
     setUserPersona('employer');
   }, []);
@@ -41,14 +42,14 @@ export default function Employers() {
               Employee health benefits for Indianapolis trades that actually save you money
             </p>
             <p className="text-xl mb-8 opacity-90">
-              One ER visit costs more than a year of DPC membership. See the math below.
+              Employer savings conversations start with your workforce and benefits setup.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="#calculator"
                 className="bg-secondary hover:bg-opacity-90 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all"
               >
-                Calculate Your Savings
+                Review Plan Options
               </a>
               <a
                 href="#demo"
@@ -127,17 +128,18 @@ export default function Employers() {
         </div>
       </section>
 
-      {/* Business Savings Calculator */}
+      {/* Employer Savings Notice */}
       <section id="calculator" className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
-              <h3 className="text-3xl font-bold text-primary mb-4">Calculate Your Business Savings</h3>
+              <h3 className="text-3xl font-bold text-primary mb-4">Employer savings details are shared during consultation</h3>
               <p className="text-xl text-gray-300">
-                See how much you can save by providing DPC membership to your employees
+                Public ROI calculators are paused while assumptions are under review.
               </p>
+              {employerSavingsClaim && <p className="text-muted-foreground">{employerSavingsClaim}</p>}
+              <ComplianceNote />
             </div>
-            <EmployerSavingsCalculator />
           </div>
         </div>
       </section>
@@ -212,7 +214,7 @@ export default function Employers() {
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-3xl font-bold mb-6">Ready to Protect Your Crew?</h3>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join Indianapolis businesses that are saving thousands while providing better healthcare to their employees.
+            Join Indianapolis businesses improving primary care access for their employees.
           </p>
           <a
             href="tel:+13179566288"
@@ -228,4 +230,3 @@ export default function Employers() {
     </div>
   );
 }
-
