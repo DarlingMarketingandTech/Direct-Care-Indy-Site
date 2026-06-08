@@ -1,17 +1,11 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://directcareindy.com',
-  generateRobotsTxt: true,
+  siteUrl:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://direct-care-indy-site.vercel.app",
+  generateRobotsTxt: false,
   generateIndexSitemap: false,
-  robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: '*',
-        allow: '/',
-      },
-    ],
-  },
-  exclude: ['/welcome'],
-  changefreq: 'weekly',
+  exclude: ["/welcome"],
+  changefreq: "weekly",
   priority: 0.7,
 };

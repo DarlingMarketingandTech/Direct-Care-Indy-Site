@@ -1,4 +1,5 @@
 import { SITE_ASSETS } from "@/lib/images";
+import { SITE_URL, absoluteUrl } from "@/lib/site";
 
 export function OrganizationSchema() {
   const organizationData = {
@@ -6,9 +7,9 @@ export function OrganizationSchema() {
     "@type": "MedicalBusiness",
     "name": "Direct Care Indy",
     "description": "Direct Primary Care practice in Indianapolis providing affordable, transparent healthcare with no insurance hassles.",
-    "url": "https://directcareindy.com",
-    "logo": "https://directcareindy.com/logo.png",
-    "image": "https://directcareindy.com/og-image.jpg",
+    "url": SITE_URL,
+    "logo": absoluteUrl("/logo.png"),
+    "image": absoluteUrl("/og-image.jpg"),
     "telephone": "+1-317-956-6288",
     "email": "info@directcareindy.com",
     "address": {
@@ -102,7 +103,7 @@ export function PhysicianSchema() {
       "name": "Indianapolis",
       "addressRegion": "IN"
     },
-    "image": `https://directcareindy.com${SITE_ASSETS.providers.jamesPike}`
+    "image": absoluteUrl(SITE_ASSETS.providers.jamesPike)
   };
 
   return (
@@ -163,13 +164,13 @@ export function LocalBusinessSchema({ neighborhood, zipCode }: { neighborhood?: 
   const businessData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://directcareindy.com",
+    "@id": SITE_URL,
     "name": "Direct Care Indy",
-    "image": "https://directcareindy.com/og-image.jpg",
+    "image": absoluteUrl("/og-image.jpg"),
     "description": neighborhood
       ? `Direct Primary Care serving ${neighborhood} families. Specialist-level primary care with unlimited visits, wholesale lab pricing, and direct physician access.`
       : "Direct Primary Care practice in Indianapolis providing affordable, transparent healthcare with no insurance hassles.",
-    "url": "https://directcareindy.com",
+    "url": SITE_URL,
     "telephone": "+1-317-956-6288",
     "email": "info@directcareindy.com",
     "address": {
@@ -323,7 +324,7 @@ export function ProfilePageSchema({
       "addressCountry": "US"
     },
     "description": bio,
-    "image": image.startsWith("http") ? image : `https://directcareindy.com${image}`,
+    "image": image.startsWith("http") ? image : absoluteUrl(image),
     "url": url,
     "areaServed": {
       "@type": "City",
