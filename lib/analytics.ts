@@ -10,6 +10,7 @@ export type AnalyticsEventName =
   | "membership_cta_clicked"
   | "employer_inquiry_clicked"
   | "broker_resource_clicked"
+  | "family_care_roadmap_submitted"
   | "contact_form_submitted";
 
 export type AnalyticsEventPayload = Record<

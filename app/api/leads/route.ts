@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 interface LeadData {
   name: string;
   email: string;
-  phone: string;
+  phone?: string;
   persona?: string;
   healthGoal?: string;
   goal?: string; // Alias for healthGoal
@@ -23,6 +23,17 @@ interface LeadData {
   painPoints?: string;
   recommendedCta?: string;
   sourcePage?: string;
+  audience?: string;
+  resource?: string;
+  householdSize?: string;
+  childrenAges12Plus?: string;
+  biggestFamilyCareConcern?: string;
+  currentInsuranceSituation?: string;
+  preferredContactMethod?: string;
+}
+
+function isOptionalPhoneLead(body: LeadData): boolean {
+  return body.source === "DPC Fit Quiz" || body.resource === "family_care_roadmap";
 }
 
 function buildLeadHtml(body: LeadData): string {
@@ -36,6 +47,13 @@ function buildLeadHtml(body: LeadData): string {
     healthGoal,
     persona,
     savings,
+    audience,
+    resource,
+    householdSize,
+    childrenAges12Plus,
+    biggestFamilyCareConcern,
+    currentInsuranceSituation,
+    preferredContactMethod,
   } = body;
 
   return `
@@ -54,6 +72,16 @@ function buildLeadHtml(body: LeadData): string {
       <p><strong>Health Goal:</strong> ${goal || healthGoal || 'General Interest'}</p>
       <p><strong>Persona:</strong> ${persona || 'Individual'}</p>
     `}
+    ${resource === "family_care_roadmap" ? `
+      <hr />
+      <h3>Family Care Roadmap Details</h3>
+      <p><strong>Audience:</strong> ${audience || "family"}</p>
+      <p><strong>Household Size:</strong> ${householdSize || "Not provided"}</p>
+      <p><strong>Children ages 12+:</strong> ${childrenAges12Plus || "Not provided"}</p>
+      <p><strong>Biggest Family Care Concern:</strong> ${biggestFamilyCareConcern || "Not provided"}</p>
+      <p><strong>Current Insurance Situation:</strong> ${currentInsuranceSituation || "Not provided"}</p>
+      <p><strong>Preferred Contact Method:</strong> ${preferredContactMethod || "Not provided"}</p>
+    ` : ""}
     <hr />
     ${body.quizResult ? `
       <h3>Quiz Result</h3>
@@ -73,12 +101,11 @@ export async function POST(req: Request) {
     const body: LeadData = await req.json();
     const { name, email, phone, businessName, employeeCount, goal, healthGoal, persona, savings } = body;
 
-    const isQuizLead = body.source === 'DPC Fit Quiz';
+    const phoneOptional = isOptionalPhoneLead(body);
 
-    // Validate required fields (phone optional for quiz leads)
-    if (!name || !email || (!isQuizLead && !phone)) {
+    if (!name || !email || (!phoneOptional && !phone)) {
       return NextResponse.json(
-        { error: isQuizLead
+        { error: phoneOptional
             ? 'Missing required fields: name and email are required'
             : 'Missing required fields: name, email, and phone are required' },
         { status: 400 }
@@ -98,6 +125,7 @@ export async function POST(req: Request) {
         phone,
         businessName,
         source: body.source,
+        resource: body.resource,
       });
 
       return NextResponse.json({

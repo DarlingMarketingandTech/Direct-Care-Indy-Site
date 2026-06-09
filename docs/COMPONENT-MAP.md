@@ -51,6 +51,22 @@ Component and content-source inventory for membership pricing, quiz flow, and re
 - Homepage should not render calculators or exact household pricing tools
 - Do not use “Find a provider near you” — single clinic location only
 
+## Active Families Route Composition
+
+`app/families/page.tsx`
+
+- Uses `familiesMetadata` from `lib/metadata.ts`
+- Reads pricing preview from `MEMBERSHIP_PLANS` in `lib/content/membership-pricing.ts`
+- Uses `getDpcQuizScheduleLink("family")` for demo-safe family contact CTA behavior
+- Uses provider trust data from `lib/data/providers.ts`
+- Uses single-clinic contact details from `lib/content/contact.ts`
+
+## Active Audience Lead Form Components
+
+| Component | File | Status | Notes |
+|-----------|------|--------|-------|
+| `FamilyCareRoadmapForm` | `components/families/FamilyCareRoadmapForm.tsx` | Active | Audience-specific resource form for `/families`; posts to `/api/leads` with non-medical household fields and fallback contact copy |
+
 ## Active Quiz Architecture
 
 | Area | Files |
