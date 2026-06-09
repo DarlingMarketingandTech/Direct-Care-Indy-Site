@@ -147,7 +147,7 @@ export function TheWraparoundGuide() {
             Join hundreds of Indianapolis families saving $4,560+ per year on healthcare
           </p>
           <a
-            href="/pricing"
+            href="/membership"
             className="inline-block bg-white text-[#1B2B3A] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 transition-all shadow-lg"
           >
             View Membership Options

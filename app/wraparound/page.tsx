@@ -59,7 +59,7 @@ export default function Wraparound() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/pricing"
+              href="/membership"
               className="bg-card text-card-foreground hover:bg-card/90 border border-border px-8 py-4 rounded-lg font-semibold text-lg transition-all inline-block interactive-element"
             >
               View Pricing
@@ -94,8 +94,8 @@ export default function Wraparound() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
-                    Pricing
+                  <Link href="/membership" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Membership Pricing
                   </Link>
                 </li>
                 <li>

@@ -26,8 +26,8 @@ export default function ProvidersPage() {
     <div className="min-h-screen bg-background">
 
       {/* Hero Section */}
-      <section className="relative text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
+      <section className="relative overflow-hidden bg-teal-900 py-20 text-white">
+        <div className="absolute inset-0 z-0">
           <Image
             src={SITE_ASSETS.ui.tealGradient}
             alt=""
@@ -36,17 +36,17 @@ export default function ProvidersPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-linear-to-br from-teal-700/80 to-teal-900/80" />
+          <div className="absolute inset-0 bg-linear-to-br from-teal-800/90 via-primary/85 to-teal-900/90" />
         </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+        <div className="container relative z-10 mx-auto px-4">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="heading-1-inverse mb-6 text-white">
               Meet Your Care Team
             </h1>
-            <p className="text-xl md:text-2xl mb-4 opacity-90">
+            <p className="body-large-inverse mb-4 text-white/90">
               Specialist-led primary care with high-access clinicians
             </p>
-            <p className="text-lg opacity-80 max-w-2xl mx-auto">
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
               Our &ldquo;Round Table&rdquo; model combines 24/7 direct access to expert PAs with weekly specialist oversight from Dr. Pike—bringing hospital-grade expertise to your everyday healthcare.
             </p>
           </div>
@@ -57,9 +57,8 @@ export default function ProvidersPage() {
       <RoundTableOverview />
 
       {/* Parallax Specialist Section */}
-      <section className="relative h-[600px] overflow-hidden">
-        {/* Fixed Background Image */}
-        <div className="fixed inset-0 -z-10">
+      <section className="relative h-[600px] overflow-hidden bg-primary">
+        <div className="absolute inset-0 z-0">
           <Image
             src={SITE_ASSETS.clinical.specialist}
             alt="Specialist Team"
@@ -67,16 +66,15 @@ export default function ProvidersPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-linear-to-b from-primary/80 via-primary/60 to-primary/80" />
+          <div className="absolute inset-0 bg-linear-to-b from-primary/90 via-primary/75 to-primary/90" />
         </div>
 
-        {/* Scrolling Content */}
-        <div className="relative z-10 h-full flex items-center">
+        <div className="relative z-10 flex h-full items-center">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center text-white">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-                <h2 className="text-4xl font-bold mb-4">Physician-Led Clinical Excellence</h2>
-                <p className="text-xl mb-6 opacity-90">
+            <div className="mx-auto max-w-4xl text-center text-white">
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+                <h2 className="heading-2-inverse mb-4 text-white">Physician-Led Clinical Excellence</h2>
+                <p className="body-large-inverse mb-6 text-white/90">
                   Dr. Pike&apos;s board-certified oversight ensures every member receives specialist-level diagnostic security through our Round Table model.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
@@ -206,7 +204,7 @@ export default function ProvidersPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-white">
+      <section className="bg-primary py-16 text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-3xl font-bold mb-6">
             Ready to Experience Specialist-Led Primary Care?

@@ -189,7 +189,7 @@ export default function Welcome() {
                 Call (317) 956-6288
               </a>
               <Link
-                href="/faq"
+                href="/what-is-dpc#faq"
                 className="bg-secondary text-white px-8 py-4 rounded-lg font-semibold hover:bg-opacity-90 transition-all inline-flex items-center justify-center gap-2"
               >
                 View FAQ
@@ -218,12 +218,12 @@ export default function Welcome() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/membership" className="text-gray-300 hover:text-white transition-colors">
                     Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link href="/faq" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/what-is-dpc#faq" className="text-gray-300 hover:text-white transition-colors">
                     FAQ
                   </Link>
                 </li>

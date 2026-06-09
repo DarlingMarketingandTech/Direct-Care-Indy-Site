@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "images:fetch": "node scripts/fetch-page-slot-images.js",
+    "images:optimize": "node scripts/optimize-stock-images.js",
+    "images:refresh": "node scripts/fetch-page-slot-images.js && node scripts/optimize-stock-images.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

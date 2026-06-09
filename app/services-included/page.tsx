@@ -236,7 +236,7 @@ export default function ServicesIncludedPage() {
             Join hundreds of Indianapolis families who have simplified their healthcare.
           </p>
           <Link href="/membership" className="bg-secondary text-secondary-foreground px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform interactive-element">
-            View Pricing Plans
+            View Membership Pricing
           </Link>
         </div>
       </section>

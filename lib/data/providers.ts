@@ -1,3 +1,5 @@
+import { cloudinaryAssets } from "@/lib/cloudinary";
+
 export interface Provider {
   slug: string;
   name: string;
@@ -19,7 +21,7 @@ export const PROVIDERS: Provider[] = [
     name: "James D. Pike",
     credentials: "D.O., FCCP, FACP",
     role: "Medical Director",
-    image: "/images/providers/james-pike.webp",
+    image: cloudinaryAssets.providerJames,
     bio: "Dr. James D. Pike brings over three decades of medical expertise to Direct Care Indy, combining specialist-level training with a commitment to accessible primary care. A 1984 graduate of Kansas City University of Medicine and Biosciences, Dr. Pike served as a U.S. Army physician for 10 years, where he honed his skills in complex care management and emergency medicine. As Chief Medical Officer and Medical Director, Dr. Pike provides weekly case reviews and specialist oversight for every Direct Care Indy member.",
     highlights: [
       "Triple board-certified in Internal Medicine, Pulmonary Medicine, and Critical Care Medicine",
@@ -54,7 +56,7 @@ export const PROVIDERS: Provider[] = [
     name: "Karina White",
     credentials: "PA-C, DMS",
     role: "Lead PA",
-    image: "/images/providers/karina-white.webp",
+    image: cloudinaryAssets.providerKarina,
     bio: "Karina White, PA-C, DMS brings exceptional clinical expertise and academic leadership to Direct Care Indy. As a Doctor of Medical Science (DMS), Karina represents the highest level of PA education, combining advanced clinical training with a deep understanding of evidence-based medicine.",
     highlights: [
       "Doctor of Medical Science (DMS) - highest level of PA education",
@@ -115,7 +117,7 @@ export const PROVIDERS: Provider[] = [
     name: "Chase Keirn",
     credentials: "PA-C",
     role: "Lead PA",
-    image: "/images/providers/chase-keirn.webp",
+    image: cloudinaryAssets.providerChase,
     bio: "Chase Keirn, PA-C brings specialized expertise in general pulmonology to Direct Care Indy, with a particular focus on lung nodules and respiratory conditions. Working in tandem with Dr. James D. Pike, D.O., FCCP, FACP on complex pulmonary cases, Chase provides expert evaluation and management of lung nodules and respiratory conditions. As the Health Center Director at Marian University, Chase combines clinical excellence with administrative leadership, ensuring comprehensive care for his patients.",
     highlights: [
       "Specialized focus in General Pulmonology",

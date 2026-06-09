@@ -90,8 +90,8 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
       <div className="min-h-screen bg-background">
 
         {/* Hero Section */}
-        <section className="relative text-white py-16 overflow-hidden">
-          <div className="absolute inset-0 -z-10">
+        <section className="relative overflow-hidden bg-teal-900 py-16 text-white">
+          <div className="absolute inset-0 z-0">
             <Image
               src={SITE_ASSETS.ui.tealGradient}
               alt=""
@@ -100,9 +100,9 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
               sizes="100vw"
               priority={isPhysician}
             />
-            <div className="absolute inset-0 bg-linear-to-br from-teal-700/80 to-teal-900/80" />
+            <div className="absolute inset-0 bg-linear-to-br from-teal-800/90 via-primary/85 to-teal-900/90" />
           </div>
-          <div className="container mx-auto px-4 relative z-10">
+          <div className="container relative z-10 mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <Link
                 href="/providers"
@@ -126,7 +126,7 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
                   <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
                     <span className="text-sm font-semibold">{provider.role}</span>
                   </div>
-                  <h1 className="text-4xl md:text-5xl font-bold mb-3">
+                  <h1 className="heading-1-inverse mb-3 text-white">
                     {provider.name}
                   </h1>
                   <p className="text-2xl text-teal-200 font-semibold mb-6">
@@ -282,7 +282,7 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
         )}
 
         {/* CTA Section */}
-        <section className="py-16 bg-primary text-white">
+        <section className="bg-primary py-16 text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
             <h3 className="text-3xl font-bold mb-6">
               Ready to Experience {isPhysician ? "Specialist-Level" : "Expert"} Primary Care?

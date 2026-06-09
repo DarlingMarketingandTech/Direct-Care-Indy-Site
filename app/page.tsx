@@ -5,11 +5,13 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, HeartPulse, Play, ShieldCheck, Sparkles, Stethoscope, User, Users, Briefcase } from "lucide-react";
 import { MembershipConfigurator } from "@/components/MembershipConfigurator";
 import { MembershipValue } from "@/components/shared/MembershipValue";
-import { NinetyTenSwitcher } from "@/components/NinetyTenSwitcher";
+import { NinetyTenModelSection } from "@/components/shared/NinetyTenModelSection";
 import { SavingsPersonas } from "@/components/SavingsPersonas";
 import { ComplianceNote } from "@/components/ComplianceNote";
 import { ScrollTransition } from "@/components/ScrollTransition";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
+import { SITE_ASSETS } from "@/lib/images";
+import { DpcQuizTrigger, DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 
 const PATIENT_PORTAL_URL = "https://directcareindy.hint.com/login";
 
@@ -43,11 +45,17 @@ export default function Home() {
                 and a secure Hint Health flow that makes joining as easy as texting your provider.
               </p>
               <div className="flex flex-wrap gap-4">
+                <DpcQuizTrigger
+                  label="Is DPC Right for You?"
+                  sublabel="Take the 60-second quiz"
+                  variant="primary"
+                  className="!px-7 !py-4 !text-lg !font-bold"
+                />
                 <Link
-                  href="/join"
-                  className="bg-secondary text-secondary-foreground px-7 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                  href="/membership"
+                  className="bg-card text-card-foreground border border-border px-7 py-4 rounded-full font-semibold text-lg hover:bg-card/90 transition-colors"
                 >
-                  Join Now
+                  View Membership Plans
                 </Link>
                 <Link
                   href="#pricing-calculator"
@@ -158,13 +166,12 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-2">Individuals</h3>
               <p className="text-2xl font-bold text-secondary mb-2">$85 – $110/mo</p>
               <p className="text-sm text-muted-foreground mb-6">Unlimited primary care &amp; 24/7 text access.</p>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-semibold hover:bg-secondary/90 transition-colors"
-              >
-                View Pricing
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <DpcQuizTrigger
+                label="Start here"
+                variant="primary"
+                initialAudience="individual"
+                className="w-full justify-center"
+              />
             </div>
             <div className="bg-card border border-border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-950">
@@ -173,30 +180,51 @@ export default function Home() {
               <h3 className="text-xl font-bold mb-2">Families</h3>
               <p className="text-2xl font-bold text-secondary mb-2">$250 – $300/mo</p>
               <p className="text-sm text-muted-foreground mb-6">Comprehensive care for 2 Adults + 2 Kids.</p>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-semibold hover:bg-secondary/90 transition-colors"
-              >
-                Build Your Plan
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <DpcQuizTrigger
+                label="Start here"
+                variant="primary"
+                initialAudience="family"
+                className="w-full justify-center"
+              />
             </div>
             <div className="bg-card border border-border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-950">
                 <Briefcase className="h-7 w-7 text-teal-600" />
               </div>
-              <h3 className="text-xl font-bold mb-2">Small Businesses</h3>
+              <h3 className="text-xl font-bold mb-2">For Employers</h3>
               <p className="text-2xl font-bold text-secondary mb-2">$80/emp</p>
               <p className="text-sm text-muted-foreground mb-6">Occupational health &amp; acute care.</p>
-              <Link
-                href="/partnerships"
-                className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-semibold hover:bg-secondary/90 transition-colors"
-              >
-                Partner with Us
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <DpcQuizTrigger
+                label="Start here"
+                variant="primary"
+                initialAudience="employer"
+                className="w-full justify-center"
+              />
             </div>
           </div>
+          <div className="mt-8 max-w-md mx-auto">
+            <div className="bg-card border border-border rounded-2xl p-6 text-center shadow-sm">
+              <h3 className="text-lg font-bold mb-2">For Brokers</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Advising a client on benefits? Start with the quiz.
+              </p>
+              <DpcQuizTrigger
+                label="Start here"
+                variant="secondary"
+                initialAudience="broker"
+                className="w-full justify-center"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding-sm bg-background">
+        <div className="content-container max-w-4xl mx-auto">
+          <DpcQuizCtaBand
+            headline="Not sure where to start?"
+            body="Not sure where to start? Take the quiz and we'll guide you."
+          />
         </div>
       </section>
 
@@ -319,7 +347,7 @@ export default function Home() {
             <article className="section-card p-0 overflow-hidden">
               <div className="relative aspect-video">
                 <Image
-                  src="/images/marketing/trades-90-10.webp"
+                  src={SITE_ASSETS.marketing.employer}
                   alt="Indianapolis trades professional receiving care"
                   fill
                   className="object-cover"
@@ -342,7 +370,7 @@ export default function Home() {
             <article className="section-card p-0 overflow-hidden">
               <div className="relative aspect-video">
                 <Image
-                  src="/images/marketing/senior-wellness.webp"
+                  src={SITE_ASSETS.marketing.seniorWellness}
                   alt="Senior preventive care case study"
                   fill
                   className="object-cover"
@@ -365,7 +393,7 @@ export default function Home() {
             <article className="section-card p-0 overflow-hidden">
               <div className="relative aspect-video">
                 <Image
-                  src="/images/marketing/employer-wellness.webp"
+                  src={SITE_ASSETS.marketing.employerWellness}
                   alt="Employer wellness collaboration"
                   fill
                   className="object-cover"
@@ -394,41 +422,8 @@ export default function Home() {
 
       {/* 90/10 Model */}
       <ScrollTransition id="how-it-works">
-        <section className="py-16 bg-background">
-          <div className="content-container">
-            <div className="max-w-5xl mx-auto mb-12 text-center">
-              <h3 className="heading-2 mb-4">Understand the 90/10 model in 60 seconds.</h3>
-              <p className="body-large text-muted-foreground">
-                Membership covers the 90% of care you actually use. Catastrophic insurance handles the rare 10%.
-              </p>
-            </div>
-            <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
-              <div className="section-card">
-                <NinetyTenSwitcher />
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-foreground">
-                  <CheckCircle2 className="h-5 w-5 text-secondary" />
-                  <span>Unlimited sick visits, wholesale labs, and direct texting with your provider.</span>
-                </div>
-                <div className="flex items-center gap-2 text-foreground">
-                  <CheckCircle2 className="h-5 w-5 text-secondary" />
-                  <span>Catastrophic layer stays simple: pair with an HDHP or wraparound of your choice.</span>
-                </div>
-                <div className="flex items-center gap-2 text-foreground">
-                  <CheckCircle2 className="h-5 w-5 text-secondary" />
-                  <span>Patient portal and Hint enrollment live on their own page-no PDFs or phone tag.</span>
-                </div>
-                <Link
-                  href="/how-it-works"
-                  className="inline-flex items-center gap-2 text-secondary font-semibold underline underline-offset-4"
-                >
-                  Explore the model
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
+        <section className="bg-background py-16">
+          <NinetyTenModelSection />
         </section>
       </ScrollTransition>
 

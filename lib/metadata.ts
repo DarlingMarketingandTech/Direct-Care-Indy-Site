@@ -99,24 +99,28 @@ export const partnershipMetadata: Metadata = {
   },
 };
 
-export const pricingMetadata: Metadata = {
-  title: "Transparent DPC Pricing | Direct Care Indy Demo",
+export const membershipPricingMetadata: Metadata = {
+  title: "Membership Pricing | Direct Care Indy",
   description:
-    "Direct Care Indy demo membership pricing starting at $69/mo. HSA-eligible as of Jan 1, 2026. Transparent pricing with no hidden fees.",
+    "DirectCare Indy membership pricing from $79/month. Individual, family, and senior plans with transparent everyday care — no co-pays for included visits.",
   keywords: [
-    "DPC pricing Indianapolis",
-    "affordable primary care",
-    "HSA eligible healthcare 2026",
+    "DPC membership pricing Indianapolis",
+    "affordable primary care membership",
+    "family DPC plan Indianapolis",
+    "senior direct primary care",
     "transparent healthcare pricing",
     "no surprise medical bills",
   ],
   openGraph: {
-    title: "Transparent DPC Pricing | Direct Care Indy Demo",
+    title: "Membership Pricing | Direct Care Indy",
     description:
-      "Individual plans from $69/mo. Family plans from $250/mo. All HSA-eligible.",
-    url: absoluteUrl("/pricing"),
+      "Individual memberships from $79/mo. Family plans starting at $200/mo. Senior adult memberships at $119/mo.",
+    url: absoluteUrl("/membership"),
   },
 };
+
+/** @deprecated Use membershipPricingMetadata — /pricing redirects to /membership */
+export const pricingMetadata = membershipPricingMetadata;
 
 export const servicesMetadata: Metadata = {
   title: "Direct Primary Care Services | Chronic Disease Management",
@@ -130,14 +134,25 @@ export const servicesMetadata: Metadata = {
   ],
 };
 
-export const faqMetadata: Metadata = {
-  title: "FAQ | Direct Primary Care Questions Answered",
+export const whatIsDpcMetadata: Metadata = {
+  title: "What Is DPC? | Member Benefits Explained | Direct Care Indy",
   description:
-    "Common questions about Direct Primary Care, HSA eligibility, insurance compatibility, and the 90/10 healthcare model.",
+    "Member benefits explained — affordable plans, everyday primary care, wellness exams, telehealth, in-clinic pharmacy discounts, and transparent pricing at DirectCare Indy.",
   keywords: [
+    "what is direct primary care",
+    "DPC member benefits",
     "DPC FAQ",
-    "direct primary care questions",
-    "HSA eligibility DPC",
     "DPC vs insurance",
+    "HSA eligible DPC",
+    "DirectCare Indy membership",
   ],
+  openGraph: {
+    title: "What Is DPC? | Member Benefits Explained",
+    description:
+      "How Direct Primary Care works in real life — predictable pricing, everyday care, follow-up support, and FAQs.",
+    url: absoluteUrl("/what-is-dpc"),
+  },
 };
+
+/** @deprecated /faq redirects to /what-is-dpc#faq */
+export const faqMetadata = whatIsDpcMetadata;

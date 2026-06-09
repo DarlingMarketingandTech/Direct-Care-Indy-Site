@@ -7,7 +7,8 @@ const STATIC_CACHE = [
   '/',
   '/offline',
   '/manifest.json',
-  '/images/logos/dci-logo-primary.svg',
+  '/images/logos/dci-logo-noears-scaled.png',
+  '/images/logos/dci-icon-192.png',
   '/globals.css',
 ];
 

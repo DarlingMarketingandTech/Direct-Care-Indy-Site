@@ -1,15 +1,20 @@
 'use client';
 
-import { Wifi } from 'lucide-react';
+import { WifiOff } from 'lucide-react';
 import Link from 'next/link';
+import { SiteLogoMark } from '@/components/SiteLogoMark';
 
 export default function OfflinePage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-teal-50 px-4">
       <div className="max-w-md w-full text-center space-y-8">
-        <div className="flex justify-center">
-          <div className="rounded-full bg-white p-6 shadow-xl">
-            <Wifi className="h-16 w-16 text-slate-400" />
+        <div className="flex flex-col items-center gap-4">
+          <div className="rounded-2xl bg-white p-5 shadow-xl">
+            <SiteLogoMark size="lg" decorative={false} />
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-sm text-slate-600 shadow-sm">
+            <WifiOff className="h-4 w-4" aria-hidden />
+            No connection
           </div>
         </div>
 
@@ -38,9 +43,9 @@ export default function OfflinePage() {
           </Link>
         </div>
 
-        <div className="pt-8 text-sm text-slate-500">
-          <p>Some pages may still be available offline</p>
-        </div>
+        <p className="pt-4 text-sm text-slate-500">
+          Some pages may still be available offline.
+        </p>
       </div>
     </div>
   );

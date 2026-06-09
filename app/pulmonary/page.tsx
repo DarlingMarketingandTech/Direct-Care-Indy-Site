@@ -33,9 +33,8 @@ export default function PulmonaryPage() {
     <>
       <div className="min-h-screen bg-background">
         {/* Parallax Hero Section */}
-        <section className="relative h-[600px] overflow-hidden">
-          {/* Fixed Background Image */}
-          <div className="fixed inset-0 -z-10">
+        <section className="relative h-[600px] overflow-hidden bg-primary">
+          <div className="absolute inset-0 z-0">
             <Image
               src={SITE_ASSETS.clinical.specialist}
               alt="Specialist Team - Pulmonary Medicine"
@@ -43,21 +42,20 @@ export default function PulmonaryPage() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-linear-to-b from-primary/90 via-primary/70 to-primary/90" />
+            <div className="absolute inset-0 bg-linear-to-b from-primary/90 via-primary/75 to-primary/90" />
           </div>
 
-          {/* Scrolling Content */}
-          <div className="relative z-10 h-full flex items-center">
+          <div className="relative z-10 flex h-full items-center">
             <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto text-center text-white">
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <Shield className="w-8 h-8 text-teal-400" />
-                    <h1 className="text-4xl md:text-5xl font-bold">
+              <div className="mx-auto max-w-4xl text-center text-white">
+                <div className="rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+                  <div className="mb-4 flex items-center justify-center gap-3">
+                    <Shield className="h-8 w-8 text-teal-400" />
+                    <h1 className="heading-1-inverse text-white">
                       Pulmonary Specialist Oversight
                     </h1>
                   </div>
-                  <p className="text-xl mb-6 opacity-90">
+                  <p className="body-large-inverse mb-6 text-white/90">
                     Dr. James D. Pike, D.O., FCCP, FACP brings board-certified Pulmonary Medicine expertise directly to your primary care through our Round Table model.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4">
@@ -227,7 +225,7 @@ export default function PulmonaryPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-primary text-white">
+        <section className="bg-primary py-16 text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
             <h3 className="text-3xl font-bold mb-6">
               Experience Specialist-Level Primary Care

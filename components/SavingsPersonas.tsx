@@ -50,7 +50,7 @@ export function SavingsPersonas() {
               <PersonaButton
                 persona={p.personaType}
                 action="view_pricing_from_persona"
-                href="/pricing"
+                href="/membership"
                 className="w-full bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-semibold transition-all text-center block"
                 metadata={{ personaCard: p.title, savings: p.savings }}
               >

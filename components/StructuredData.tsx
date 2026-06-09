@@ -8,7 +8,7 @@ export function OrganizationSchema() {
     "name": "Direct Care Indy",
     "description": "Direct Primary Care practice in Indianapolis providing affordable, transparent healthcare with no insurance hassles.",
     "url": SITE_URL,
-    "logo": absoluteUrl("/logo.png"),
+    "logo": absoluteUrl("/images/logos/dci-logo-noears-scaled.png"),
     "image": absoluteUrl("/og-image.jpg"),
     "telephone": "+1-317-956-6288",
     "email": "info@directcareindy.com",

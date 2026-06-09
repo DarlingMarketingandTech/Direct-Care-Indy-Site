@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { X, TrendingUp } from "lucide-react";
+import { DpcQuizTrigger } from "@/components/dpc-fit-quiz";
 
 export function StickySavingsBar() {
   const [isVisible, setIsVisible] = useState(false);
@@ -51,14 +52,14 @@ export function StickySavingsBar() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <DpcQuizTrigger
+              label="Is DPC Right for You?"
+              shortLabel="Take the Quiz"
+              variant="primary"
+              className="!px-6 !py-2 !text-sm hover:scale-105 transition-transform shadow"
+            />
             <Link
-              href="/join"
-              className="bg-secondary text-secondary-foreground px-6 py-2 rounded-full font-semibold text-sm hover:scale-105 transition-transform interactive-element shadow"
-            >
-              Join Now
-            </Link>
-            <Link
-              href="/pricing#pricing-calculator"
+              href="/membership"
               className="hidden md:inline-flex px-5 py-2 rounded-full font-semibold text-sm border border-border text-foreground hover:bg-muted transition-colors interactive-element"
             >
               Calculate Price

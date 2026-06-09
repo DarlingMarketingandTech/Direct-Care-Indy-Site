@@ -157,8 +157,8 @@ export default function HowItWorksPage() {
         <div className="content-container">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="heading-2 mb-4">Your Care Team: The Round Table Model</h2>
-              <p className="body-large max-w-3xl mx-auto">
+              <h2 className="heading-2 mb-4 text-secondary-foreground">Your Care Team: The Round Table Model</h2>
+              <p className="body-large max-w-3xl mx-auto text-secondary-foreground/90">
                 Physician Assistant-led care with physician oversight through weekly Round Table discussions.
                 The best of both worlds: accessible care from skilled clinicians with physician supervision.
               </p>

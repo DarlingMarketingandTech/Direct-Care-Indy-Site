@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { CheckCircle2, Clock, HeartPulse, ShieldCheck, Stethoscope } from "lucide-react";
+import { SITE_ASSETS } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Chronic Care Direct Primary Care | Carmel, IN | Direct Care Indy",
@@ -17,7 +18,7 @@ export default function ChronicCareCarmelPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/locations/carmel-hero.webp"
+            src={SITE_ASSETS.locations.carmel}
             alt="Carmel Indiana streetscape"
             fill
             className="object-cover opacity-70"
@@ -126,7 +127,7 @@ export default function ChronicCareCarmelPage() {
               </p>
               <div className="flex gap-3">
                 <Link
-                  href="/pricing#pricing-calculator"
+                  href="/membership"
                   className="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
                 >
                   Calculate pricing

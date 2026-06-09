@@ -39,7 +39,7 @@ export function DynamicCTA() {
           <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity">
             <Image src={SITE_ASSETS.ui.tealGradient} alt="" fill className="object-cover" />
           </div>
-          <span className="relative z-10">Calculate Business Savings</span>
+          <span className="relative z-10">Talk About Employer Plans</span>
         </Link>
       );
     default:
