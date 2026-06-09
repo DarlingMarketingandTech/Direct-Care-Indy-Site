@@ -7,14 +7,16 @@ Map active routes to their rendering components and current content sources.
 ## Current Pricing Map
 
 - `/` → `app/page.tsx`
-  - Quiz-first homepage
+  - Audience-first routing homepage
   - Membership preview should read from `MEMBERSHIP_PLANS`
+  - Quiz is secondary decision support, not the primary CTA
+- `/individuals`, `/families` → planned audience pages (see ROUTE-MAP)
 - `/membership` → `app/membership/page.tsx`
   - Active public membership pricing route
   - Renders `components/membership/MembershipPricingView.tsx`
   - Pricing source of truth: `lib/content/membership-pricing.ts`
 - `/quiz` → `app/quiz/page.tsx`
-  - Quiz content source: `lib/dpc-fit-quiz.ts`
+  - Secondary quiz — quiz content source: `lib/dpc-fit-quiz.ts`
 
 ## Legacy Pricing Components
 

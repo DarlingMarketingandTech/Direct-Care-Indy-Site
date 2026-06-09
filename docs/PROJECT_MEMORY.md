@@ -10,6 +10,8 @@ README.md  →  PROJECT_MEMORY.md  →  detail docs
             single truth
                   │
     ROUTE-MAP · COMPONENT-MAP · DEVELOPMENT · MOBILE_APP_ARCHITECTURE · nav-map · QA-CHECKLIST
+                  │
+    CODEX_WORKFLOW · CODEX_BACKLOG  (implementation queue for Codex)
 ```
 
 | Layer | File | Role |
@@ -21,6 +23,7 @@ README.md  →  PROJECT_MEMORY.md  →  detail docs
 | Detail | [`COMPONENT-MAP.md`](./COMPONENT-MAP.md) | Components and content sources |
 | Detail | [`MOBILE_APP_ARCHITECTURE.md`](./MOBILE_APP_ARCHITECTURE.md) | Mobile shell and bottom bar |
 | Detail | [`nav-map.md`](./nav-map.md) | Navigation roles |
+| Codex | [`CODEX_WORKFLOW.md`](./CODEX_WORKFLOW.md), [`CODEX_BACKLOG.md`](./CODEX_BACKLOG.md) | Repeatable workflow and next tasks |
 | Agents | [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md) | Pointers only — no duplicated strategy |
 | History | [`archive/`](./archive/) | Past implementation reports — not active guidance |
 
@@ -39,42 +42,111 @@ Do not duplicate this file’s rules in other docs. Other docs point **up** here
 
 ## 2. Core strategy
 
-- Site is **quiz-first**; main CTA: **“Is DPC Right for You?”**
-- Quiz routes visitors to: individual membership, family membership, senior/Medicare membership, employer options, broker conversation, general DPC education.
-- Homepage = **routing page**, not a giant all-in-one brochure.
+- Homepage = **audience routing page**, not a giant all-in-one brochure.
+- Lead with **audience-specific CTAs** (individuals, families, employers) and local clinic trust.
+- The DPC fit quiz is a **secondary** “not sure where to start?” tool — not the primary site CTA.
+- **Do not** repeat “Is DPC Right for You? Take the 60-second quiz” across every audience card, sticky bar, and CTA section.
+- Remove the **global header quiz CTA** from current strategy (quiz remains at `/quiz` and contextual secondary placements).
 
 ---
 
-## 3. Active routes
+## 3. Current CTA and audience strategy
+
+### Single clinic location
+
+There is only one physical clinic:
+
+**7911 N. Michigan Rd., Indianapolis, IN 46268**
+
+- **Do not** use “Find a provider near you” or multi-location framing.
+- Prefer labels such as:
+  - “Visit Our Michigan Rd Clinic”
+  - “See Location & Hours”
+  - “Meet the Care Team”
+  - “Talk With Our Local Care Team”
+- Location source of truth: `lib/content/contact.ts`, `lib/constants.ts`
+
+### Audience pages and CTAs
+
+Each audience page should lead with audience-specific CTAs and resources — not the quiz.
+
+| Audience | Route (planned / active) | Primary CTA direction |
+|----------|--------------------------|------------------------|
+| Individuals | `/individuals` (planned) | Membership, local care team, resource download |
+| Families | `/families` (planned) | Family membership, family resource, schedule/contact |
+| Employers | `/employers` | Employer inquiry, rollout conversation |
+| Brokers | `/brokers` (footer/context only) | Broker toolkit, partnership conversation |
+
+### Planned audience lead resources (gated forms)
+
+Each audience gets its own resource CTA and tailored form questions:
+
+**Individuals** — *Transparent Membership & Add-On Pricing Guide*
+- Collect: name, email, phone (optional), age range, insurance status, biggest care frustration, preferred contact method
+
+**Families** — *Family Care Roadmap*
+- Collect: name, email, phone (optional), household size, children ages 12+, biggest family care concern, preferred contact method
+
+**Employers** — *Employer DPC Overview / Small-Team Healthcare Access Guide*
+- Collect: name, company, role, email, phone (optional), employee count band, current benefits situation, renewal month if known, biggest workforce healthcare concern
+
+**Brokers** — *Broker Toolkit / DPC Client Conversation Kit*
+- Collect: name, firm, role, email, phone (optional), client size band, primary client industries, funding model focus, whether they want co-branded materials
+
+### Demo scheduler (development)
+
+- **Do not** require production scheduler env vars yet.
+- Use demo-safe scheduler fallbacks until real Cal.com (or equivalent) links are configured.
+- Pattern: `getDpcQuizScheduleLink()` in `lib/dpc-fit-quiz.ts` — env override when set, otherwise `dpcQuizScheduleFallbacks` (currently `/contact?source=quiz&intent=…`).
+- Extend this pattern for audience-page schedule CTAs; keep all demo links safe for development (no broken `/schedule/*` routes).
+
+### Analytics (deferred)
+
+- This is still a **development demo site** — **do not** set up GA4 or GTM as an active implementation requirement.
+- `lib/analytics.ts` is a lightweight no-op-safe bridge (`trackEvent` does nothing when `dataLayer` is unavailable).
+- Tracking taxonomy may be documented as **future/planned only** — do not add env setup instructions or production integration work unless explicitly requested.
+
+### Navigation notes
+
+- **Brokers stay out of main nav** (`lib/nav.ts`). OK in footer and employer/resource contextual links.
+- `/team` may be removed or redirected later; provider trust should center on `/providers` and `/providers/[slug]`.
+- Contact will likely become **Location & Contact** — rename/reposition in a future pass.
+
+---
+
+## 4. Active routes
 
 | Route | Purpose |
 |-------|---------|
-| `/` | Homepage (quiz-first) |
+| `/` | Homepage (audience routing) |
 | `/membership` | **Active pricing route** |
 | `/what-is-dpc` | DPC education |
 | `/employers` | Employer / B2B |
 | `/brokers` | Broker campaign landing (not main nav) |
-| `/providers` | Team / providers |
-| `/contact` | Contact |
-| `/quiz` | Standalone DPC fit quiz |
+| `/providers` | Provider directory |
+| `/providers/[slug]` | Provider detail |
+| `/contact` | Contact (→ Location & Contact later) |
+| `/quiz` | Standalone DPC fit quiz (secondary tool) |
+
+**Planned audience routes:** `/individuals`, `/families` — build in upcoming Codex tasks.
 
 - `/membership` is the active pricing route; `/pricing` is not primary.
 - `/pricing` should redirect to `/membership` (`next.config.mjs`).
 
 ---
 
-## 4. Navigation strategy
+## 5. Navigation strategy
 
 - Main nav: patient/member + employer audiences only.
 - **Do not add brokers to `mainNav`** (`lib/nav.ts`).
 - `/brokers` = targeted campaign landing for outbound broker outreach.
 - Brokers OK in footer and employer-page contextual links.
 
-Current main nav: Membership Pricing, For Employers, What Is DPC?, Our Team, Contact.
+Current main nav (may evolve): Membership Pricing, For Employers, What Is DPC?, Our Team, Contact.
 
 ---
 
-## 5. Pricing source of truth
+## 6. Pricing source of truth
 
 **File:** `lib/content/membership-pricing.ts` — membership plans, pricing, benefits, additional-service pricing, pharmacy examples, disclaimers.
 
@@ -92,15 +164,15 @@ Homepage and membership page must import from this file; do not hardcode plan pr
 
 ---
 
-## 6. Content guardrails
+## 7. Content guardrails
 
-**Do not use:** old age-band pricing; $69/$89/$109 old plans; $250 family cap; exact monthly price calculators; fake testimonials; hard savings claims; guaranteed ROI/ER reduction; “DPC replaces insurance”; “unlimited care/visits”.
+**Do not use:** old age-band pricing; $69/$89/$109 old plans; $250 family cap; exact monthly price calculators; fake testimonials; hard savings claims; guaranteed ROI/ER reduction; “DPC replaces insurance”; “unlimited care/visits”; generic quiz CTA spam.
 
 **Use instead:** “may be a fit”, “can help”, “designed to support”, “when available”, “pricing subject to change”, “DPC is not insurance and does not replace major medical coverage”.
 
 ---
 
-## 7. Quiz system
+## 8. Quiz system
 
 | Item | Location |
 |------|----------|
@@ -108,14 +180,15 @@ Homepage and membership page must import from this file; do not hardcode plan pr
 | Components | `components/dpc-fit-quiz/*` |
 | Page | `/quiz` |
 
+- **Secondary tool only** — not the primary homepage or header CTA.
 - Rules-based unless AI integration is explicitly requested.
 - No medical history or urgent symptoms collection.
 - Include medical disclaimer and 911 emergency guidance.
-- Prefer `DpcQuizTrigger` / `DpcQuizCtaBand` over legacy pricing CTAs.
+- Use `DpcQuizTrigger` / `DpcQuizCtaBand` sparingly — prefer audience-specific CTAs on audience pages.
 
 ---
 
-## 8. Employer / B2B strategy
+## 9. Employer / B2B strategy
 
 - Position DPC as practical healthcare access benefit.
 - Complement to major medical, not a replacement.
@@ -124,19 +197,20 @@ Homepage and membership page must import from this file; do not hardcode plan pr
 
 ---
 
-## 9. Build and lint
+## 10. Build and lint
 
 - `npm run build` after meaningful code changes; `npm run lint`.
 - Report known unrelated lint issues clearly; do not fix unless asked.
 
 ---
 
-## 10. Agent workflow
+## 11. Agent workflow
 
 1. Read this file before editing.
 2. Inspect active imports before deleting files.
 3. Small, focused changes only.
 4. Avoid deprecated pricing/calculators.
+5. See [`CODEX_WORKFLOW.md`](./CODEX_WORKFLOW.md) for Codex-specific steps and [`CODEX_BACKLOG.md`](./CODEX_BACKLOG.md) for the implementation queue.
 
 Report: files changed, build result, lint result, follow-up issues.
 
@@ -146,10 +220,10 @@ Report: files changed, build result, lint result, follow-up issues.
 
 Removed files: `MembershipConfigurator`, `PricingCalculator`, `PricingTiers`, `SavingsPersonas`, `Testimonials`/`TestimonialsCarousel`, `TierDisplay`, `ValueBanner`, `LabPharmacySavingsTable`, `TheWraparoundGuide`, `lib/pricing.ts`.
 
-Removed patterns: age-band pricing, family-cap logic, household calculators, active `/pricing` page (redirect only).
+Removed patterns: age-band pricing, family-cap logic, household calculators, active `/pricing` page (redirect only), quiz-first as primary site strategy, global header quiz CTA, “Find a provider near you”.
 
 ---
 
 ## No-touch zones
 
-Unless explicitly requested: `app/api/**`, `app/join/**`, env files, Hint Health integration, payment/enrollment integrations.
+Unless explicitly requested: `app/api/**`, `app/join/**`, env files, Hint Health integration, payment/enrollment integrations, **GA4/GTM production setup**, **production scheduler env vars**, HSA/FSA gates.

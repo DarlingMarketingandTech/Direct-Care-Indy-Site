@@ -52,6 +52,11 @@ CLAUDE.local.md
 .claude/transcripts/
 .claude/cache/
 
+# Codex local logs and sessions
+.codex-log/
+.codex/sessions/
+.codex/state/
+
 # CodeGraph local index
 .codegraph/
 

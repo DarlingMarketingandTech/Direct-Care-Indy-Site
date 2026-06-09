@@ -12,7 +12,7 @@ Component and content-source inventory for membership pricing, quiz flow, and re
 | Homepage membership preview | `app/page.tsx` | Active | `MEMBERSHIP_PLANS` from `lib/content/membership-pricing.ts` |
 | `MembershipSectionNav` | `components/membership/MembershipSectionNav.tsx` | Active | Membership page section anchors |
 | `DpcQuizTrigger` | `components/dpc-fit-quiz/*` | Active | Quiz flow helpers |
-| `DpcQuizCtaBand` | `components/dpc-fit-quiz/*` | Active | Quiz-first CTA bands |
+| `DpcQuizCtaBand` | `components/dpc-fit-quiz/*` | Active | Secondary quiz CTA bands — use sparingly, not as primary homepage/audience CTA |
 
 ## Active Pricing Data Sources
 
@@ -39,14 +39,17 @@ Component and content-source inventory for membership pricing, quiz flow, and re
 - Reads pricing content from `lib/content/membership-pricing.ts`
 - Hosts the active public-facing membership pricing experience
 
-## Active Homepage Pricing Composition
+## Active Homepage Composition
 
 `app/page.tsx`
 
-- Homepage remains quiz-first
+- Homepage uses **audience-first routing** — individuals, families, employers — with local clinic trust (7911 N. Michigan Rd.)
+- Quiz is a **secondary** “not sure where to start?” tool, not the primary CTA
+- Do not repeat quiz CTAs across audience cards, sticky bars, or every section
 - Pricing preview is concise and should not duplicate full benefit lists
 - Pricing preview must read from `MEMBERSHIP_PLANS`
 - Homepage should not render calculators or exact household pricing tools
+- Do not use “Find a provider near you” — single clinic location only
 
 ## Active Quiz Architecture
 

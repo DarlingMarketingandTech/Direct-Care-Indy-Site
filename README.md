@@ -1,6 +1,6 @@
 # Direct Care Indy — Website
 
-Next.js site for **Direct Primary Care (DPC)** in Indianapolis: quiz-first member discovery, membership pricing, employer and broker landing pages, and Hint Health enrollment.
+Next.js site for **Direct Primary Care (DPC)** in Indianapolis: audience-first member routing, membership pricing, employer and broker landing pages, and Hint Health enrollment.
 
 This is the active DirectCare Indy website buildout — not a generic Next.js starter or a throwaway demo.
 
@@ -30,6 +30,8 @@ Copy `.env.example` to `.env.local` for local secrets. Never commit `.env.local`
 | [`docs/nav-map.md`](docs/nav-map.md) | Navigation roles and route intent |
 | [`docs/MOBILE_APP_ARCHITECTURE.md`](docs/MOBILE_APP_ARCHITECTURE.md) | Mobile shell, bottom bar, PWA layout |
 | [`docs/QA-CHECKLIST.md`](docs/QA-CHECKLIST.md) | Post-change validation |
+| [`docs/CODEX_WORKFLOW.md`](docs/CODEX_WORKFLOW.md) | Codex-assisted development workflow |
+| [`docs/CODEX_BACKLOG.md`](docs/CODEX_BACKLOG.md) | Next planned implementation tasks |
 | [`docs/archive/`](docs/archive/) | Historical implementation and deployment reports |
 
 ## Agent entry points

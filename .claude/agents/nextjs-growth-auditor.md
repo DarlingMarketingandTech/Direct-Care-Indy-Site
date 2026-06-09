@@ -50,7 +50,7 @@ Verify alignment with `docs/PROJECT_MEMORY.md`.
 
 | Check | Pass criteria |
 |-------|---------------|
-| Homepage | Quiz-first; main CTA: "Is DPC Right for You?" |
+| Homepage | Audience-first routing; audience-specific CTAs lead; quiz is secondary support |
 | Brokers | Footer/campaign only — **not** in `mainNav` (`lib/nav.ts`) |
 | Pricing source | `lib/content/membership-pricing.ts` only |
 | Active pricing route | `/membership` |
@@ -92,7 +92,7 @@ Flag: thin pages, duplicate content, weak CTAs, weak internal linking, content g
 
 ### Homepage
 
-- Hero effectiveness, quiz visibility, audience routing, CTA hierarchy, trust signals, friction
+- Hero effectiveness, audience routing, CTA hierarchy (quiz not over-prioritized), trust signals, friction
 
 ### Quiz (`lib/dpc-fit-quiz.ts`, `components/dpc-fit-quiz/*`, `/quiz`)
 

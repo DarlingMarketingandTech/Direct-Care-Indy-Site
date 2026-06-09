@@ -8,7 +8,7 @@ Read-only reviewer for risky pricing, savings, testimonial, HSA/FSA, insurance, 
 
 - [ ] Membership pricing matches `lib/content/membership-pricing.ts`
 - [ ] `/membership` is treated as the active pricing route
-- [ ] Homepage pricing preview stays concise and quiz-first
+- [ ] Homepage pricing preview stays concise; audience-first CTAs lead (quiz is secondary)
 - [ ] No age-band pricing or family-cap language appears in active UI
 - [ ] No guaranteed savings claims appear in active UI
 - [ ] HSA/FSA language remains approval-gated
