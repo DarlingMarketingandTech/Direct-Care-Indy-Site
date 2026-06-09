@@ -93,6 +93,7 @@ export default function MobileAppBar() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const shouldShowBar = isVisible || menuOpen;
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
   const toggleMenu = useCallback(() => setMenuOpen((open) => !open), []);
@@ -114,11 +115,6 @@ export default function MobileAppBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  useEffect(() => {
-    if (!menuOpen) return;
-    setIsVisible(true);
-  }, [menuOpen]);
-
   return (
     <>
       <MobileFullMenu open={menuOpen} onClose={closeMenu} />
@@ -129,7 +125,7 @@ export default function MobileAppBar() {
           bg-white/95 backdrop-blur-lg border-t border-gray-200
           shadow-[0_-4px_20px_rgba(0,0,0,0.08)]
           transition-transform duration-300 ease-in-out
-          ${isVisible || menuOpen ? "translate-y-0" : "translate-y-full"}
+          ${shouldShowBar ? "translate-y-0" : "translate-y-full"}
         `}
         role="navigation"
         aria-label="Mobile bottom navigation"
