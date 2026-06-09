@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { mainNav, PATIENT_PORTAL_URL } from '@/lib/nav';
-import { DpcQuizTrigger } from '@/components/dpc-fit-quiz';
 import { SiteLogo } from '@/components/SiteLogo';
 
 export default function Navbar() {
@@ -33,21 +32,6 @@ export default function Navbar() {
             >
               Patient Login
             </a>
-            <DpcQuizTrigger
-              label="Is DPC Right for You?"
-              sublabel="Take the 60-second quiz"
-              variant="primary"
-              className="!bg-teal-600 hover:!bg-teal-700 !text-white !px-5 !py-2 !rounded-full !shadow-lg hover:!shadow-xl"
-            />
-          </div>
-
-          <div className="lg:hidden flex items-center shrink-0">
-            <DpcQuizTrigger
-              label="Take the DPC Quiz"
-              shortLabel="Take the DPC Quiz"
-              variant="compact"
-              className="!bg-teal-600 hover:!bg-teal-700 !text-white !px-4 !py-2 !rounded-full !shadow-md"
-            />
           </div>
         </div>
       </div>

@@ -1,82 +1,93 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { homeMetadata } from "@/lib/metadata";
-
-export const metadata: Metadata = homeMetadata;
 import {
   ArrowRight,
-  BookOpen,
   BriefcaseBusiness,
   Building2,
   CheckCircle2,
   Compass,
   HeartPulse,
+  MapPin,
   ShieldCheck,
   Stethoscope,
   Users,
 } from "lucide-react";
-import { DpcQuizCtaBand, DpcQuizTrigger } from "@/components/dpc-fit-quiz";
-import type { QuizAudience } from "@/lib/dpc-fit-quiz";
+import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 import { SITE_ASSETS } from "@/lib/images";
+import { homeMetadata } from "@/lib/metadata";
 import {
   MEMBERSHIP_PLANS,
   MEMBERSHIP_PLANS_INTRO,
 } from "@/lib/content/membership-pricing";
 import { getLeadPAs, getMedicalDirector } from "@/lib/data/providers";
 
+export const metadata: Metadata = homeMetadata;
+
+// TODO: Swap to /individuals when the dedicated audience page ships.
+const individualsRoute = "/membership";
+// TODO: Swap to /families when the dedicated audience page ships.
+const familiesRoute = "/membership";
+
 const audienceCards: Array<{
   title: string;
-  description: string;
-  href: string;
-  linkLabel: string;
-  initialAudience: QuizAudience;
+  headline: string;
+  pain: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref: string;
+  secondaryLabel: string;
   icon: typeof HeartPulse;
 }> = [
   {
     title: "Individuals",
-    description:
-      "If you want a simpler first stop for everyday care, start here and let the quiz guide you.",
-    href: "/membership",
-    linkLabel: "Explore individual membership",
-    initialAudience: "individual",
+    headline: "Everyday care without the insurance runaround",
+    pain: "Better appointment access, clearer cost expectations, less urgent care dependence, and a more practical next step when high-deductible frustration keeps piling up.",
+    primaryHref: individualsRoute,
+    primaryLabel: "Explore Individual Membership",
+    secondaryHref: "/contact?source=homepage&intent=individual-pricing-guide",
+    secondaryLabel: "Get the Pricing Guide",
     icon: HeartPulse,
   },
   {
     title: "Families",
-    description:
-      "If your household needs a clearer care path when someone gets sick, this route starts with family fit.",
-    href: "/membership",
-    linkLabel: "See family plan context",
-    initialAudience: "family",
+    headline: "Care access for busy households",
+    pain: "Get a clearer family care path for sick kids, urgent care detours, pricing questions, and the peace of mind busy households usually have to chase down.",
+    primaryHref: familiesRoute,
+    primaryLabel: "Explore Family Membership",
+    secondaryHref: "/contact?source=homepage&intent=family-care-roadmap",
+    secondaryLabel: "Get the Family Care Roadmap",
     icon: Users,
   },
   {
     title: "Employers",
-    description:
-      "If you are evaluating DPC as a practical employee benefit, start with the employer path.",
-    href: "/employers",
-    linkLabel: "See employer overview",
-    initialAudience: "employer",
+    headline: "A practical healthcare access benefit for your team",
+    pain: "Support retention, reduce missed-work friction, and give employees a more usable first stop for everyday care alongside major medical coverage.",
+    primaryHref: "/employers",
+    primaryLabel: "Explore Employer Options",
+    secondaryHref: "/contact?source=homepage&intent=employer-overview",
+    secondaryLabel: "Get the Employer Overview",
     icon: Building2,
   },
   {
     title: "Brokers",
-    description:
-      "If you advise employer clients, use the broker path for a tailored next step and supporting resources.",
-    href: "/brokers",
-    linkLabel: "Visit broker resources",
-    initialAudience: "broker",
+    headline: "Resources for benefits advisors",
+    pain: "Bring clients a clearer local care access option for renewal pressure, alternative funding conversations, and plan differentiation.",
+    primaryHref: "/brokers",
+    primaryLabel: "Visit Broker Resources",
+    secondaryHref: "/contact?source=homepage&intent=broker-toolkit",
+    secondaryLabel: "Get the Broker Toolkit",
     icon: BriefcaseBusiness,
   },
   {
-    title: "Unsure / education",
-    description:
-      "If you are still figuring out what DPC is, start with the education route and get a guided recommendation.",
-    href: "/what-is-dpc",
-    linkLabel: "Read the DPC basics",
-    initialAudience: "unsure",
-    icon: BookOpen,
+    title: "New to DPC",
+    headline: "Still learning how DPC works?",
+    pain: "Start here if you are sorting through insurance questions, wondering what DPC does, or deciding whether this care model belongs in your next step.",
+    primaryHref: "/what-is-dpc",
+    primaryLabel: "Learn the Basics",
+    secondaryHref: "/quiz",
+    secondaryLabel: "Use the 60-second guide",
+    icon: Compass,
   },
 ];
 
@@ -107,24 +118,26 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white/90 backdrop-blur-sm">
               <Compass className="h-4 w-4" aria-hidden />
-              Warm, relationship-based primary care guidance
+              Local, relationship-based primary care guidance
             </div>
 
             <h1 className="heading-1-inverse mt-6 text-glow sm:text-5xl lg:text-6xl">
-              Direct Primary Care, without the guesswork about where to start
+              Direct Primary Care, built around how you actually need care
             </h1>
             <p className="body-large-inverse mx-auto mt-5 max-w-3xl font-medium text-white/90">
-              Direct Care Indy helps individuals, families, employers, and advisors find the right
-              next step for everyday care. Start with the quiz, then move into the route that fits
-              you best.
+              Start with the care path that fits your situation. Direct Care Indy helps
+              individuals, families, employers, and benefits advisors choose a clearer next step
+              without forcing every visitor through the same starting point.
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <DpcQuizTrigger
-                label="Is DPC Right for You?"
-                sublabel="Take the 60-second quiz"
-                className="min-w-[260px] justify-center"
-              />
+              <Link
+                href="#care-paths"
+                className="inline-flex min-w-[260px] items-center justify-center gap-2 rounded-full bg-white px-7 py-4 text-base font-semibold text-primary shadow-lg transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+              >
+                Explore Your Care Options
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
               <Link
                 href="/membership"
                 className="inline-flex min-w-[240px] items-center justify-center gap-2 rounded-full border border-white/55 bg-white/10 px-7 py-4 text-base font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
@@ -134,11 +147,21 @@ export default function HomePage() {
               </Link>
             </div>
 
+            <p className="mt-4 text-sm text-white/85">
+              Not sure where to start?{" "}
+              <Link
+                href="/quiz"
+                className="font-semibold text-white underline decoration-white/50 underline-offset-4 hover:decoration-white"
+              >
+                Use the 60-second guide
+              </Link>
+            </p>
+
             <ul className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm">
               {[
-                "Quiz-first guidance",
-                "Membership plans preview",
-                "Employer and broker paths available",
+                "Audience-first care paths",
+                "Transparent membership plan preview",
+                "Local clinic and employer options",
               ].map((item) => (
                 <li
                   key={item}
@@ -155,17 +178,37 @@ export default function HomePage() {
       <section className="section-padding-sm">
         <div className="content-container">
           <div className="mx-auto max-w-6xl">
+            <div className="mx-auto mb-8 max-w-3xl rounded-3xl border border-white/60 bg-white/85 p-4 text-left shadow-sm backdrop-blur sm:flex sm:items-center sm:justify-between sm:gap-6">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-secondary">
+                  One Indianapolis clinic
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  Visit our Michigan Rd clinic, meet the DirectCare Indy care team, or start with
+                  the route that fits your situation best.
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:underline sm:mt-0"
+              >
+                See Location &amp; Contact
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
+
             <SectionHeading
               eyebrow="Choose your route"
-              title="Start in the lane that matches why you are here"
+              title="Start with the care path that fits your situation"
             >
               <p>
-                Each path opens the quiz with the right context, so you can get a more useful next
-                step without digging through a giant brochure pile.
+                Choose the audience path that matches what you need right now. The quiz is still
+                available if you want help later, but the homepage now starts with clearer direct
+                routes.
               </p>
             </SectionHeading>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+            <div id="care-paths" className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
               {audienceCards.map((card) => {
                 const Icon = card.icon;
 
@@ -179,22 +222,22 @@ export default function HomePage() {
                     </div>
                     <h2 className="mt-5 text-xl font-bold text-foreground">{card.title}</h2>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                      {card.description}
+                      <span className="block font-semibold text-foreground">{card.headline}</span>
+                      <span className="mt-2 block">{card.pain}</span>
                     </p>
                     <div className="mt-6 space-y-3">
-                      <DpcQuizTrigger
-                        label="Is DPC Right for You?"
-                        shortLabel="Start this path"
-                        sublabel="Take the 60-second quiz"
-                        variant="secondary"
-                        initialAudience={card.initialAudience}
-                        className="w-full justify-center"
-                      />
                       <Link
-                        href={card.href}
+                        href={card.primaryHref}
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground shadow-sm transition-colors hover:bg-secondary/90"
+                      >
+                        {card.primaryLabel}
+                        <ArrowRight className="h-4 w-4" aria-hidden />
+                      </Link>
+                      <Link
+                        href={card.secondaryHref}
                         className="inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:underline"
                       >
-                        {card.linkLabel}
+                        {card.secondaryLabel}
                         <ArrowRight className="h-4 w-4" aria-hidden />
                       </Link>
                     </div>
@@ -226,16 +269,16 @@ export default function HomePage() {
                   href="/what-is-dpc"
                   className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm transition-colors hover:bg-secondary/90"
                 >
-                  Learn how DPC works
+                  Learn the Basics
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
-                <DpcQuizTrigger
-                  label="Is DPC Right for You?"
-                  shortLabel="Take the quiz"
-                  sublabel="Take the 60-second quiz"
-                  variant="secondary"
-                  initialAudience="unsure"
-                />
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                >
+                  Visit Our Michigan Rd Clinic
+                  <MapPin className="h-4 w-4" aria-hidden />
+                </Link>
               </div>
             </div>
 
@@ -300,9 +343,7 @@ export default function HomePage() {
                   <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-secondary">
                     {plan.audienceLabel}
                   </p>
-                  <p
-                    className="mt-4 text-3xl font-black text-secondary"
-                  >
+                  <p className="mt-4 text-3xl font-black text-secondary">
                     {plan.monthlyPrice}
                     <span className="text-base font-normal text-muted-foreground">
                       {plan.priceNote}
@@ -380,24 +421,24 @@ export default function HomePage() {
                   step for everyday care without turning the homepage into a full benefits manual.
                 </p>
                 <p>
-                  Start with the employer quiz if you want guidance. Jump to the employer page if
-                  you already know you need the business overview.
+                  Use the employer route if you already know you need the business overview, or
+                  reach out for a practical next-step conversation for your team.
                 </p>
               </SectionHeading>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <DpcQuizTrigger
-                  label="Is DPC Right for You?"
-                  shortLabel="Start employer quiz"
-                  sublabel="Take the 60-second quiz"
-                  initialAudience="employer"
-                  className="justify-center"
-                />
                 <Link
                   href="/employers"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
                 >
-                  View Employer Overview
+                  Explore Employer Options
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+                <Link
+                  href="/contact?source=homepage&intent=employer-overview"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm transition-colors hover:bg-secondary/90"
+                >
+                  Get the Employer Overview
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <Link
@@ -477,7 +518,7 @@ export default function HomePage() {
               href="/providers"
               className="inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:underline"
             >
-              Meet the care team
+              Meet the DirectCare Indy care team
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
           </div>
@@ -487,8 +528,8 @@ export default function HomePage() {
       <section className="section-padding-sm pt-0">
         <div className="content-container max-w-5xl">
           <DpcQuizCtaBand
-            headline="Still deciding where to begin?"
-            body="Take the 60-second quiz and we will point you toward the right next step for individual care, family care, employer planning, broker conversations, or basic DPC education."
+            headline="Not sure which path fits?"
+            body="Answer a few quick questions and we will point you toward the most relevant next step."
             variant="primary"
           />
         </div>
