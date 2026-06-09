@@ -5,7 +5,6 @@ import Link from "next/link";
 import { SiteLogo } from "@/components/SiteLogo";
 import { usePathname } from "next/navigation";
 import { ExternalLink, X } from "lucide-react";
-import { DpcQuizTrigger } from "@/components/dpc-fit-quiz";
 import { mobileFullMenuLinks } from "@/lib/nav";
 
 interface MobileFullMenuProps {
@@ -75,12 +74,17 @@ export function MobileFullMenu({ open, onClose }: MobileFullMenuProps) {
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5">
           <div className="mb-6 rounded-2xl border border-secondary/25 bg-secondary/5 p-4">
-            <DpcQuizTrigger
-              label="Is DPC Right for You?"
-              sublabel="Take the 60-second quiz"
-              variant="primary"
-              className="w-full !py-3"
-            />
+            <p className="text-sm font-semibold text-foreground">Need a little guidance first?</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Use the 60-second guide if you want help choosing the best next step.
+            </p>
+            <Link
+              href="/quiz"
+              className="mt-4 inline-flex items-center rounded-full border border-secondary/20 bg-card px-4 py-2 text-sm font-semibold text-secondary transition-colors hover:bg-secondary/10"
+              onClick={onClose}
+            >
+              Use the 60-second guide
+            </Link>
           </div>
 
           <nav aria-label="Full site navigation">

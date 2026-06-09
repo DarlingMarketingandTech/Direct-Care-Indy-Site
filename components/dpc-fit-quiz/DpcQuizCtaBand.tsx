@@ -13,7 +13,7 @@ interface DpcQuizCtaBandProps {
 
 export function DpcQuizCtaBand({
   headline = "Not sure where to start?",
-  body = "Is Direct Primary Care right for you? Take the 60-second quiz and get a personalized next step.",
+  body = "Use the 60-second guide to get pointed toward the most relevant next step.",
   initialAudience,
   variant = "default",
 }: DpcQuizCtaBandProps) {
@@ -54,9 +54,8 @@ export function DpcQuizCtaBand({
         </div>
         <div className="shrink-0">
           <DpcQuizTrigger
-            label="Is DPC Right for You?"
-            shortLabel="Take the Quiz"
-            sublabel="Take the 60-second quiz"
+            label="Use the 60-second guide"
+            shortLabel="Use the guide"
             variant={variant === "primary" ? "band" : "primary"}
             initialAudience={initialAudience}
           />

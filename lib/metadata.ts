@@ -31,7 +31,7 @@ export const baseMetadata: Metadata = {
     siteName: "Direct Care Indy",
     title: "Direct Care Indy | Direct Primary Care Membership in Indianapolis",
     description:
-      "Membership-based primary care in Indianapolis with transparent pricing, employer benefit options, and a quiz-first path to the right care plan.",
+      "Membership-based primary care in Indianapolis with transparent pricing, employer benefit options, and audience-specific paths for the right next step.",
     images: [
       {
         url: "/og-image.jpg",
@@ -69,11 +69,11 @@ export const baseMetadata: Metadata = {
 export const homeMetadata: Metadata = {
   title: "Direct Primary Care Membership in Indianapolis",
   description:
-    "Is Direct Primary Care right for you? Take the quiz, compare membership plans, and explore employer healthcare options at Direct Care Indy in Indianapolis.",
+    "Explore membership plans, employer healthcare options, and the best next step for individuals, families, and local teams at Direct Care Indy in Indianapolis.",
   openGraph: {
-    title: "Direct Care Indy | Quiz-First Direct Primary Care in Indianapolis",
+    title: "Direct Care Indy | Direct Primary Care in Indianapolis",
     description:
-      "Find your path to membership, family care, senior plans, or employer benefits with transparent Indianapolis DPC pricing.",
+      "Choose the care path that fits your situation, compare membership plans, and explore employer options with Direct Care Indy.",
     url: absoluteUrl("/"),
   },
 };

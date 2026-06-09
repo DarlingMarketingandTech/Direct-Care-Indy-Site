@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { DpcQuizTrigger } from "./DpcQuizTrigger";
 
-const HIDDEN_PATHS = ["/quiz", "/contact"];
+const HIDDEN_PATHS = ["/", "/quiz", "/contact"];
 
 export function DpcQuizMobileSticky() {
   const pathname = usePathname();
@@ -33,8 +33,8 @@ export function DpcQuizMobileSticky() {
     >
       <div className="mx-auto max-w-md rounded-full border border-secondary/30 bg-card/95 p-1.5 shadow-lg backdrop-blur-md">
         <DpcQuizTrigger
-          label="Is DPC right for you?"
-          shortLabel="Take the Quiz"
+          label="Not sure where to start?"
+          shortLabel="Use the guide"
           variant="primary"
           className="w-full !rounded-full !py-3"
         />
