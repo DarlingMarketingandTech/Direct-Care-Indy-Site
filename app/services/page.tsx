@@ -9,8 +9,8 @@ export default function Services() {
   const services = [
     {
       icon: Heart,
-      title: "Unlimited Sick Visits",
-      description: "See Dr. Pike as often as you need. No copays, no per-visit fees. Same-day or next-day appointments available.",
+      title: "Included Sick Visits",
+      description: "See Dr. Pike for included sick visits based on your membership plan. No co-pays on covered visits when available. Same-day or next-day appointments may be available.",
     },
     {
       icon: Activity,
@@ -44,13 +44,13 @@ export default function Services() {
       title: "Wholesale Labs",
       price: "$5-$12",
       examples: "Lipid Panel ($5), A1C ($8), Comprehensive Metabolic Panel ($7)",
-      savings: "Save 90% compared to retail lab prices",
+      savings: "Discounted lab pricing compared to typical retail rates",
     },
     {
       title: "Wholesale Pharmacy",
       price: "$3-$8",
       examples: "Amoxicillin ($3), Lisinopril ($3.50), Metformin ($4)",
-      savings: "Save 80-90% compared to retail pharmacy prices",
+      savings: "Discounted in-clinic pharmacy pricing when medications are available",
     },
   ];
 
@@ -224,8 +224,9 @@ export default function Services() {
             </p>
           </div>
           <div className="text-center mt-8">
-            <p className="text-2xl font-bold text-foreground">
-              Annual Net Savings: $3,732
+            <p className="text-sm text-foreground/70 max-w-xl mx-auto">
+              Cost comparisons vary by plan, utilization, and insurance design. Pricing is subject
+              to change — call or text DirectCare Indy to confirm current membership pricing.
             </p>
           </div>
         </div>
@@ -236,7 +237,7 @@ export default function Services() {
         <div className="container mx-auto px-4 text-center">
           <h3 className="text-3xl font-bold mb-6">Experience the Difference</h3>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Ready to simplify your healthcare and save money? Get started with Direct Care Indy today.
+            Ready to explore a simpler primary care experience? Get started with Direct Care Indy today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

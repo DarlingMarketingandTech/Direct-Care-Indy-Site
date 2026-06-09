@@ -1,5 +1,7 @@
 # Content Governance
 
+> **Canonical strategy:** [`PROJECT_MEMORY.md`](./PROJECT_MEMORY.md)
+
 ## Source of Truth
 
 - Approved public membership pricing content lives in `lib/content/membership-pricing.ts`

@@ -3,21 +3,10 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { LeadMagnetCard } from "@/components/LeadMagnetCard";
 import { SITE_ASSETS } from "@/lib/images";
-import { absoluteUrl } from "@/lib/site";
+import { brokersMetadata } from "@/lib/metadata";
 import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 
-export const metadata: Metadata = {
-  title: "For Brokers | Direct Care Indy",
-  description:
-    "Partner with Direct Care Indy to offer clients affordable direct primary care. Download employer sales tools and learn how DPC pairs with major medical plans.",
-  openGraph: {
-    title: "For Brokers | Direct Care Indy",
-    description:
-      "Download employer summary and buyer checklist PDFs. Pair DPC with HDHP and self-funded plans for Indianapolis clients.",
-    url: absoluteUrl("/brokers"),
-    type: "website",
-  },
-};
+export const metadata: Metadata = brokersMetadata;
 
 const brokerResources = [
   {
@@ -27,6 +16,7 @@ const brokerResources = [
     href: SITE_ASSETS.employers.summaryPdf,
     preview: SITE_ASSETS.employers.summaryPreview,
     cta: "Download PDF",
+    sourceLabel: "broker_employer_summary",
   },
   {
     title: "Employer DPC Buyer Checklist",
@@ -35,6 +25,7 @@ const brokerResources = [
     href: SITE_ASSETS.employers.checklistPdf,
     preview: SITE_ASSETS.employers.checklistPreview,
     cta: "Download PDF",
+    sourceLabel: "broker_buyer_checklist",
   },
 ] as const;
 
@@ -46,18 +37,18 @@ export default function BrokersPage() {
           For benefits brokers
         </p>
         <h1 className="mt-2 text-4xl font-bold text-foreground">
-          Sell DPC with confidence
+          DPC as a local primary care layer
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-muted-foreground">
-          Help your clients reduce primary care friction and unnecessary ER use by
-          pairing Direct Care Indy with high-deductible or self-funded health plans.
-          Start with the resources below.
+          Help clients reduce primary care friction by pairing Direct Care Indy with HDHP,
+          level-funded, or self-funded health plans. DPC is designed to complement major medical
+          coverage — not replace insurance.
         </p>
 
         <div className="mt-10">
           <DpcQuizCtaBand
             headline="See how DPC may fit your client's plan strategy"
-            body="See how DPC may fit your client's plan strategy. Take the broker quiz for a personalized next step."
+            body="Take the broker quiz for a personalized next step — broker path preselected."
             initialAudience="broker"
           />
         </div>
@@ -84,6 +75,7 @@ export default function BrokersPage() {
                   description={resource.description}
                   href={resource.href}
                   cta={resource.cta}
+                  sourceLabel={resource.sourceLabel}
                 />
               </div>
             ))}
@@ -97,22 +89,23 @@ export default function BrokersPage() {
             </h2>
             <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
               <li>Flat monthly fee — predictable for employers and members</li>
-              <li>Same-day access reduces absenteeism and ER diversion</li>
+              <li>May improve same-day access and reduce friction for everyday care</li>
+              <li>Fits HDHP, level-funded, self-funded, and traditional group designs</li>
               <li>Works alongside major medical, Medicare, or self-funded plans</li>
-              <li>Wholesale lab pricing passed through to members</li>
+              <li>Discounted in-clinic lab and pharmacy pricing when available</li>
             </ul>
           </div>
           <div className="rounded-2xl border border-secondary/30 bg-secondary/5 p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-foreground">Partner with us</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Need employer pricing, implementation details, or a client-specific
-              walkthrough? We will respond within one business day.
+              Need employer pricing, implementation details, or a client-specific walkthrough? We
+              will respond within one business day.
             </p>
             <Link
-              href="mailto:info@directcareindy.com?subject=Broker%20partnership%20inquiry"
+              href="/contact?source=quiz&intent=broker"
               className="mt-5 inline-flex rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
             >
-              Contact partnerships
+              Request broker conversation
             </Link>
           </div>
         </section>

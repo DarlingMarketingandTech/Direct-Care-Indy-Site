@@ -8,7 +8,7 @@ interface CoverageItem {
 }
 
 const coverage: CoverageItem[] = [
-  { service: "Unlimited Primary Care Visits", dpc: true, insurance: false },
+  { service: "Included Primary Care Visits", dpc: true, insurance: false },
   { service: "Direct Texting with Dr. Pike", dpc: true, insurance: false },
   { service: "Wholesale Labs & Medications", dpc: true, insurance: false },
   { service: "Minor Stitches & Procedures", dpc: true, insurance: false },

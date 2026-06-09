@@ -1,7 +1,7 @@
 {
   "name": "Direct Care Indy - Primary Care Membership",
   "short_name": "DPC Indy",
-  "description": "Direct Primary Care in Indianapolis - Unlimited primary care, wholesale labs & imaging, same/next-day appointments. No insurance required.",
+  "description": "Direct Primary Care in Indianapolis — membership-based primary care with transparent pricing and same- or next-day appointments when available. DPC is not insurance and does not replace major medical coverage.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F8FAFC",
@@ -39,10 +39,10 @@
       "icons": [{ "src": "/images/logos/dci-icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Pricing",
-      "short_name": "Pricing",
-      "description": "View membership plans",
-      "url": "/pricing",
+      "name": "Membership",
+      "short_name": "Membership",
+      "description": "View membership plans and pricing",
+      "url": "/membership",
       "icons": [{ "src": "/images/logos/dci-icon-192.png", "sizes": "192x192" }]
     }
   ],

@@ -1,91 +1,25 @@
-# Agent Instructions: DirectCare Indy Website Repo
+# Agent Instructions — Direct Care Indy
 
-This file is for coding agents working in the DirectCare Indy website repository.
+**Before any code or content change, read [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md).**
 
-## Repo Identity
+That file is the single source of truth. Do not duplicate strategy, pricing rules, or navigation guardrails here.
 
-- Next.js 16 App Router site
-- B2C website plus employer and partner pages
-- Active pricing architecture has been cleaned up
+## Reference docs (detail layers)
 
-## Current Pricing Architecture
+| Doc | Use when |
+|-----|----------|
+| [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) | Stack, commands, no-touch zones |
+| [`docs/ROUTE-MAP.md`](docs/ROUTE-MAP.md) | Which routes exist and which files render them |
+| [`docs/COMPONENT-MAP.md`](docs/COMPONENT-MAP.md) | Active components and shared content sources |
+| [`docs/MOBILE_APP_ARCHITECTURE.md`](docs/MOBILE_APP_ARCHITECTURE.md) | Mobile bottom bar, menu, PWA shell |
+| [`docs/QA-CHECKLIST.md`](docs/QA-CHECKLIST.md) | Validation after pricing, nav, or content changes |
 
-- Active pricing route: `/membership`
-- Legacy route: `/pricing` redirects to `/membership`
-- Source of truth: `lib/content/membership-pricing.ts`
-- Active pricing UI: `components/membership/MembershipPricingView.tsx`
-- Homepage preview source: `MEMBERSHIP_PLANS`
-- Homepage: `app/page.tsx`
-- Homepage strategy: quiz-first
+Historical reports live under [`docs/archive/`](docs/archive/) — context only, not active guidance.
 
-## Quiz Architecture
+## Workflow
 
-- Quiz route: `/quiz`
-- Quiz data: `lib/dpc-fit-quiz.ts`
-- Quiz UI: `components/dpc-fit-quiz/*`
-- Prefer `DpcQuizTrigger` and `DpcQuizCtaBand` over legacy pricing CTAs
-
-## Navigation Rules
-
-- Do not change the main navigation strategy unless explicitly requested
-- Do not add brokers to `mainNav`
-- `/brokers` is a targeted landing page, not a primary public nav lane
-- Brokers may remain in footer navigation
-
-## Pricing Content Rules
-
-- Update membership plans, pricing, plan benefits, additional-service pricing, pharmacy examples, and disclaimers in `lib/content/membership-pricing.ts`
-- Do not reintroduce:
-  - age-band pricing
-  - family-cap pricing
-  - exact household price calculators
-  - fake testimonials
-  - guaranteed savings claims
-  - old `/pricing` page architecture
-- Keep “pricing subject to change” style caveats where pricing is shown
-
-## Removed Legacy Pricing Files
-
-These are no longer part of the active architecture and should not be recreated:
-
-- `components/MembershipConfigurator.tsx`
-- `components/PricingCalculator.tsx`
-- `components/PricingTiers.tsx`
-- `components/SavingsPersonas.tsx`
-- `components/Testimonials.tsx`
-- `components/TestimonialsCarousel.tsx`
-- `components/membership/TierDisplay.tsx`
-- `components/ValueBanner.tsx`
-- `components/LabPharmacySavingsTable.tsx`
-- `components/TheWraparoundGuide.tsx`
-- `lib/pricing.ts`
-
-## Active Routes to Protect
-
-- `/`
-- `/membership`
-- `/quiz`
-- `/what-is-dpc`
-- `/how-it-works`
-- `/services`
-- `/about`
-- `/wraparound`
-- `/brokers`
-- `/employers`
-
-## No-Touch Zones
-
-- `app/api/**`
-- `app/join/**`
-- environment files
-- Hint Health integration code
-- payment and enrollment integrations
-
-## Workflow Expectations
-
-1. Inspect files before editing
-2. Make focused, reversible changes
-3. Prefer current shared content/data files over hardcoded page copy
-4. Run `npm run build`
-5. Run `npm run lint`
-6. Summarize files changed, validation results, and any intentionally preserved legacy areas
+1. Read `docs/PROJECT_MEMORY.md`
+2. Inspect target files and imports
+3. Make focused, reversible changes
+4. Run `npm run build` and `npm run lint`
+5. Report files changed, validation results, and any follow-up risks

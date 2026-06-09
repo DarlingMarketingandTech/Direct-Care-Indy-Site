@@ -13,7 +13,7 @@ export function NinetyTenSwitcher() {
     dpc: {
       title: "The 90%: Day-to-Day Care",
       subtitle: "Managed by Direct Care Indy Membership",
-      items: ["Unlimited Sick Visits", "Chronic Disease Management", "Stitches & Minor Procedures", "Wholesale Labs & Meds"],
+      items: ["Included Sick Visits", "Chronic Disease Management", "Stitches & Minor Procedures", "Discounted Labs & Meds"],
       icon: <Activity className="w-6 h-6 text-[#8A9A8A]" />,
       color: "bg-[#8A9A8A]"
     },

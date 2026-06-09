@@ -19,6 +19,7 @@ import {
   collectPainPoints,
   type QuizLeadPayload,
 } from "@/lib/dpc-fit-quiz";
+import { trackEvent } from "@/lib/analytics";
 import { DpcQuizChoiceButton } from "./DpcQuizChoiceButton";
 import { DpcQuizResultCard } from "./DpcQuizResultCard";
 
@@ -88,6 +89,7 @@ export function DpcFitQuiz({
       const result = resolveResult(resolvedAudience, answers);
       setResultId(result);
       setPhase("result");
+      trackEvent("quiz_completed", { resultType: result });
       onComplete?.(result);
     }
   }, [answers, audience, skipAudience, initialAudience, phase, onComplete]);
@@ -184,14 +186,16 @@ export function DpcFitQuiz({
           painPoints: payload.painPoints.join("; "),
           recommendedCta: payload.recommendedCta,
           sourcePage: payload.sourcePage,
+          utmSource: payload.utmSource,
+          utmMedium: payload.utmMedium,
+          utmCampaign: payload.utmCampaign,
         }),
       });
 
       if (!res.ok) throw new Error("Submit failed");
       setLeadStatus("success");
     } catch {
-      // Graceful fallback per requirements
-      setLeadStatus("success");
+      setLeadStatus("error");
     }
   };
 
@@ -284,9 +288,31 @@ export function DpcFitQuiz({
             >
               <p className="font-semibold">Thank you — we received your information.</p>
               <p className="mt-2 text-muted-foreground">
-                A team member may reach out about your quiz result. You can also book your intro
-                meeting using the button above.
+                A team member may reach out about your quiz result. You can also use your recommended
+                next step using the button above.
               </p>
+            </div>
+          ) : leadStatus === "error" ? (
+            <div className="mt-6 rounded-xl border border-destructive/30 bg-destructive/5 p-4 text-sm" role="alert">
+              <p className="font-semibold text-foreground">We could not save your details right now.</p>
+              <p className="mt-2 text-muted-foreground">
+                Please call or text{" "}
+                <a href="tel:+13179566288" className="font-medium text-secondary hover:underline">
+                  (317) 956-6288
+                </a>{" "}
+                or email{" "}
+                <a href="mailto:info@directcareindy.com" className="font-medium text-secondary hover:underline">
+                  info@directcareindy.com
+                </a>
+                .
+              </p>
+              <button
+                type="button"
+                onClick={() => setLeadStatus("idle")}
+                className="mt-4 text-sm font-semibold text-secondary hover:underline"
+              >
+                Try again
+              </button>
             </div>
           ) : (
             <form onSubmit={submitLead} className="mt-6 space-y-4">

@@ -1,6 +1,12 @@
 "use client";
 
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { MEMBERSHIP_PLANS } from "@/lib/content/membership-pricing";
+
+const seniorPlan = MEMBERSHIP_PLANS.find((plan) => plan.id === "senior");
+const seniorMembershipPriceLabel = seniorPlan
+  ? `${seniorPlan.monthlyPrice}/mo`
+  : "$119/mo";
 
 export function MedicareDpcFaq() {
   return (
@@ -20,7 +26,7 @@ export function MedicareDpcFaq() {
             Is my membership fee HSA-eligible?
           </AccordionTrigger>
           <AccordionContent itemValue="item-2" className="text-gray-600 dark:text-gray-300">
-            <strong>As of Jan 1, 2026, Yes.</strong> Under the One Big Beautiful Bill Act (OBBB), DPC fees are now 100% HSA-eligible. Since our Senior Tier is $109/mo (well under the $150 federal cap), you can use tax-free dollars to pay for your care, effectively saving you up to 30% depending on your tax bracket.
+            <strong>As of Jan 1, 2026, Yes.</strong> Under the One Big Beautiful Bill Act (OBBB), DPC fees are now 100% HSA-eligible. Since our Senior Tier is {seniorMembershipPriceLabel} (well under the $150 federal cap), you can use tax-free dollars to pay for your care, effectively saving you up to 30% depending on your tax bracket.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">

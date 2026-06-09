@@ -1,5 +1,7 @@
 # QA Checklist
 
+> **Strategy and guardrails:** [`PROJECT_MEMORY.md`](./PROJECT_MEMORY.md)
+
 Use this checklist after content, route, pricing, or navigation updates.
 
 ## Core Validation

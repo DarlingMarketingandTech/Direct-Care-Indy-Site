@@ -1,64 +1,21 @@
-# DirectCare Indy Website: Claude Code Instructions
+# Claude Code — Direct Care Indy
 
-## What This Repo Is
+**Before any code or content change, read [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md).**
 
-The active DirectCare Indy website buildout in progress. This is a Next.js 16 application with member-facing and employer-facing routes plus Hint Health enrollment integration.
+That file is the single source of truth. Do not duplicate strategy here.
 
-Do not call this a demo, mockup, or replacement site.
+## Reference docs
 
-## Current Membership Pricing Architecture
+- [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) — stack, commands, sensitive areas
+- [`docs/ROUTE-MAP.md`](docs/ROUTE-MAP.md) — routes
+- [`docs/COMPONENT-MAP.md`](docs/COMPONENT-MAP.md) — components
+- [`docs/MOBILE_APP_ARCHITECTURE.md`](docs/MOBILE_APP_ARCHITECTURE.md) — mobile UX shell
 
-- Active route: `/membership`
-- Deprecated route: `/pricing` redirects to `/membership`
-- Source of truth: `lib/content/membership-pricing.ts`
-- Active pricing UI: `components/membership/MembershipPricingView.tsx`
-- Homepage pricing preview lives in `app/page.tsx` and must read from `MEMBERSHIP_PLANS`
-- Homepage remains quiz-first
+## Workflow
 
-## Quiz Architecture
+1. Read `docs/PROJECT_MEMORY.md`
+2. Inspect files first; make small, surgical changes
+3. Run `npm run build` and `npm run lint`
+4. Summarize files changed and remaining risks
 
-- Quiz route: `/quiz`
-- Quiz content: `lib/dpc-fit-quiz.ts`
-- Quiz components: `components/dpc-fit-quiz/*`
-
-## Navigation Guardrails
-
-- Do not change the main navigation strategy unless explicitly requested
-- Do not add brokers to the main navigation
-- `/brokers` is a targeted campaign or footer destination, not a primary nav lane
-
-## Legacy Pricing Guardrails
-
-Do not reintroduce:
-
-- old calculators
-- family-cap pricing
-- age-band pricing
-- exact household price tools
-- fake testimonials
-- guaranteed savings claims
-- old `/pricing` page assumptions
-
-## No-Touch Zones
-
-- `app/api/**`
-- `app/join/**`
-- environment files
-- Hint Health integration code
-- payment and enrollment integrations
-
-## Build & Test
-
-```bash
-npm run dev
-npm run build
-npm run lint
-```
-
-## Working Style
-
-1. Inspect files first
-2. Make small, surgical changes
-3. Use current shared content sources
-4. Validate with build and lint
-5. Summarize exact files changed and any remaining risks
+Do not call this repo a demo, mockup, or replacement site.

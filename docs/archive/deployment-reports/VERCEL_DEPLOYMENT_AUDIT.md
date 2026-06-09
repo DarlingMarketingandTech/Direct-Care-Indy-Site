@@ -180,7 +180,7 @@ SENDGRID_API_KEY=your_sendgrid_api_key_here
 #### Optional Variables
 ```bash
 # Air quality widget for Indy Breath-Easy component
-NEXT_PUBLIC_OPENWEATHER_API_KEY=ea2669bff97a26ccf6139c285f183f46
+NEXT_PUBLIC_OPENWEATHER_API_KEY=your_openweather_api_key_here
 ```
 
 ### How to Add to Vercel

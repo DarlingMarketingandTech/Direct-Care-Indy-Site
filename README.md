@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Direct Care Indy — Website
 
-## Getting Started
+Next.js site for **Direct Primary Care (DPC)** in Indianapolis: quiz-first member discovery, membership pricing, employer and broker landing pages, and Hint Health enrollment.
 
-First, run the development server:
+This is the active DirectCare Indy website buildout — not a generic Next.js starter or a throwaway demo.
+
+## Start here
+
+**Read [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md) first.** It is the single source of truth for strategy, pricing, navigation, content guardrails, and deprecated patterns.
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev    # http://localhost:3000
+npm run build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copy `.env.example` to `.env.local` for local secrets. Never commit `.env.local`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Documentation map
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Document | Purpose |
+|----------|---------|
+| [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md) | **Canonical** — strategy, guardrails, pricing source of truth |
+| [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) | Stack, commands, sensitive areas |
+| [`docs/ROUTE-MAP.md`](docs/ROUTE-MAP.md) | Active routes and page files |
+| [`docs/COMPONENT-MAP.md`](docs/COMPONENT-MAP.md) | Active components and content sources |
+| [`docs/nav-map.md`](docs/nav-map.md) | Navigation roles and route intent |
+| [`docs/MOBILE_APP_ARCHITECTURE.md`](docs/MOBILE_APP_ARCHITECTURE.md) | Mobile shell, bottom bar, PWA layout |
+| [`docs/QA-CHECKLIST.md`](docs/QA-CHECKLIST.md) | Post-change validation |
+| [`docs/archive/`](docs/archive/) | Historical implementation and deployment reports |
 
-## Learn More
+## Agent entry points
 
-To learn more about Next.js, take a look at the following resources:
+- [`AGENTS.md`](AGENTS.md) — Cursor and coding agents
+- [`CLAUDE.md`](CLAUDE.md) — Claude Code
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Both point to `docs/PROJECT_MEMORY.md`. Do not duplicate strategy in agent files.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hosted on Vercel. Environment setup: see `RESEND_SETUP.md` and `VERCEL_ENV_SETUP.md` at repo root (move to `docs/setup/` planned).

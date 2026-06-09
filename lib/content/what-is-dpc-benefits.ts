@@ -1,3 +1,5 @@
+import { AFFORDABLE_PLANS_PRICING_SENTENCE } from "@/lib/content/membership-pricing";
+
 export const WHAT_IS_DPC_HERO = {
   eyebrow: "What Is DPC?",
   title: "Member Benefits, Explained",
@@ -56,7 +58,7 @@ export const WHAT_IS_DPC_BENEFIT_SECTIONS: readonly WhatIsDpcBenefitSection[] = 
     title: "Affordable plans for individuals and families",
     paragraphs: [
       "DirectCare Indy membership is designed to make everyday care more predictable.",
-      "Individual plans start at $79/month for adults ages 18 to 64, with family plans starting as low as $200/month for families with children ages 12 and older. Senior adult plans are also available for adults ages 65 and older.",
+      AFFORDABLE_PLANS_PRICING_SENTENCE,
       "That monthly membership gives you access to included primary care services without co-pays for covered membership visits and without insurance billing through our clinic for included care.",
       "For many people, that predictability matters just as much as the price.",
       "If you have ever avoided the doctor because you were worried about the bill, waited too long because your deductible was too high, or wondered whether a simple visit would turn into a surprise charge later, Direct Primary Care gives you a simpler way to plan for everyday health needs.",

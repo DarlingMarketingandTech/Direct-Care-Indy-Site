@@ -6,6 +6,13 @@ import { Calculator, TrendingDown, DollarSign, ShieldCheck } from "lucide-react"
 import Link from "next/link";
 import Image from "next/image";
 import { SITE_ASSETS } from "@/lib/images";
+import { MEMBERSHIP_PLANS } from "@/lib/content/membership-pricing";
+
+const seniorPlan = MEMBERSHIP_PLANS.find((plan) => plan.id === "senior");
+const seniorMembershipMonthlyPrice = seniorPlan?.monthlyPrice ?? "$119";
+const seniorMembershipMonthlyAmount = Number(
+  seniorMembershipMonthlyPrice.replace(/[^0-9]/g, ""),
+);
 
 interface SeniorSavingsCalculatorProps {
   variant?: 'full' | 'compact';
@@ -17,8 +24,7 @@ export function SeniorSavingsCalculator({ variant = 'full' }: SeniorSavingsCalcu
   const [newMedigap, setNewMedigap] = useState(173); // ~20% lower default
   const [useHSA, setUseHSA] = useState(true);
 
-  // DPC membership fee
-  const dpcMembership = 109;
+  const dpcMembership = seniorMembershipMonthlyAmount;
 
   // Calculate Medigap savings
   const medigapSavings = currentMedigap - newMedigap;
@@ -232,7 +238,7 @@ export function SeniorSavingsCalculator({ variant = 'full' }: SeniorSavingsCalcu
         {/* Kicker Text */}
         <div className="mt-6 bg-teal-50 dark:bg-teal-900/20 rounded-lg p-4 border-l-4 border-teal-500">
           <p className="text-sm text-gray-700 dark:text-gray-300">
-            <strong className="text-teal-700 dark:text-teal-400">Thanks to the 2026 OBBBA,</strong> your DPC fee is now a qualified medical expense. Use your HSA to pay your $109 membership tax-free!
+            <strong className="text-teal-700 dark:text-teal-400">Thanks to the 2026 OBBBA,</strong> your DPC fee is now a qualified medical expense. Use your HSA to pay your {seniorMembershipMonthlyPrice} membership tax-free!
             <Link href="#hsa-tracker" className="text-teal-600 dark:text-teal-400 underline ml-1">
               Learn more about HSA eligibility
             </Link>

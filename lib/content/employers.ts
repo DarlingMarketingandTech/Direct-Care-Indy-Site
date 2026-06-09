@@ -16,11 +16,30 @@ export const EMPLOYER_GET_ITEMS = [
   "Discounted in-house medications and labs when available",
 ] as const;
 
-export const EMPLOYER_STATS = [
-  { label: "Hospitalizations", value: "Down 25%" },
-  { label: "Overall claims", value: "Down 20%" },
-  { label: "ER visits", value: "Down 40%" },
+/** Qualitative employer access highlights — no guaranteed utilization or savings claims */
+export const EMPLOYER_ACCESS_HIGHLIGHTS = [
+  {
+    label: "Everyday care access",
+    value: "May improve",
+    description:
+      "DPC may help employees address routine health needs earlier, with a local care team they can reach directly.",
+  },
+  {
+    label: "Employee experience",
+    value: "Often simpler",
+    description:
+      "A membership model can make it easier for employees to know where to start when they need primary care.",
+  },
+  {
+    label: "Works with major medical",
+    value: "Designed to complement",
+    description:
+      "Direct Care Indy is often used alongside traditional health coverage — not as a replacement for insurance.",
+  },
 ] as const;
+
+/** @deprecated Use EMPLOYER_ACCESS_HIGHLIGHTS — removed unsupported percentage outcome claims */
+export const EMPLOYER_STATS = EMPLOYER_ACCESS_HIGHLIGHTS;
 
 export const EMPLOYER_FIT_INDUSTRIES = [
   "Construction and trades teams",
@@ -178,3 +197,26 @@ export const EMPLOYER_VIRTUAL_INTRO = {
 } as const;
 
 export const EMPLOYER_STARTING_RATE_BADGE = "From $80/employee/mo" as const;
+
+export const EMPLOYER_ROLLOUT_STEPS = [
+  {
+    step: 1,
+    title: "Intro conversation",
+    body: "We learn about your team size, current benefits setup, and what everyday care friction you are trying to address.",
+  },
+  {
+    step: 2,
+    title: "Fit and structure",
+    body: "We discuss employer-paid, shared contribution, or voluntary enrollment — and whether a pilot makes sense.",
+  },
+  {
+    step: 3,
+    title: "Employee communication",
+    body: "We help you introduce the benefit clearly so employees know when to contact the clinic and what is included.",
+  },
+  {
+    step: 4,
+    title: "Launch and follow-up",
+    body: "Enrollment timing depends on your goals. We stay available for questions as employees start using membership.",
+  },
+] as const;
