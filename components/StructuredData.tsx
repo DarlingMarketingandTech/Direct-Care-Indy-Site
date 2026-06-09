@@ -33,7 +33,7 @@ export function OrganizationSchema() {
         "closes": "17:00"
       }
     ],
-    "priceRange": "$69-$250",
+    "priceRange": "$79-$200",
     "areaServed": {
       "@type": "City",
       "name": "Indianapolis"
@@ -119,7 +119,7 @@ export function ServiceSchema() {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Direct Primary Care Membership",
-    "description": "Monthly membership providing unlimited primary care visits, direct physician access, and wholesale lab pricing with no insurance hassles.",
+    "description": "Monthly membership for everyday primary care with transparent pricing, direct communication, and additional service pricing that varies by plan.",
     "provider": {
       "@type": "MedicalBusiness",
       "name": "Direct Care Indy"
@@ -138,16 +138,23 @@ export function ServiceSchema() {
       {
         "@type": "Offer",
         "name": "Individual Membership",
-        "price": "69",
+        "price": "79",
         "priceCurrency": "USD",
-        "description": "Individual Direct Primary Care membership with unlimited visits"
+        "description": "Individual Direct Primary Care membership for adults ages 18 to 64."
       },
       {
         "@type": "Offer",
         "name": "Family Membership",
-        "price": "250",
+        "price": "200",
         "priceCurrency": "USD",
-        "description": "Family Direct Primary Care membership with unlimited visits for entire household"
+        "description": "Family Direct Primary Care membership for households with dependents ages 12 and up."
+      },
+      {
+        "@type": "Offer",
+        "name": "Senior Adults Membership",
+        "price": "119",
+        "priceCurrency": "USD",
+        "description": "Direct Primary Care membership tailored for adults ages 65 and older."
       }
     ]
   };
@@ -194,7 +201,7 @@ export function LocalBusinessSchema({ neighborhood, zipCode }: { neighborhood?: 
         "closes": "17:00"
       }
     ],
-    "priceRange": "$69-$250",
+    "priceRange": "$79-$200",
     "areaServed": neighborhood
       ? [
           {
@@ -223,7 +230,7 @@ export function LocalBusinessSchema({ neighborhood, zipCode }: { neighborhood?: 
           "itemOffered": {
             "@type": "Service",
             "name": "Primary Care Visits",
-            "description": "Unlimited primary care visits with no copays"
+            "description": "Primary care visits and follow-up support based on the selected membership plan"
           }
         },
         {
@@ -231,7 +238,7 @@ export function LocalBusinessSchema({ neighborhood, zipCode }: { neighborhood?: 
           "itemOffered": {
             "@type": "Service",
             "name": "Wholesale Lab Testing",
-            "description": "Lab tests at wholesale prices (90% savings)"
+            "description": "Transparent lab pricing with member discounts that vary by service and plan"
           }
         },
         {

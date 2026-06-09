@@ -47,8 +47,10 @@ export function StickySavingsBar() {
               <TrendingUp className="w-5 h-5" />
             </div>
             <div>
-              <div className="font-semibold text-foreground">Save $3,600 Annually</div>
-              <div className="text-sm text-muted-foreground">On labs, prescriptions, and office visits</div>
+              <div className="font-semibold text-foreground">See Membership Plans</div>
+              <div className="text-sm text-muted-foreground">
+                Review current membership options, add-on pricing, and quiz guidance
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -62,7 +64,7 @@ export function StickySavingsBar() {
               href="/membership"
               className="hidden md:inline-flex px-5 py-2 rounded-full font-semibold text-sm border border-border text-foreground hover:bg-muted transition-colors interactive-element"
             >
-              Calculate Price
+              View Membership
             </Link>
             <button
               onClick={handleDismiss}

@@ -1,66 +1,26 @@
-# Navigation Map - Current vs Proposed
+# Navigation Map
 
-## Current Navigation Structure
+## Main Navigation
 
-### MegaMenu (Desktop)
-- Home: /
-- Membership: /membership
-- How It Works: /how-it-works
-- Services Included: /services-included
-- For Employers: /for-employers
-- FAQ: /faq
-- About: /about
-- Join the Table: /join (CTA)
+The homepage is quiz-first, and the main navigation should stay focused on primary public discovery paths.
 
-### MobileNav
-- Home: /
-- Membership: /membership
-- How It Works: /how-it-works
-- Services Included: /services-included
-- For Employers: /for-employers
-- FAQ: /faq
-- About: /about
+- Keep brokers out of `mainNav`
+- Keep `/brokers` as a targeted landing page or footer destination
+- Keep membership pricing discovery pointed at `/membership`
 
-### SharedFooter Quick Links
-- Home: /
-- Membership: /membership
-- Services Included: /services-included
-- How It Works: /how-it-works
-- For Employers: /for-employers
-- FAQ: /faq
+## Current Route Intent
 
-### SharedFooter Resources (SEO/Local)
-- 2026 Indiana Birthday Rule Guide: /blog/indiana-medigap-birthday-rule-2026
-- FAQ: /faq
+| Route | Navigation Role |
+|-------|-----------------|
+| `/` | Primary entry point |
+| `/membership` | Active membership pricing route |
+| `/quiz` | Quiz path and CTA destination |
+| `/how-it-works` | Education and onboarding |
+| `/what-is-dpc` | DPC education and FAQ destination |
+| `/about` | Trust and clinic story |
+| `/services` | Care offering overview |
 
-## Proposed Simplified Navigation
+## Legacy Route Notes
 
-### Header Nav (Desktop + Mobile)
-- Home: /
-- Pricing: /membership (renamed from Membership)
-- Services: /services-included
-- Employers: /for-employers
-- Seniors: /seniors (if exists, otherwise move to footer)
-- Join: /join (primary CTA)
-
-### Footer Links (Secondary/Resources)
-- About: /about
-- FAQ: /faq
-- Resources:
-  - 2026 Indiana Birthday Rule Guide: /blog/indiana-medigap-birthday-rule-2026
-  - Wraparound Guide: /wraparound (if exists)
-  - Partnership Opportunities: /partnerships
-- Contact Info
-- Local SEO Links (Carmel, Zionsville, etc.)
-
-## Route Changes
-- /membership → /pricing (URL redirect needed if changing)
-- /how-it-works → Move to footer or remove from header
-- Keep all existing routes working
-
-## Conversion Path Simplification
-1. Visitor lands on Home
-2. Sees clear call-to-action for Pricing
-3. Can reach Join in 1 click from header
-4. Services page clearly explains what's included/not included
-5. No distracting nested menus or secondary paths in header
+- `/pricing` is not a primary nav destination
+- `/pricing` should only be referenced as a deprecated route that redirects to `/membership`

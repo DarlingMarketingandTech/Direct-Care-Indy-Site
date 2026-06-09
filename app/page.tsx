@@ -15,7 +15,10 @@ import {
 import { DpcQuizCtaBand, DpcQuizTrigger } from "@/components/dpc-fit-quiz";
 import type { QuizAudience } from "@/lib/dpc-fit-quiz";
 import { SITE_ASSETS } from "@/lib/images";
-import { MEMBERSHIP_PLANS } from "@/lib/content/membership-pricing";
+import {
+  MEMBERSHIP_PLANS,
+  MEMBERSHIP_PLANS_INTRO,
+} from "@/lib/content/membership-pricing";
 import { getLeadPAs, getMedicalDirector } from "@/lib/data/providers";
 
 const audienceCards: Array<{
@@ -262,8 +265,9 @@ export default function HomePage() {
           >
             <p>
               If you already know you want to compare plan options, here is the short version. The
-              full pricing page has the deeper detail.
+              full membership page has the deeper detail.
             </p>
+            <p>{MEMBERSHIP_PLANS_INTRO}</p>
           </SectionHeading>
 
           <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-3 lg:items-stretch">
@@ -289,31 +293,29 @@ export default function HomePage() {
                   </div>
 
                   <h2 className="mt-5 text-xl font-bold text-foreground">{plan.name}</h2>
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-secondary">
+                    {plan.audienceLabel}
+                  </p>
                   <p
-                    className={`mt-4 font-black text-secondary ${
-                      plan.id === "family" ? "text-2xl leading-tight" : "text-3xl"
-                    }`}
+                    className="mt-4 text-3xl font-black text-secondary"
                   >
-                    {plan.price}
+                    {plan.monthlyPrice}
                     <span className="text-base font-normal text-muted-foreground">
                       {plan.priceNote}
                     </span>
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {plan.summary}
+                    {plan.description}
                   </p>
-                  {"detail" in plan && plan.detail && (
-                    <p className="mt-3 text-sm text-muted-foreground">{plan.detail}</p>
-                  )}
                   {"medicareNote" in plan && plan.medicareNote && (
                     <p className="mt-3 rounded-xl border border-border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
                       {plan.medicareNote}
                     </p>
                   )}
 
-                  <p className="mt-6 text-sm font-semibold text-foreground">Best for</p>
+                  <p className="mt-6 text-sm font-semibold text-foreground">Preview includes</p>
                   <ul className="mt-3 flex-1 space-y-2">
-                    {plan.bestFor.slice(0, 3).map((item) => (
+                    {plan.benefits.slice(0, 3).map((item) => (
                       <li
                         key={item}
                         className="flex items-start gap-2 text-sm text-muted-foreground"

@@ -176,3 +176,5 @@ export const EMPLOYER_VIRTUAL_INTRO = {
   description:
     "A short virtual conversation to learn about your team, benefits setup, and whether Direct Care Indy could be a good fit.",
 } as const;
+
+export const EMPLOYER_STARTING_RATE_BADGE = "From $80/employee/mo" as const;
