@@ -8,7 +8,9 @@
 - Legacy `/pricing` route is deprecated and redirected
 - Membership pricing content is centralized in `lib/content/membership-pricing.ts`
 - The homepage uses a concise membership preview sourced from `MEMBERSHIP_PLANS`
-- The homepage remains quiz-first
+- The homepage uses **audience-first routing** — quiz is secondary decision support, not the primary CTA
+- Single clinic: 7911 N. Michigan Rd., Indianapolis, IN 46268
+- GA4/GTM and production scheduler setup are deferred for this development build
 
 ## Current Membership Plan Set
 

@@ -10,7 +10,7 @@
 
 - `/membership` is the active public pricing route
 - `/pricing` is a deprecated redirect to `/membership`
-- `/quiz` powers the current quiz-first funnel
+- `/quiz` is secondary decision support — audience-first routing is the primary funnel
 - Do not move or recreate deprecated pricing routes casually
 
 ## Shared Content Rules
@@ -21,7 +21,7 @@
 
 ## Navigation Notes
 
-- Keep the homepage quiz-first
+- Keep the homepage audience-first — quiz is secondary support only
 - Do not add brokers to main navigation
 - `/brokers` is not a primary nav lane
 

@@ -9,11 +9,20 @@
 - Parent claims register remains the master approval log:
   `C:\dev\DirectCare-Indy-Claude-OS\00_command_center\claims-and-approval-register.md`
 
+## CTA and audience strategy
+
+- Homepage uses **audience-first routing** — lead with audience-specific CTAs and resources, not the quiz
+- Quiz is a **secondary** decision-support tool at `/quiz` and contextual placements only
+- Do not repeat “Is DPC Right for You?” across every audience card, sticky bar, or CTA section
+- Single clinic: **7911 N. Michigan Rd., Indianapolis, IN 46268** — no “Find a provider near you”
+- Prefer location labels: “Visit Our Michigan Rd Clinic”, “See Location & Hours”, “Location & Contact”
+- Planned audience lead resources (gated forms): see PROJECT_MEMORY § Planned audience lead resources
+
 ## Pricing Rules
 
 - Active public pricing route: `/membership`
 - Legacy `/pricing` route is deprecated and redirected
-- Homepage pricing preview must stay concise and quiz-first
+- Homepage pricing preview must stay **concise** — audience routing leads; membership preview supports without duplicating full benefit lists
 - Do not reintroduce calculators, family-cap pricing, age-band pricing, or exact household price copy
 
 ## Approval-Gated Claim Categories

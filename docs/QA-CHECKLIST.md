@@ -12,11 +12,13 @@ Use this checklist after content, route, pricing, or navigation updates.
 
 ## Homepage
 
-- Quiz-first hero still loads correctly
-- Primary CTA still routes into the quiz flow
+- Audience-first routing hero loads correctly (individuals, families, employers)
+- Audience-specific CTAs lead; quiz is secondary “not sure where to start?” support only
+- Global header quiz CTA should not be the primary homepage CTA (per current strategy)
 - Pricing preview renders from `MEMBERSHIP_PLANS`
 - Homepage does not show a calculator
 - Homepage does not show family-cap, age-band, or exact-price language
+- No “Find a provider near you” — single clinic (7911 N. Michigan Rd.) only
 - Brokers are not added to the main navigation
 
 ## Membership Page

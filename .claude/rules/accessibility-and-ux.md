@@ -10,7 +10,7 @@
 
 ## Current Pricing UX Expectations
 
-- Homepage remains quiz-first
+- Homepage uses audience-first routing — quiz is secondary, not the primary CTA
 - Homepage pricing preview should stay concise
 - Membership pricing belongs on `/membership`
 - Pricing tables or cards should remain mobile-friendly

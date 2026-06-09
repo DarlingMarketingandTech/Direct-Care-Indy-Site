@@ -8,23 +8,30 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 
 | Route | File | Status | Notes |
 |-------|------|--------|-------|
-| `/` | `app/page.tsx` | Active | Quiz-first homepage with concise membership preview from `MEMBERSHIP_PLANS` |
+| `/` | `app/page.tsx` | Active | Audience-first routing homepage; concise membership preview from `MEMBERSHIP_PLANS`; quiz is secondary |
 | `/membership` | `app/membership/page.tsx` | Active | Canonical membership pricing, benefits, additional-service pricing, pharmacy section |
-| `/quiz` | `app/quiz/page.tsx` | Active | DPC fit quiz flow |
-| `/contact` | `app/contact/page.tsx` | Active | Quiz-intent-aware contact, phone/text, form → `/api/leads` |
+| `/quiz` | `app/quiz/page.tsx` | Active | Secondary DPC fit quiz — decision support, not primary site CTA |
+| `/contact` | `app/contact/page.tsx` | Active | Single-clinic contact (7911 N. Michigan Rd.); quiz-intent-aware query params; form → `/api/leads`. Rename to **Location & Contact** planned |
 | `/how-it-works` | `app/how-it-works/page.tsx` | Active | Onboarding and care process |
 | `/what-is-dpc` | `app/what-is-dpc/page.tsx` | Active | Education and FAQ destination; pricing from `MEMBERSHIP_PLANS` |
 | `/about` | `app/about/page.tsx` | Active | Clinic and team story |
 | `/services` | `app/services/page.tsx` | Active | Care offering overview |
 | `/wraparound` | `app/wraparound/page.tsx` | Active | Membership plus backup-coverage guidance without savings guarantees |
-| `/brokers` | `app/brokers/page.tsx` | Active | Campaign landing page — footer only, not main nav |
+| `/brokers` | `app/brokers/page.tsx` | Active | Campaign landing — footer/context only, not main nav; broker toolkit resource planned |
 | `/partnerships` | `app/partnerships/page.tsx` | Active | Partner-facing page |
+
+## Planned Audience Routes
+
+| Route | File | Status | Notes |
+|-------|------|--------|-------|
+| `/individuals` | `app/individuals/page.tsx` | Planned | Individuals audience page — membership, local care team, gated pricing guide resource |
+| `/families` | `app/families/page.tsx` | Planned | Families audience page — family membership, Family Care Roadmap resource |
 
 ## Employer and Support Routes
 
 | Route | File | Status | Notes |
 |-------|------|--------|-------|
-| `/employers` | `app/employers/page.tsx` | Active | Employer-facing overview, quiz CTA, rollout, contact flow |
+| `/employers` | `app/employers/page.tsx` | Active | Employer-facing overview — audience-first CTAs, inquiry flow, employer resource planned; contextual broker link OK |
 | `/for-employers` | `app/for-employers/page.tsx` | Active | Employer inquiry route |
 | `/providers` | `app/providers/page.tsx` | Active | Provider listing |
 | `/providers/[slug]` | `app/providers/[slug]/page.tsx` | Active | Provider detail |

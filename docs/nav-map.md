@@ -6,7 +6,7 @@
 
 ## Main navigation (`mainNav`)
 
-Quiz-first homepage; main nav stays focused on member and employer discovery.
+Audience-first homepage routing; main nav stays focused on member and employer discovery. Brokers stay out of main nav.
 
 | Label | Route | Notes |
 |-------|-------|-------|
@@ -14,7 +14,7 @@ Quiz-first homepage; main nav stays focused on member and employer discovery.
 | For Employers | `/employers` | B2B |
 | What Is DPC? | `/what-is-dpc` | Education + FAQ |
 | Our Team | `/providers` | Provider listing |
-| Contact | `/contact` | Contact |
+| Contact | `/contact` | Contact and single-clinic location (→ Location & Contact planned) |
 
 Also in header (not `mainNav`): **Patient Login** → Hint portal (external).
 
@@ -28,8 +28,9 @@ Bottom bar (`mobileBottomNav`): Membership Pricing, For Employers, What Is DPC?,
 
 | Route | Role |
 |-------|------|
-| `/` | Quiz-first homepage |
-| `/quiz` | Standalone DPC fit quiz |
+| `/` | Audience-first routing homepage |
+| `/individuals`, `/families` | Planned audience pages — see ROUTE-MAP |
+| `/quiz` | Secondary DPC fit quiz — decision support |
 | `/brokers` | Footer / campaign landing only |
 | `/how-it-works`, `/services`, `/about`, `/wraparound` | Active pages — see ROUTE-MAP |
 

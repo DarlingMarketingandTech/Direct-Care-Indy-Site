@@ -8,7 +8,7 @@ Inspect rendered pages after UI or content changes.
 
 | Page | Route | What To Check |
 |------|-------|---------------|
-| Homepage | `/` | Quiz-first hero, quiz CTA, concise pricing preview |
+| Homepage | `/` | Audience-first routing, audience CTAs, concise pricing preview; quiz secondary |
 | Membership | `/membership` | Plan cards, additional-service pricing, disclaimers |
 | Quiz | `/quiz` | Flow renders and CTAs work |
 | Wraparound | `/wraparound` | No stale savings or old pricing claims |

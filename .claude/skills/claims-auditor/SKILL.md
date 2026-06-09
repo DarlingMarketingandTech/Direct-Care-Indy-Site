@@ -25,7 +25,7 @@ Audit visible website copy for risky or unapproved claims.
 
 - `/membership` is the active public pricing route
 - `/pricing` is deprecated and redirected
-- The homepage is quiz-first
+- The homepage uses audience-first routing — quiz is secondary decision support
 - Do not look for deleted calculators or deleted pricing-tier components as active surfaces
 
 ## Flag These Immediately

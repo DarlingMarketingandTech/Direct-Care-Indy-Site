@@ -9,13 +9,13 @@ Active reference for the mobile-first app shell — bottom bar, overflow menu, P
 
 ```
 RootLayout
-├── Navbar                    # fixed top — desktop links + quiz CTA
+├── Navbar                    # fixed top — desktop links (global header quiz CTA being removed per strategy)
 ├── main (#main-content)      # pt-20 pb-20 md:pb-0
 ├── SharedFooter
 ├── MobileAppBar              # md:hidden — bottom bar + Menu
-├── DpcQuizMobileSticky       # mobile quiz CTA
+├── DpcQuizMobileSticky       # secondary mobile quiz support
 ├── PWAInstallPrompt
-├── StickySavingsBar          # quiz / membership sticky hook
+├── StickySavingsBar          # desktop sticky bar — refactor away from quiz-first
 └── BackToTop
 ```
 
@@ -26,7 +26,7 @@ PWA assets: `public/manifest.json`, `public/sw.js`, offline page at `app/offline
 | Viewport | Top nav | Bottom bar |
 |----------|---------|------------|
 | `< md` | Logo + compact actions (`Navbar`) | `MobileAppBar` — 4 shortcuts + Menu |
-| `≥ md` | Full `mainNav` links + Patient Login + quiz CTA | Hidden |
+| `≥ md` | Full `mainNav` links + Patient Login | Hidden |
 
 There is **no mega menu** and **no hamburger in the top navbar**. Mobile overflow uses the bottom bar **Menu** button → `MobileFullMenu`.
 
@@ -80,10 +80,10 @@ For historical PWA rollout notes, see [`archive/design-reports/PWA_TRANSFORMATIO
 | Component | Viewport | Behavior |
 |-----------|----------|----------|
 | `MobileAppBar` | `< md` | Fixed bottom nav (4 shortcuts + Menu); hides on scroll down |
-| `DpcQuizMobileSticky` | `< md` | Quiz pill above bottom bar (`bottom-[4.5rem]`); hidden on `/quiz` and `/contact` |
-| `StickySavingsBar` | `≥ md` only | Desktop quiz CTA bar — does not render on mobile |
+| `DpcQuizMobileSticky` | `< md` | Secondary quiz pill above bottom bar — demote per strategy; hidden on `/quiz` and `/contact` |
+| `StickySavingsBar` | `≥ md` only | Desktop sticky bar — being refactored away from quiz-first; does not render on mobile |
 
-Only one dominant quiz entry should feel primary on mobile: the bottom bar handles navigation; `DpcQuizMobileSticky` appears after ~200px scroll on most pages. Avoid adding a third fixed quiz CTA on the same viewport.
+**Audience-first mobile CTA priority:** bottom bar handles navigation; audience-specific CTAs lead on homepage and audience pages. Quiz sticky is secondary support only — do not stack multiple quiz entry points. Avoid a third fixed quiz CTA on the same viewport.
 
 Touch targets: bottom bar items use `min-h-[60px]`; quiz trigger uses full-width pill with `py-3`.
 
@@ -91,6 +91,7 @@ Touch targets: bottom bar items use `min-h-[60px]`; quiz trigger uses full-width
 
 1. Update **`lib/nav.ts`** first — bottom bar and full menu read from there
 2. Adjust icons/labels in **`MobileAppBar.tsx`** only if needed
-3. Keep quiz-first CTAs — prefer `DpcQuizTrigger` / `DpcQuizMobileSticky` over legacy pricing CTAs
-4. If adding a page-specific sticky CTA, add its path to `DpcQuizMobileSticky` `HIDDEN_PATHS` to prevent stacking
-5. Run mobile viewport QA from [`QA-CHECKLIST.md`](./QA-CHECKLIST.md)
+3. Lead with **audience-specific CTAs** on homepage and audience pages — do not over-prioritize `DpcQuizTrigger` / `DpcQuizMobileSticky`
+4. Use quiz components sparingly as secondary “not sure where to start?” support, not as the dominant CTA everywhere
+5. If adding a page-specific sticky CTA, add its path to `DpcQuizMobileSticky` `HIDDEN_PATHS` to prevent stacking
+6. Run mobile viewport QA from [`QA-CHECKLIST.md`](./QA-CHECKLIST.md)

@@ -1,0 +1,23 @@
+---
+description: DirectCare Indy project guardrails — read PROJECT_MEMORY first
+alwaysApply: true
+---
+
+# DirectCare Indy
+
+Before any code or content change, read [`docs/PROJECT_MEMORY.md`](../../docs/PROJECT_MEMORY.md). It is the strategic source of truth.
+
+- Keep [`AGENTS.md`](../../AGENTS.md) and [`CLAUDE.md`](../../CLAUDE.md) as **pointers** — do not duplicate full strategy into agent files or rules.
+- Implementation queue: [`docs/CODEX_BACKLOG.md`](../../docs/CODEX_BACKLOG.md); workflow: [`docs/CODEX_WORKFLOW.md`](../../docs/CODEX_WORKFLOW.md).
+
+## Guardrails
+
+- **Single clinic:** 7911 N. Michigan Rd., Indianapolis, IN 46268 — no “Find a provider near you.”
+- **Quiz is secondary** — no global header quiz CTA; do not spam quiz CTAs on audience cards or sticky bars.
+- **Brokers** stay out of main nav (`lib/nav.ts`).
+- **Do not implement** GA4/GTM production setup, HSA/FSA gates, or production scheduler env vars unless explicitly requested.
+- **Demo scheduler:** use `getDpcQuizScheduleLink()` fallbacks; keep links dev-safe.
+- **Pricing:** import from `lib/content/membership-pricing.ts` — no hardcoded plans, calculators, fake testimonials, or “unlimited visits.”
+- **No-touch:** `app/api/**`, `app/join/**`, env files, Hint Health — unless explicitly approved.
+
+After meaningful code changes: `npm run build` and `npm run lint`.
