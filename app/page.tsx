@@ -1,514 +1,518 @@
-"use client";
-
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, HeartPulse, Play, ShieldCheck, Sparkles, Stethoscope, User, Users, Briefcase } from "lucide-react";
-import { MembershipConfigurator } from "@/components/MembershipConfigurator";
-import { MembershipValue } from "@/components/shared/MembershipValue";
-import { NinetyTenModelSection } from "@/components/shared/NinetyTenModelSection";
-import { SavingsPersonas } from "@/components/SavingsPersonas";
-import { ComplianceNote } from "@/components/ComplianceNote";
-import { ScrollTransition } from "@/components/ScrollTransition";
-import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BookOpen,
+  BriefcaseBusiness,
+  Building2,
+  CheckCircle2,
+  Compass,
+  HeartPulse,
+  ShieldCheck,
+  Stethoscope,
+  Users,
+} from "lucide-react";
+import { DpcQuizCtaBand, DpcQuizTrigger } from "@/components/dpc-fit-quiz";
+import type { QuizAudience } from "@/lib/dpc-fit-quiz";
 import { SITE_ASSETS } from "@/lib/images";
-import { DpcQuizTrigger, DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
+import { MEMBERSHIP_PLANS } from "@/lib/content/membership-pricing";
+import { getLeadPAs, getMedicalDirector } from "@/lib/data/providers";
 
-const PATIENT_PORTAL_URL = "https://directcareindy.hint.com/login";
+const audienceCards: Array<{
+  title: string;
+  description: string;
+  href: string;
+  linkLabel: string;
+  initialAudience: QuizAudience;
+  icon: typeof HeartPulse;
+}> = [
+  {
+    title: "Individuals",
+    description:
+      "If you want a simpler first stop for everyday care, start here and let the quiz guide you.",
+    href: "/membership",
+    linkLabel: "Explore individual membership",
+    initialAudience: "individual",
+    icon: HeartPulse,
+  },
+  {
+    title: "Families",
+    description:
+      "If your household needs a clearer care path when someone gets sick, this route starts with family fit.",
+    href: "/membership",
+    linkLabel: "See family plan context",
+    initialAudience: "family",
+    icon: Users,
+  },
+  {
+    title: "Employers",
+    description:
+      "If you are evaluating DPC as a practical employee benefit, start with the employer path.",
+    href: "/employers",
+    linkLabel: "See employer overview",
+    initialAudience: "employer",
+    icon: Building2,
+  },
+  {
+    title: "Brokers",
+    description:
+      "If you advise employer clients, use the broker path for a tailored next step and supporting resources.",
+    href: "/brokers",
+    linkLabel: "Visit broker resources",
+    initialAudience: "broker",
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: "Unsure / education",
+    description:
+      "If you are still figuring out what DPC is, start with the education route and get a guided recommendation.",
+    href: "/what-is-dpc",
+    linkLabel: "Read the DPC basics",
+    initialAudience: "unsure",
+    icon: BookOpen,
+  },
+];
 
-export default function Home() {
+const medicalDirector = getMedicalDirector();
+const leadProviders = getLeadPAs().slice(0, 2);
+const providerHighlights = [medicalDirector, ...leadProviders].filter(
+  (provider): provider is NonNullable<typeof provider> => Boolean(provider)
+);
+
+export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
+    <main className="min-h-screen bg-background">
+      <section className="relative overflow-hidden bg-primary pb-18 pt-24 text-primary-foreground lg:pb-24 lg:pt-30">
+        <div className="absolute inset-0 z-0">
           <Image
-            src="/images/clinical/pulmonary-clinic.webp"
-            alt="Direct Care Indy exam room"
+            src={SITE_ASSETS.clinical.healthcareChart}
+            alt="Direct Care Indy team supporting a patient visit"
             fill
-            className="object-cover"
-            priority
+            className="object-cover object-center"
             sizes="100vw"
+            priority
           />
+          <div className="absolute inset-0 bg-linear-to-br from-primary/94 via-teal-950/86 to-primary/96" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_38%)]" />
         </div>
-        <div className="content-container relative section-padding">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 bg-white/60 backdrop-blur-md dark:bg-card/95 p-8 rounded-3xl shadow-xl">
-              <div className="inline-flex items-center gap-2 bg-white dark:bg-card px-4 py-2 rounded-full border border-border shadow-sm w-fit">
-                <Sparkles className="h-4 w-4 text-secondary" />
-                <span className="text-sm font-semibold text-foreground">Hint-powered enrollment in one click</span>
-              </div>
-              <h1 className="heading-1 text-left text-gray-900">
-                Specialist-led primary care for Indy without the insurance detour.
-              </h1>
-              <p className="body-large text-gray-700 max-w-2xl">
-                Direct Care Indy bridges interest to enrollment in minutes. Transparent pricing, authentic clinical photos,
-                and a secure Hint Health flow that makes joining as easy as texting your provider.
+
+        <div className="content-container relative z-10">
+          <div className="mx-auto max-w-5xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white/90 backdrop-blur-sm">
+              <Compass className="h-4 w-4" aria-hidden />
+              Warm, relationship-based primary care guidance
+            </div>
+
+            <h1 className="heading-1-inverse mt-6 text-glow sm:text-5xl lg:text-6xl">
+              Direct Primary Care, without the guesswork about where to start
+            </h1>
+            <p className="body-large-inverse mx-auto mt-5 max-w-3xl font-medium text-white/90">
+              Direct Care Indy helps individuals, families, employers, and advisors find the right
+              next step for everyday care. Start with the quiz, then move into the route that fits
+              you best.
+            </p>
+
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <DpcQuizTrigger
+                label="Is DPC Right for You?"
+                sublabel="Take the 60-second quiz"
+                className="min-w-[260px] justify-center"
+              />
+              <Link
+                href="/membership"
+                className="inline-flex min-w-[240px] items-center justify-center gap-2 rounded-full border border-white/55 bg-white/10 px-7 py-4 text-base font-semibold text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+              >
+                View Membership Plans
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
+
+            <ul className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm">
+              {[
+                "Quiz-first guidance",
+                "Membership plans preview",
+                "Employer and broker paths available",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="rounded-full border border-white/18 bg-white/10 px-4 py-1.5 text-white/90 backdrop-blur-sm"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding-sm">
+        <div className="content-container">
+          <div className="mx-auto max-w-6xl">
+            <SectionHeading
+              eyebrow="Choose your route"
+              title="Start in the lane that matches why you are here"
+            >
+              <p>
+                Each path opens the quiz with the right context, so you can get a more useful next
+                step without digging through a giant brochure pile.
               </p>
-              <div className="flex flex-wrap gap-4">
+            </SectionHeading>
+
+            <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+              {audienceCards.map((card) => {
+                const Icon = card.icon;
+
+                return (
+                  <article
+                    key={card.title}
+                    className="section-card flex h-full flex-col border-secondary/10 bg-linear-to-b from-white to-muted/20"
+                  >
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
+                      <Icon className="h-6 w-6" aria-hidden />
+                    </div>
+                    <h2 className="mt-5 text-xl font-bold text-foreground">{card.title}</h2>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      {card.description}
+                    </p>
+                    <div className="mt-6 space-y-3">
+                      <DpcQuizTrigger
+                        label="Is DPC Right for You?"
+                        shortLabel="Start this path"
+                        sublabel="Take the 60-second quiz"
+                        variant="secondary"
+                        initialAudience={card.initialAudience}
+                        className="w-full justify-center"
+                      />
+                      <Link
+                        href={card.href}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:underline"
+                      >
+                        {card.linkLabel}
+                        <ArrowRight className="h-4 w-4" aria-hidden />
+                      </Link>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding-sm bg-muted/35">
+        <div className="content-container">
+          <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div>
+              <SectionHeading eyebrow="Quick preview" title="What is Direct Primary Care?">
+                <p>
+                  Direct Primary Care is a membership model for everyday primary care. Instead of
+                  starting with co-pays, referral friction, and unclear bills, members get a more
+                  direct relationship with their care team for routine needs.
+                </p>
+                <p>
+                  It is not health insurance. Think of it as a clear first stop for common health
+                  questions, sick visits, follow-up care, and ongoing support.
+                </p>
+              </SectionHeading>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="/what-is-dpc"
+                  className="inline-flex items-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground shadow-sm transition-colors hover:bg-secondary/90"
+                >
+                  Learn how DPC works
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
                 <DpcQuizTrigger
                   label="Is DPC Right for You?"
+                  shortLabel="Take the quiz"
                   sublabel="Take the 60-second quiz"
-                  variant="primary"
-                  className="!px-7 !py-4 !text-lg !font-bold"
+                  variant="secondary"
+                  initialAudience="unsure"
+                />
+              </div>
+            </div>
+
+            <div className="section-card border-primary/10 bg-white/95">
+              <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
+                A better first step
+              </p>
+              <ul className="mt-5 space-y-4">
+                {[
+                  "Clear monthly structure for everyday care",
+                  "Longer, more personal primary care visits",
+                  "Direct communication with your care team",
+                  "A practical wayfinding layer before bigger-system confusion kicks in",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-secondary" aria-hidden />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding-sm">
+        <div className="content-container">
+          <SectionHeading
+            eyebrow="Membership preview"
+            title="Current membership paths at a glance"
+          >
+            <p>
+              If you already know you want to compare plan options, here is the short version. The
+              full pricing page has the deeper detail.
+            </p>
+          </SectionHeading>
+
+          <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-3 lg:items-stretch">
+            {MEMBERSHIP_PLANS.map((plan) => {
+              const isFeatured = "featured" in plan && Boolean(plan.featured);
+
+              return (
+                <article
+                  key={plan.id}
+                  className={`section-card flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${
+                    isFeatured ? "border-secondary/30 ring-2 ring-secondary/15" : ""
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="rounded-2xl bg-secondary/10 p-3 text-secondary">
+                      <Stethoscope className="h-6 w-6" aria-hidden />
+                    </div>
+                    {isFeatured && (
+                      <span className="rounded-full bg-secondary/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-secondary">
+                        Popular household route
+                      </span>
+                    )}
+                  </div>
+
+                  <h2 className="mt-5 text-xl font-bold text-foreground">{plan.name}</h2>
+                  <p
+                    className={`mt-4 font-black text-secondary ${
+                      plan.id === "family" ? "text-2xl leading-tight" : "text-3xl"
+                    }`}
+                  >
+                    {plan.price}
+                    <span className="text-base font-normal text-muted-foreground">
+                      {plan.priceNote}
+                    </span>
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    {plan.summary}
+                  </p>
+                  {"detail" in plan && plan.detail && (
+                    <p className="mt-3 text-sm text-muted-foreground">{plan.detail}</p>
+                  )}
+                  {"medicareNote" in plan && plan.medicareNote && (
+                    <p className="mt-3 rounded-xl border border-border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
+                      {plan.medicareNote}
+                    </p>
+                  )}
+
+                  <p className="mt-6 text-sm font-semibold text-foreground">Best for</p>
+                  <ul className="mt-3 flex-1 space-y-2">
+                    {plan.bestFor.slice(0, 3).map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2 text-sm text-muted-foreground"
+                      >
+                        <CheckCircle2
+                          className="mt-0.5 h-4 w-4 shrink-0 text-secondary"
+                          aria-hidden
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/membership"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              View Membership Plans
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding-sm bg-muted/40">
+        <div className="content-container">
+          <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div className="section-card overflow-hidden border-primary/10 p-0">
+              <div className="relative min-h-[280px]">
+                <Image
+                  src={SITE_ASSETS.employers.hero}
+                  alt="Small business team reviewing employer healthcare options"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 520px"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-primary/85 via-primary/25 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <p className="text-sm font-semibold uppercase tracking-wide text-white/80">
+                    Employer preview
+                  </p>
+                  <p className="mt-2 text-2xl font-bold">
+                    A practical path for teams that need care to be easier to use
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <SectionHeading eyebrow="For employers" title="Evaluating DPC for your team?">
+                <p>
+                  The employer path is for business owners and leaders who want a more usable first
+                  step for everyday care without turning the homepage into a full benefits manual.
+                </p>
+                <p>
+                  Start with the employer quiz if you want guidance. Jump to the employer page if
+                  you already know you need the business overview.
+                </p>
+              </SectionHeading>
+
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <DpcQuizTrigger
+                  label="Is DPC Right for You?"
+                  shortLabel="Start employer quiz"
+                  sublabel="Take the 60-second quiz"
+                  initialAudience="employer"
+                  className="justify-center"
                 />
                 <Link
-                  href="/membership"
-                  className="bg-card text-card-foreground border border-border px-7 py-4 rounded-full font-semibold text-lg hover:bg-card/90 transition-colors"
+                  href="/employers"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
                 >
-                  View Membership Plans
+                  View Employer Overview
+                  <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
                 <Link
-                  href="#pricing-calculator"
-                  className="bg-card text-card-foreground border border-border px-7 py-4 rounded-full font-semibold text-lg hover:bg-card/90 transition-colors"
+                  href="/brokers"
+                  className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-secondary hover:underline"
                 >
-                  See My Exact Price
+                  Brokers: resources and next steps
+                  <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
-                <a
-                  href={PATIENT_PORTAL_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm font-semibold underline underline-offset-4 text-foreground hover:text-secondary"
-                >
-                  Patient Login
-                </a>
-              </div>
-              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                <div className="inline-flex items-center gap-2 bg-card/80 border border-border px-3 py-2 rounded-full">
-                  <ShieldCheck className="h-4 w-4 text-secondary" />
-                  <span>Board-certified Pulmonary & Internal Medicine</span>
-                </div>
-                <div className="inline-flex items-center gap-2 bg-card/80 border border-border px-3 py-2 rounded-full">
-                  <Stethoscope className="h-4 w-4 text-secondary" />
-                  <span>Same-week onboarding. Text-first care.</span>
-                </div>
-              </div>
-            </div>
-            <div className="relative space-y-4">
-              {/* Calm, welcoming features grid */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white dark:bg-card p-6 rounded-2xl shadow-lg border border-border/60 hover:shadow-xl transition-shadow">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-teal-50 dark:bg-teal-950 p-3 rounded-xl">
-                      <HeartPulse className="h-6 w-6 text-teal-600" />
-                    </div>
-                  </div>
-                  <p className="font-semibold text-foreground mb-2">Same-Week Onboarding</p>
-                  <p className="text-sm text-muted-foreground">
-                    Join today, see your provider this week
-                  </p>
-                </div>
-
-                <div className="bg-white dark:bg-card p-6 rounded-2xl shadow-lg border border-border/60 hover:shadow-xl transition-shadow">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="bg-teal-50 dark:bg-teal-950 p-3 rounded-xl">
-                      <CheckCircle2 className="h-6 w-6 text-teal-600" />
-                    </div>
-                  </div>
-                  <p className="font-semibold text-foreground mb-2">No Insurance Needed</p>
-                  <p className="text-sm text-muted-foreground">
-                    Direct pricing, zero claim forms
-                  </p>
-                </div>
-
-                <div className="bg-white dark:bg-card p-6 rounded-2xl shadow-lg border border-border/60 hover:shadow-xl transition-shadow">
-                  <div className="relative h-32 overflow-hidden rounded-xl mb-3">
-                    <Image
-                      src="/images/clinical/doctor-consultation.webp"
-                      alt="Calming exam room"
-                      fill
-                      className="object-cover"
-                      sizes="250px"
-                    />
-                  </div>
-                  <p className="font-semibold text-foreground mb-1">Designed for Comfort</p>
-                  <p className="text-sm text-muted-foreground">
-                    Warm lighting, calm environment
-                  </p>
-                </div>
-
-                <div className="bg-white dark:bg-card p-6 rounded-2xl shadow-lg border border-border/60 hover:shadow-xl transition-shadow">
-                  <div className="relative h-32 overflow-hidden rounded-xl mb-3">
-                    <Image
-                      src="/images/clinical/pulmonary-clinic.webp"
-                      alt="Modern clinic space"
-                      fill
-                      className="object-cover"
-                      sizes="250px"
-                    />
-                  </div>
-                  <p className="font-semibold text-foreground mb-1">Specialist-Led Care</p>
-                  <p className="text-sm text-muted-foreground">
-                    Board-certified oversight on every visit
-                  </p>
-                </div>
-              </div>
-
-              {/* Subtle team mention */}
-              <div className="bg-teal-50/50 dark:bg-teal-950/30 p-4 rounded-xl border border-teal-200/50 dark:border-teal-800/50">
-                <p className="text-sm text-muted-foreground text-center">
-                  <span className="font-semibold text-foreground">Led by Dr. James Pike, D.O., FCCP, FACP</span> — Board-certified in Pulmonary & Internal Medicine
-                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3-Lane Entry */}
-      <section className="section-padding bg-muted/30">
+      <section className="section-padding-sm">
         <div className="content-container">
-          <h2 className="heading-2 text-center mb-10">Choose Your Path</h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="bg-card border border-border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-950">
-                <User className="h-7 w-7 text-teal-600" />
+          <SectionHeading eyebrow="Provider trust" title="Led by experienced local clinicians">
+            <p>
+              Direct Care Indy pairs relationship-based everyday care with experienced provider
+              leadership, so the next step feels human and clinically grounded.
+            </p>
+          </SectionHeading>
+
+          <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="section-card border-secondary/10 bg-linear-to-br from-secondary/5 to-card">
+              <div className="flex items-start gap-4">
+                <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-secondary/15 text-secondary">
+                  <ShieldCheck className="h-6 w-6" aria-hidden />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground">
+                    {medicalDirector?.name ?? "Clinical leadership you can trust"}
+                  </h2>
+                  <p className="mt-1 text-sm font-medium text-secondary">
+                    {medicalDirector?.credentials}
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                    {medicalDirector?.bio ??
+                      "Experienced clinical leadership helps keep the member experience personal, practical, and grounded in real medical judgment."}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-2">Individuals</h3>
-              <p className="text-2xl font-bold text-secondary mb-2">$85 – $110/mo</p>
-              <p className="text-sm text-muted-foreground mb-6">Unlimited primary care &amp; 24/7 text access.</p>
-              <DpcQuizTrigger
-                label="Start here"
-                variant="primary"
-                initialAudience="individual"
-                className="w-full justify-center"
-              />
             </div>
-            <div className="bg-card border border-border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-950">
-                <Users className="h-7 w-7 text-teal-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Families</h3>
-              <p className="text-2xl font-bold text-secondary mb-2">$250 – $300/mo</p>
-              <p className="text-sm text-muted-foreground mb-6">Comprehensive care for 2 Adults + 2 Kids.</p>
-              <DpcQuizTrigger
-                label="Start here"
-                variant="primary"
-                initialAudience="family"
-                className="w-full justify-center"
-              />
-            </div>
-            <div className="bg-card border border-border rounded-2xl p-8 text-center shadow-sm hover:shadow-lg transition-shadow">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal-50 dark:bg-teal-950">
-                <Briefcase className="h-7 w-7 text-teal-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">For Employers</h3>
-              <p className="text-2xl font-bold text-secondary mb-2">$80/emp</p>
-              <p className="text-sm text-muted-foreground mb-6">Occupational health &amp; acute care.</p>
-              <DpcQuizTrigger
-                label="Start here"
-                variant="primary"
-                initialAudience="employer"
-                className="w-full justify-center"
-              />
+
+            <div className="grid gap-4">
+              {providerHighlights.map((provider) => (
+                <article
+                  key={provider.slug}
+                  className="section-card flex items-start gap-4 border-border/80"
+                >
+                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl bg-muted">
+                    <Image
+                      src={provider.image}
+                      alt={provider.name}
+                      fill
+                      className="object-cover"
+                      sizes="64px"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">{provider.name}</h3>
+                    <p className="text-sm text-secondary">
+                      {provider.credentials} | {provider.role}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {provider.highlights[0]}
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
-          <div className="mt-8 max-w-md mx-auto">
-            <div className="bg-card border border-border rounded-2xl p-6 text-center shadow-sm">
-              <h3 className="text-lg font-bold mb-2">For Brokers</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Advising a client on benefits? Start with the quiz.
-              </p>
-              <DpcQuizTrigger
-                label="Start here"
-                variant="secondary"
-                initialAudience="broker"
-                className="w-full justify-center"
-              />
-            </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              href="/providers"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:underline"
+            >
+              Meet the care team
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="section-padding-sm bg-background">
-        <div className="content-container max-w-4xl mx-auto">
+      <section className="section-padding-sm pt-0">
+        <div className="content-container max-w-5xl">
           <DpcQuizCtaBand
-            headline="Not sure where to start?"
-            body="Not sure where to start? Take the quiz and we'll guide you."
+            headline="Still deciding where to begin?"
+            body="Take the 60-second quiz and we will point you toward the right next step for individual care, family care, employer planning, broker conversations, or basic DPC education."
+            variant="primary"
           />
         </div>
       </section>
+    </main>
+  );
+}
 
-      {/* Membership Value */}
-      <section className="section-padding">
-        <div className="content-container max-w-5xl mx-auto">
-          <MembershipValue />
+function SectionHeading({
+  eyebrow,
+  title,
+  children,
+}: {
+  eyebrow?: string;
+  title: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="mx-auto max-w-3xl text-center">
+      {eyebrow ? (
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-secondary">{eyebrow}</p>
+      ) : null}
+      <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        {title}
+      </h2>
+      {children ? (
+        <div className="mt-5 space-y-4 text-base leading-relaxed text-muted-foreground">
+          {children}
         </div>
-      </section>
-
-      {/* Pricing Calculator */}
-      <section className="section-padding bg-muted/30">
-        <div className="content-container">
-          <MembershipConfigurator />
-          {/* Pricing Disclaimer */}
-          <div className="mt-6 text-xs text-muted-foreground text-center">
-            <p>Pricing subject to change. Contact Direct Care Indy for current rates and enrollment details.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Insurance Disclaimer */}
-      <section className="section-padding">
-        <div className="content-container">
-          <div className="max-w-3xl mx-auto bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-6 text-center">
-            <p className="text-sm text-blue-900 dark:text-blue-200">
-              <strong>Important:</strong> Direct Care Indy membership is not health insurance.
-              We recommend maintaining insurance coverage for emergencies, hospitalizations, and specialist care.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Credentials Ribbon */}
-      <section className="section-padding">
-        <div className="content-container">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-            <h2 className="heading-2">Verified authority, transparent credentials.</h2>
-            <p className="text-sm text-muted-foreground">
-              Board certifications and licenses linked for easy verification.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-4 gap-4">
-            <div className="section-card">
-              <p className="text-xs font-semibold text-secondary uppercase mb-2">Board Certification</p>
-              <p className="font-bold text-lg text-foreground">Pulmonary Medicine</p>
-              <p className="text-sm text-muted-foreground mb-3">American Board of Internal Medicine</p>
-              <a
-                href="https://www.abim.org/verify-physician"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm font-semibold text-secondary underline underline-offset-4"
-              >
-                Verify certification
-              </a>
-            </div>
-            <div className="section-card">
-              <p className="text-xs font-semibold text-secondary uppercase mb-2">Board Certification</p>
-              <p className="font-bold text-lg text-foreground">Internal Medicine</p>
-              <p className="text-sm text-muted-foreground mb-3">Specialist oversight on every panel.</p>
-              <a
-                href="https://www.abim.org/verify-physician"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm font-semibold text-secondary underline underline-offset-4"
-              >
-                Verify certification
-              </a>
-            </div>
-            <div className="section-card">
-              <p className="text-xs font-semibold text-secondary uppercase mb-2">Medical License</p>
-              <p className="font-bold text-lg text-foreground">Indiana Medical License</p>
-              <p className="text-sm text-muted-foreground mb-3">Active and in good standing.</p>
-              <a
-                href="https://www.in.gov/pla/license/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm font-semibold text-secondary underline underline-offset-4"
-              >
-                Verify with PLA
-              </a>
-            </div>
-            <div className="section-card">
-              <p className="text-xs font-semibold text-secondary uppercase mb-2">NPI Registry</p>
-              <p className="font-bold text-lg text-foreground">James D. Pike, D.O.</p>
-              <p className="text-sm text-muted-foreground mb-3">NPI profile available for patient review.</p>
-              <a
-                href="https://npiregistry.cms.hhs.gov/registry/search-results-table?name=james%20pike%20do"
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm font-semibold text-secondary underline underline-offset-4"
-              >
-                View NPI search
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Case Studies */}
-      <section className="section-padding bg-card">
-        <div className="content-container">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-10">
-            <div>
-              <p className="text-sm font-semibold text-secondary uppercase mb-2">Case studies</p>
-              <h2 className="heading-2">HIPAA-safe stories from the exam room.</h2>
-              <p className="text-muted-foreground max-w-2xl">
-                Detailed scenarios from real patients (identities altered) showing how DPC solves high-friction problems.
-              </p>
-            </div>
-            <Link
-              href="/how-it-works"
-              className="inline-flex items-center gap-2 text-secondary font-semibold underline underline-offset-4"
-            >
-              Read more
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            <article className="section-card p-0 overflow-hidden">
-              <div className="relative aspect-video">
-                <Image
-                  src={SITE_ASSETS.marketing.employer}
-                  alt="Indianapolis trades professional receiving care"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 bg-white/85 text-foreground px-3 py-1 rounded-full text-xs font-semibold">
-                  <Play className="h-3 w-3" />
-                  90-second walkthrough
-                </div>
-              </div>
-              <div className="p-5 space-y-3">
-                <h3 className="text-xl font-bold text-foreground">Case: Asthma control for HVAC technician</h3>
-                <p className="text-sm text-muted-foreground">
-                  Problem: missed shifts from urgent care visits. DPC Plan: same-day neb treatments, wholesale inhalers, and text triage.
-                </p>
-                <p className="text-sm font-semibold text-secondary">Outcome: 3 ER visits avoided in 90 days; $620 saved.</p>
-              </div>
-            </article>
-            <article className="section-card p-0 overflow-hidden">
-              <div className="relative aspect-video">
-                <Image
-                  src={SITE_ASSETS.marketing.seniorWellness}
-                  alt="Senior preventive care case study"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 bg-white/85 text-foreground px-3 py-1 rounded-full text-xs font-semibold">
-                  <Play className="h-3 w-3" />
-                  Clinical recap
-                </div>
-              </div>
-              <div className="p-5 space-y-3">
-                <h3 className="text-xl font-bold text-foreground">Case: Medicare senior with diabetes</h3>
-                <p className="text-sm text-muted-foreground">
-                  Problem: rising A1C despite specialist visits. DPC Plan: continuous glucose review, nutrition texting, labs at $8.
-                </p>
-                <p className="text-sm font-semibold text-secondary">Outcome: A1C down 1.2 points in 4 months; $480 saved on labs.</p>
-              </div>
-            </article>
-            <article className="section-card p-0 overflow-hidden">
-              <div className="relative aspect-video">
-                <Image
-                  src={SITE_ASSETS.marketing.employerWellness}
-                  alt="Employer wellness collaboration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-3 left-3 inline-flex items-center gap-2 bg-white/85 text-foreground px-3 py-1 rounded-full text-xs font-semibold">
-                  <Play className="h-3 w-3" />
-                  Team debrief
-                </div>
-              </div>
-              <div className="p-5 space-y-3">
-                <h3 className="text-xl font-bold text-foreground">Case: 18-person home services crew</h3>
-                <p className="text-sm text-muted-foreground">
-                  Problem: claims spikes and lost hours. DPC Plan: onsite flu clinic, telehealth injury triage, capped memberships.
-                </p>
-                <p className="text-sm font-semibold text-secondary">Outcome: 28% fewer sick days and predictable $69/employee pricing.</p>
-              </div>
-            </article>
-          </div>
-          <p className="text-xs text-muted-foreground mt-4">
-            All case studies are HIPAA-safe composites with clinical details preserved and identities modified.
-          </p>
-        </div>
-      </section>
-
-      {/* 90/10 Model */}
-      <ScrollTransition id="how-it-works">
-        <section className="bg-background py-16">
-          <NinetyTenModelSection />
-        </section>
-      </ScrollTransition>
-
-      {/* Savings Personas */}
-      <section className="section-padding bg-muted/30">
-        <div className="content-container">
-          <div className="max-w-4xl mx-auto text-center mb-8">
-            <h2 className="heading-2 mb-4">What you save, based on who you are.</h2>
-            <p className="body-large text-muted-foreground">
-              Whether you are a young professional or a Medicare couple, see how the numbers play out.
-            </p>
-          </div>
-          <SavingsPersonas />
-          <div className="max-w-4xl mx-auto">
-            <ComplianceNote />
-          </div>
-        </div>
-      </section>
-
-      {/* Portal Access and Trust */}
-      <section className="section-padding">
-        <div className="content-container">
-          <div className="max-w-4xl mx-auto section-card space-y-4">
-            <h3 className="heading-3">Secure portal access is available for members.</h3>
-            <p className="body-large text-muted-foreground">
-              Enrollment and member login are handled in Hint Health with secure messaging and follow-up workflows.
-            </p>
-            <div className="space-y-2 text-foreground">
-              <div className="flex items-center gap-2">
-                <HeartPulse className="h-5 w-5 text-secondary" />
-                <span>HIPAA-aware systems from enrollment through follow-up.</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-secondary" />
-                <span>Accessible forms and straightforward login paths for members.</span>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <Link
-                href="/join"
-                className="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-              >
-                Start enrollment
-              </Link>
-              <a
-                href={PATIENT_PORTAL_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="px-6 py-3 rounded-lg font-semibold border border-border text-foreground hover:bg-muted transition-colors"
-              >
-                Patient login
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="section-padding">
-        <div className="content-container">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h2 className="heading-2 mb-4">What members are saying</h2>
-            <p className="body-large text-muted-foreground">
-              Real stories from Indianapolis families who switched to Direct Care Indy.
-            </p>
-          </div>
-          <TestimonialsCarousel />
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 bg-secondary text-secondary-foreground">
-        <div className="content-container text-center">
-          <h3 className="text-3xl font-bold mb-6">Ready to enroll in minutes?</h3>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join hundreds of Indy families enjoying specialist-led care without copays or deductibles.
-          </p>
-          <Link
-            href="/join"
-            className="bg-card text-card-foreground hover:bg-card/90 border border-border px-8 py-4 rounded-lg font-semibold text-lg transition-all inline-block interactive-element"
-          >
-            Start enrollment
-          </Link>
-        </div>
-      </section>
+      ) : null}
     </div>
   );
 }
