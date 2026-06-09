@@ -4,56 +4,48 @@ import { SITE_URL, IS_DEMO, absoluteUrl } from "@/lib/site";
 export const baseMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Direct Care Indy Demo | Employer DPC Strategy",
-    template: "%s | Direct Care Indy Demo",
+    default: "Direct Care Indy | Direct Primary Care Membership in Indianapolis",
+    template: "%s | Direct Care Indy",
   },
   description:
-    "Demo website concept for Direct Care Indy with employer Direct Primary Care education, membership paths, and B2B healthcare benefit positioning.",
+    "Direct Primary Care membership in Indianapolis — transparent pricing, same- or next-day appointments when available, and employer healthcare benefit options. DPC is not insurance.",
   keywords: [
     "Direct Primary Care Indianapolis",
+    "DPC membership Indianapolis",
+    "employer healthcare benefits Indy",
     "HSA eligible DPC 2026",
-    "HSA eligible doctor Indianapolis",
     "DPC for Medicare patients Indy",
-    "Pulmonary specialist Direct Primary Care",
-    "healthcare for self-employed Indiana",
     "small business health benefits Indy",
-    "DPC near me Indianapolis",
-    "affordable healthcare Indiana",
+    "affordable primary care membership Indiana",
     "Dr. James Pike Indianapolis",
-    "wholesale labs Indianapolis",
-    "no insurance doctor Indianapolis",
-    "healthcare missing middle",
-    "HVAC healthcare benefits",
-    "contractor health insurance alternative",
-    "complex care Indianapolis",
-    "Medicare and Direct Primary Care",
-    "HSA eligible healthcare Indianapolis",
+    "family direct primary care Indianapolis",
+    "senior direct primary care Indianapolis",
   ],
   authors: [{ name: "Dr. James D. Pike, D.O." }],
-  creator: "Direct Care Indy Demo",
-  publisher: "Direct Care Indy Demo",
+  creator: "Direct Care Indy",
+  publisher: "Direct Care Indy",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    siteName: "Direct Care Indy Demo",
-    title: "Direct Care Indy Demo | Employer DPC Strategy",
+    siteName: "Direct Care Indy",
+    title: "Direct Care Indy | Direct Primary Care Membership in Indianapolis",
     description:
-      "A demo site concept focused on employer Direct Primary Care, small business healthcare education, and membership conversion paths.",
+      "Membership-based primary care in Indianapolis with transparent pricing, employer benefit options, and a quiz-first path to the right care plan.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Direct Care Indy Demo",
+        alt: "Direct Care Indy — Direct Primary Care in Indianapolis",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Direct Care Indy Demo | Employer DPC Strategy",
+    title: "Direct Care Indy | Direct Primary Care Membership in Indianapolis",
     description:
-      "Demo concept focused on employer Direct Primary Care and membership conversion paths.",
+      "Membership-based primary care in Indianapolis — individual, family, and senior plans plus employer healthcare options.",
     images: ["/og-image.jpg"],
   },
   robots: IS_DEMO
@@ -74,10 +66,22 @@ export const baseMetadata: Metadata = {
       },
 };
 
+export const homeMetadata: Metadata = {
+  title: "Direct Primary Care Membership in Indianapolis",
+  description:
+    "Is Direct Primary Care right for you? Take the quiz, compare membership plans, and explore employer healthcare options at Direct Care Indy in Indianapolis.",
+  openGraph: {
+    title: "Direct Care Indy | Quiz-First Direct Primary Care in Indianapolis",
+    description:
+      "Find your path to membership, family care, senior plans, or employer benefits with transparent Indianapolis DPC pricing.",
+    url: absoluteUrl("/"),
+  },
+};
+
 export const partnershipMetadata: Metadata = {
   title: "Health Benefits for Indianapolis Trades | HVAC, Landscaping, Auto",
   description:
-    "Direct Primary Care partnership concept for small businesses in Indianapolis, IN 46268. Built for HVAC, landscaping, auto shops, and construction trades.",
+    "Direct Primary Care partnerships for small businesses in Indianapolis, IN 46268. Built for HVAC, landscaping, auto shops, and construction trades.",
   keywords: [
     "small business health benefits Indianapolis",
     "HVAC contractor healthcare",
@@ -86,15 +90,13 @@ export const partnershipMetadata: Metadata = {
     "construction trade healthcare",
     "affordable employee benefits Indiana",
     "Indianapolis 46268 healthcare",
-    "Indianapolis 46268",
-    "healthcare 46268",
     "DPC Indianapolis 46268",
     "direct primary care 46268",
   ],
   openGraph: {
-    title: "Health Benefits for Indianapolis Trades | Direct Care Indy Demo",
+    title: "Health Benefits for Indianapolis Trades | Direct Care Indy",
     description:
-      "Direct Primary Care partnership concept for small businesses in Indianapolis, IN 46268. Perfect for trades and contractors.",
+      "Direct Primary Care partnerships for small businesses in Indianapolis, IN 46268 — practical care access for trades and contractors.",
     url: absoluteUrl("/partnerships"),
   },
 };
@@ -156,3 +158,39 @@ export const whatIsDpcMetadata: Metadata = {
 
 /** @deprecated /faq redirects to /what-is-dpc#faq */
 export const faqMetadata = whatIsDpcMetadata;
+
+export const contactMetadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Contact Direct Care Indy by phone, text, or email. Schedule a membership intro, employer conversation, or broker partnership discussion at our Indianapolis clinic.",
+  openGraph: {
+    title: "Contact Direct Care Indy",
+    description:
+      "Call (317) 956-6288, text, or message our team about membership, employer plans, or broker resources.",
+    url: absoluteUrl("/contact"),
+  },
+};
+
+export const employersMetadata: Metadata = {
+  title: "For Employers",
+  description:
+    "A practical healthcare benefit for Indianapolis employers. Direct Primary Care may help improve everyday care access alongside major medical coverage — not as insurance.",
+  openGraph: {
+    title: "For Employers | Direct Care Indy",
+    description:
+      "Explore employer-paid, shared, and voluntary DPC options for teams in Indianapolis.",
+    url: absoluteUrl("/employers"),
+  },
+};
+
+export const brokersMetadata: Metadata = {
+  title: "For Brokers",
+  description:
+    "Broker resources for pairing Direct Care Indy DPC with HDHP, level-funded, and self-funded employer plans in Indianapolis.",
+  openGraph: {
+    title: "For Brokers | Direct Care Indy",
+    description:
+      "Download employer summary and buyer checklist PDFs. DPC as a local primary care layer — not insurance.",
+    url: absoluteUrl("/brokers"),
+  },
+};

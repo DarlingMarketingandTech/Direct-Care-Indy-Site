@@ -33,6 +33,7 @@ import {
 } from "@/lib/content/what-is-dpc-benefits";
 import { SITE_ASSETS } from "@/lib/images";
 import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
+import { WHAT_IS_DPC_PRICING_HIGHLIGHTS } from "@/lib/content/membership-pricing";
 
 const HERO_PILLS = [
   "Predictable monthly pricing",
@@ -61,11 +62,7 @@ const OVERVIEW_CARDS = [
   },
 ] as const;
 
-const PRICING_HIGHLIGHTS = [
-  { label: "Adults 18–64", price: "$79", note: "/month" },
-  { label: "Families", price: "from $200", note: "/month" },
-  { label: "Seniors 65+", price: "$119", note: "/month" },
-] as const;
+const PRICING_HIGHLIGHTS = WHAT_IS_DPC_PRICING_HIGHLIGHTS;
 
 const SECTION_ICONS: Record<WhatIsDpcBenefitSectionId, LucideIcon> = {
   "affordable-plans": Wallet,

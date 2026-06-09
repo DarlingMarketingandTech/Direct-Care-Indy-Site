@@ -3,7 +3,6 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { Phone, Mail, MapPin, CheckCircle2, TrendingDown, Clock, DollarSign, Heart, Briefcase, Stethoscope } from "lucide-react";
 import { LocalBusinessSchema } from "@/components/StructuredData";
-import { SharedFooter } from "@/components/SharedFooter";
 import { NEIGHBORHOODS, BUSINESS_INFO } from "@/lib/constants";
 import WholesaleLabSearch from "@/components/WholesaleLabSearch";
 import { SeniorSavingsCalculator } from "@/components/SeniorSavingsCalculator";
@@ -365,8 +364,6 @@ export default async function NeighborhoodPage({ params }: NeighborhoodPageProps
           </div>
         </section>
 
-        {/* Footer */}
-        <SharedFooter />
       </div>
     </>
   );

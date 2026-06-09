@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { Compass } from "lucide-react";
 import type { QuizAudience } from "@/lib/dpc-fit-quiz";
+import { trackEvent } from "@/lib/analytics";
 import { useDpcQuiz } from "./DpcQuizProvider";
 
 export type DpcQuizTriggerVariant = "primary" | "secondary" | "compact" | "band";
@@ -71,7 +72,13 @@ export function DpcQuizTrigger({
   return (
     <button
       type="button"
-      onClick={() => openQuiz({ initialAudience })}
+      onClick={() => {
+        trackEvent("quiz_opened", {
+          source: "trigger",
+          initialAudience,
+        });
+        openQuiz({ initialAudience });
+      }}
       className={styles}
       aria-label={ariaLabel}
     >

@@ -1,6 +1,8 @@
 # Component Map
 
-Current component map for membership pricing, quiz flow, and pricing-related public UI.
+> **Strategy and guardrails:** [`PROJECT_MEMORY.md`](./PROJECT_MEMORY.md)
+
+Component and content-source inventory for membership pricing, quiz flow, and related public UI.
 
 ## Active Pricing Components
 

@@ -1,3 +1,5 @@
+import { MEMBERSHIP_PRICING_FAQ_BULLETS } from "@/lib/content/membership-pricing";
+
 export type DpcFaqItem = {
   question: string;
   answer: string;
@@ -70,11 +72,7 @@ export const DPC_FAQ_CATEGORIES: readonly DpcFaqCategory[] = [
       {
         question: "How much do DirectCare plans cost?",
         answer: "DirectCare Indy offers affordable and flexible membership options for different patient needs. Current membership options include:",
-        bullets: [
-          "Individuals ages 18 to 64: $79/month, with additional cash-pay services as needed",
-          "Families with children ages 12 and older: starting as low as $200/month for one dependent, with additional children at discounted monthly rates",
-          "Senior adults ages 65 and older: $119/month, with additional cash-pay services as needed",
-        ],
+        bullets: MEMBERSHIP_PRICING_FAQ_BULLETS,
       },
       {
         question: "Is there a contract, or can I cancel anytime?",

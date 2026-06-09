@@ -175,7 +175,7 @@ export function LocalBusinessSchema({ neighborhood, zipCode }: { neighborhood?: 
     "name": "Direct Care Indy",
     "image": absoluteUrl("/og-image.jpg"),
     "description": neighborhood
-      ? `Direct Primary Care serving ${neighborhood} families. Specialist-level primary care with unlimited visits, wholesale lab pricing, and direct physician access.`
+      ? `Direct Primary Care serving ${neighborhood} families. Specialist-level primary care with included membership visits when available, discounted lab pricing, and direct physician access.`
       : "Direct Primary Care practice in Indianapolis providing affordable, transparent healthcare with no insurance hassles.",
     "url": SITE_URL,
     "telephone": "+1-317-956-6288",

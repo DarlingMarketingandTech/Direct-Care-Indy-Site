@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CheckCircle2, Mail, Smartphone, Calendar, Download } from "lucide-react";
-import { SharedFooter } from "@/components/SharedFooter";
 import { useEffect, useState } from "react";
 
 export default function JoinSuccess() {
@@ -185,8 +184,6 @@ export default function JoinSuccess() {
         </div>
       </section>
 
-      {/* Footer */}
-      <SharedFooter />
     </div>
   );
 }

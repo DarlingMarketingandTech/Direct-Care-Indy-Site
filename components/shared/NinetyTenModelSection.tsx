@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { NinetyTenSwitcher } from "@/components/NinetyTenSwitcher";
 
 const DEFAULT_HIGHLIGHTS = [
-  "Unlimited sick visits, wholesale labs, and direct texting with your provider.",
+  "Included sick visits based on your plan, discounted labs when available, and direct texting with your care team.",
   "Catastrophic layer stays simple: pair with an HDHP or wraparound of your choice.",
   "Patient portal and Hint enrollment live on their own page — no PDFs or phone tag.",
 ] as const;

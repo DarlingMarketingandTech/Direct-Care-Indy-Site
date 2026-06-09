@@ -1,26 +1,39 @@
 # Navigation Map
 
-## Main Navigation
+> **Strategy and guardrails:** [`PROJECT_MEMORY.md`](./PROJECT_MEMORY.md)
+> **Source of truth:** `lib/nav.ts`
+> **Mobile shell:** [`MOBILE_APP_ARCHITECTURE.md`](./MOBILE_APP_ARCHITECTURE.md)
 
-The homepage is quiz-first, and the main navigation should stay focused on primary public discovery paths.
+## Main navigation (`mainNav`)
 
-- Keep brokers out of `mainNav`
-- Keep `/brokers` as a targeted landing page or footer destination
-- Keep membership pricing discovery pointed at `/membership`
+Quiz-first homepage; main nav stays focused on member and employer discovery.
 
-## Current Route Intent
+| Label | Route | Notes |
+|-------|-------|-------|
+| Membership Pricing | `/membership` | Active pricing route |
+| For Employers | `/employers` | B2B |
+| What Is DPC? | `/what-is-dpc` | Education + FAQ |
+| Our Team | `/providers` | Provider listing |
+| Contact | `/contact` | Contact |
 
-| Route | Navigation Role |
-|-------|-----------------|
-| `/` | Primary entry point |
-| `/membership` | Active membership pricing route |
-| `/quiz` | Quiz path and CTA destination |
-| `/how-it-works` | Education and onboarding |
-| `/what-is-dpc` | DPC education and FAQ destination |
-| `/about` | Trust and clinic story |
-| `/services` | Care offering overview |
+Also in header (not `mainNav`): **Patient Login** → Hint portal (external).
 
-## Legacy Route Notes
+**Do not add brokers to `mainNav`.** `/brokers` is footer-only (`footerNav`) or campaign traffic.
 
-- `/pricing` is not a primary nav destination
-- `/pricing` should only be referenced as a deprecated route that redirects to `/membership`
+## Mobile navigation
+
+Bottom bar (`mobileBottomNav`): Membership Pricing, For Employers, What Is DPC?, Patient Login, plus **Menu** → full `mainNav` + Patient Login. See MOBILE_APP_ARCHITECTURE.
+
+## Other public routes (not in main nav)
+
+| Route | Role |
+|-------|------|
+| `/` | Quiz-first homepage |
+| `/quiz` | Standalone DPC fit quiz |
+| `/brokers` | Footer / campaign landing only |
+| `/how-it-works`, `/services`, `/about`, `/wraparound` | Active pages — see ROUTE-MAP |
+
+## Legacy routes
+
+- `/pricing` → redirects to `/membership`
+- `/faq` → redirects to `/what-is-dpc#faq`

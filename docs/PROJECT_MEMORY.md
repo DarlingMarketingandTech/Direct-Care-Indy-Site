@@ -2,6 +2,30 @@
 
 Short, durable context for coding agents. Read this before making code or content changes.
 
+## Documentation hierarchy
+
+```
+README.md  →  PROJECT_MEMORY.md  →  detail docs
+                  ▲
+            single truth
+                  │
+    ROUTE-MAP · COMPONENT-MAP · DEVELOPMENT · MOBILE_APP_ARCHITECTURE · nav-map · QA-CHECKLIST
+```
+
+| Layer | File | Role |
+|-------|------|------|
+| Entry | [`README.md`](../README.md) | Project identity and doc index |
+| **Canonical** | **This file** | Strategy, guardrails, pricing, navigation |
+| Detail | [`DEVELOPMENT.md`](./DEVELOPMENT.md) | Stack and commands |
+| Detail | [`ROUTE-MAP.md`](./ROUTE-MAP.md) | Routes and page files |
+| Detail | [`COMPONENT-MAP.md`](./COMPONENT-MAP.md) | Components and content sources |
+| Detail | [`MOBILE_APP_ARCHITECTURE.md`](./MOBILE_APP_ARCHITECTURE.md) | Mobile shell and bottom bar |
+| Detail | [`nav-map.md`](./nav-map.md) | Navigation roles |
+| Agents | [`AGENTS.md`](../AGENTS.md), [`CLAUDE.md`](../CLAUDE.md) | Pointers only — no duplicated strategy |
+| History | [`archive/`](./archive/) | Past implementation reports — not active guidance |
+
+Do not duplicate this file’s rules in other docs. Other docs point **up** here.
+
 ---
 
 ## 1. Project identity

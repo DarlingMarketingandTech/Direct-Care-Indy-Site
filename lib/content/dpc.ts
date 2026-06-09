@@ -157,9 +157,9 @@ export const DPC_CONTENT = {
   services: [
     // Included Services (90% Model)
     {
-      id: 'unlimited-visits',
-      title: 'Unlimited Sick Visits',
-      description: 'See your PA as often as needed. No per-visit fees or copays.',
+      id: 'included-visits',
+      title: 'Included Sick Visits',
+      description: 'See your care team for included sick visits based on your membership plan. No co-pays on covered visits.',
       category: 'included' as const,
     },
     {
@@ -256,7 +256,7 @@ export const DPC_CONTENT = {
       description: 'Perfect for self-employed professionals and individuals',
       target: 'individual' as const,
       features: [
-        'Unlimited sick visits',
+        'Included sick visits based on your plan',
         'Preventive care & wellness',
         'Wholesale labs & pharmacy',
         '24/7 direct access',

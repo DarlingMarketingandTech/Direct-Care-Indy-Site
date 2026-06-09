@@ -7,8 +7,6 @@ import { GlobalHealthChart } from "@/components/GlobalHealthChart";
 import { NinetyTenSwitcher } from "@/components/NinetyTenSwitcher";
 import IndyBreathEasy from "@/components/IndyBreathEasy";
 import { PhysicianOversightBadge } from "@/components/PhysicianOversightBadge";
-import { SharedFooter } from "@/components/SharedFooter";
-
 export const metadata: Metadata = {
   title: "Pulmonary Specialist Oversight | Direct Care Indy - Dr. James D. Pike, D.O.",
   description: "Board-certified Pulmonary Medicine specialist Dr. Pike provides specialist-level oversight for all Direct Care Indy patients. Learn how the Round Table model ensures diagnostic security and complex care management.",
@@ -174,7 +172,7 @@ export default function PulmonaryPage() {
                   <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                     <li className="flex items-start gap-2">
                       <Activity className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
-                      <span>Unlimited sick visits</span>
+                      <span>Included sick visits based on your plan</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Activity className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
@@ -251,7 +249,6 @@ export default function PulmonaryPage() {
           </div>
         </section>
 
-        <SharedFooter />
       </div>
     </>
   );

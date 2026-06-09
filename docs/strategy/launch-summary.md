@@ -1,6 +1,8 @@
 # Launch Summary
 
-## Current Membership Architecture
+> **Canonical source:** [`PROJECT_MEMORY.md`](../PROJECT_MEMORY.md) — this file is a strategy snapshot only.
+
+## Membership architecture (snapshot)
 
 - Active pricing route: `/membership`
 - Legacy `/pricing` route is deprecated and redirected

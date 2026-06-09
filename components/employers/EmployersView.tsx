@@ -38,11 +38,13 @@ import {
   EMPLOYER_GAINS,
   EMPLOYER_GET_ITEMS,
   EMPLOYER_STARTING_RATE_BADGE,
-  EMPLOYER_STATS,
+  EMPLOYER_ACCESS_HIGHLIGHTS,
+  EMPLOYER_ROLLOUT_STEPS,
   LARGER_BUSINESS_PLANS,
   PARTNERSHIP_MODELS,
   SMALL_BUSINESS_USES,
 } from "@/lib/content/employers";
+import { trackEvent } from "@/lib/analytics";
 import { EmployerPersonaBoot } from "./EmployerPersonaBoot";
 import { EmployersSectionNav } from "./EmployersSectionNav";
 import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
@@ -116,11 +118,13 @@ function PrimaryCta({
   children,
   icon: Icon,
   variant = "solid",
+  onTrack,
 }: {
   href: string;
   children: React.ReactNode;
   icon: typeof MessageCircle;
   variant?: "solid" | "ghost";
+  onTrack?: () => void;
 }) {
   const base =
     "interactive-element gap-2 rounded-full px-8 py-4 text-base font-semibold sm:text-lg";
@@ -130,7 +134,11 @@ function PrimaryCta({
       : "border border-white/60 bg-white/10 text-white hover:bg-white/20";
 
   return (
-    <a href={href} className={`inline-flex ${base} ${styles}`}>
+    <a
+      href={href}
+      onClick={onTrack}
+      className={`inline-flex ${base} ${styles}`}
+    >
       <Icon className="h-5 w-5" aria-hidden />
       {children}
     </a>
@@ -177,7 +185,11 @@ export function EmployersView() {
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-              <PrimaryCta href={EMPLOYER_CONTACT_MAILTO} icon={MessageCircle}>
+              <PrimaryCta
+                href={EMPLOYER_CONTACT_MAILTO}
+                icon={MessageCircle}
+                onTrack={() => trackEvent("employer_inquiry_clicked", { location: "hero" })}
+              >
                 Talk About Employer Plans
               </PrimaryCta>
               <PrimaryCta
@@ -313,19 +325,22 @@ export function EmployersView() {
           <ScrollTransition id="employers-business-case">
             <SectionHeading title="The business case for better primary care access">
               <p>
-                When employees cannot access affordable care, they wait — and problems escalate.
-                Direct Primary Care moves care upstream with a trusted first stop for everyday
-                medical needs.
+                When employees cannot access affordable care, they may wait — and problems can
+                escalate. Direct Primary Care can help move everyday care upstream with a trusted
+                first stop for routine medical needs.
               </p>
-              <p>Research on DPC models has shown promising results, including:</p>
+              <p>
+                DPC is often used alongside traditional health coverage to improve access — not to
+                guarantee specific claims or utilization outcomes.
+              </p>
             </SectionHeading>
 
             <div className="mx-auto mt-12 grid max-w-5xl gap-4 sm:grid-cols-3">
-              {EMPLOYER_STATS.map((stat, index) => {
+              {EMPLOYER_ACCESS_HIGHLIGHTS.map((highlight, index) => {
                 const Icon = STAT_ICONS[index] ?? TrendingDown;
                 return (
                   <div
-                    key={stat.label}
+                    key={highlight.label}
                     className={`relative overflow-hidden rounded-3xl border border-border bg-card p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${
                       index === 1 ? "sm:scale-[1.02] sm:shadow-md" : ""
                     }`}
@@ -333,9 +348,12 @@ export function EmployersView() {
                     <div className="mx-auto mb-4 inline-flex rounded-2xl bg-secondary/10 p-3 text-secondary">
                       <Icon className="h-6 w-6" aria-hidden />
                     </div>
-                    <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
-                    <p className="mt-2 text-3xl font-bold tracking-tight text-secondary lg:text-4xl">
-                      {stat.value}
+                    <p className="text-sm font-medium text-muted-foreground">{highlight.label}</p>
+                    <p className="mt-2 text-2xl font-bold tracking-tight text-secondary lg:text-3xl">
+                      {highlight.value}
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {highlight.description}
                     </p>
                   </div>
                 );
@@ -344,13 +362,8 @@ export function EmployersView() {
 
             <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-border bg-muted/50 px-6 py-5 text-center text-sm text-muted-foreground">
               <p>
-                Source: Busch, Grzeskowiak, and Huth. &ldquo;Direct Primary Care: Evaluating A New
-                Model Of Delivery And Financing.&rdquo; Society of Actuaries, Health Care Cost
-                Trends, 2020.
-              </p>
-              <p className="mt-2">
-                Results vary by employer, plan design, utilization, and employee population.
-                Direct Care Indy does not guarantee specific savings or claims reductions.
+                Outcomes vary by employer, workforce, and plan design. Direct Care Indy does not
+                guarantee specific claims savings, ER reductions, or hospitalization rates.
               </p>
               <ComplianceNote />
             </div>
@@ -448,12 +461,44 @@ export function EmployersView() {
                   <InteractiveCard className="border-l-4 border-l-primary">
                     <h3 className="font-semibold text-foreground">Self-funded & level-funded</h3>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      A trusted first stop to reduce low-value care friction and improve
-                      utilization.
+                      A trusted first stop that may help reduce friction when employees need timely
+                      everyday care.
                     </p>
                   </InteractiveCard>
                 </div>
               </div>
+            </div>
+          </ScrollTransition>
+        </div>
+      </section>
+
+      {/* Rollout */}
+      <section id="rollout" className="section-padding scroll-mt-28">
+        <div className="content-container">
+          <ScrollTransition id="employers-rollout">
+            <SectionHeading title="How employer rollout could work">
+              <p>
+                Every team is different. These steps describe a typical conversation — not a
+                guaranteed timeline or outcome.
+              </p>
+            </SectionHeading>
+            <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
+              {EMPLOYER_ROLLOUT_STEPS.map((step) => (
+                <InteractiveCard key={step.title} className="flex gap-4">
+                  <span
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary text-sm font-bold text-secondary-foreground"
+                    aria-hidden
+                  >
+                    {step.step}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-foreground">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {step.body}
+                    </p>
+                  </div>
+                </InteractiveCard>
+              ))}
             </div>
           </ScrollTransition>
         </div>
@@ -600,7 +645,11 @@ export function EmployersView() {
             Care Indy could be a good fit.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <PrimaryCta href={EMPLOYER_CONTACT_MAILTO} icon={MessageCircle}>
+            <PrimaryCta
+              href={EMPLOYER_CONTACT_MAILTO}
+              icon={MessageCircle}
+              onTrack={() => trackEvent("employer_inquiry_clicked", { location: "footer" })}
+            >
               Schedule a 15-Minute Conversation
             </PrimaryCta>
             <PrimaryCta

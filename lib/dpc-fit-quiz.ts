@@ -54,20 +54,55 @@ export interface QuizResultConfig {
   bullets: string[];
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
-  scheduleKey: keyof typeof dpcQuizScheduleLinks;
+  scheduleKey: DpcQuizScheduleKey;
   disclaimer: string;
 }
 
-/** TODO: Replace placeholder routes with live Cal.com or scheduler URLs when available */
-export const dpcQuizScheduleLinks = {
-  individual: "/schedule/individual-intro",
-  family: "/schedule/family-intro",
-  senior: "/schedule/senior-intro",
-  employerSmall: "/schedule/small-employer-intro",
-  employerCore: "/schedule/employer-intro",
-  employerLarge: "/schedule/employer-strategy",
-  broker: "/schedule/broker-conversation",
+/**
+ * Temporary scheduling destinations until live Cal.com URLs are configured.
+ * Replaces broken /schedule/* routes — all paths route to /contact with quiz source context.
+ *
+ * | Key           | Was (404)                      | Now                                      |
+ * |---------------|--------------------------------|------------------------------------------|
+ * | individual    | /schedule/individual-intro     | /contact?source=quiz&intent=individual   |
+ * | family        | /schedule/family-intro         | /contact?source=quiz&intent=family       |
+ * | senior        | /schedule/senior-intro           | /contact?source=quiz&intent=senior       |
+ * | employerSmall | /schedule/small-employer-intro | /contact?source=quiz&intent=employer-sm  |
+ * | employerCore  | /schedule/employer-intro       | /contact?source=quiz&intent=employer     |
+ * | employerLarge | /schedule/employer-strategy    | /contact?source=quiz&intent=employer-lg  |
+ * | broker        | /schedule/broker-conversation  | /contact?source=quiz&intent=broker       |
+ */
+export const dpcQuizScheduleFallbacks = {
+  individual: "/contact?source=quiz&intent=individual",
+  family: "/contact?source=quiz&intent=family",
+  senior: "/contact?source=quiz&intent=senior",
+  employerSmall: "/contact?source=quiz&intent=employer-sm",
+  employerCore: "/contact?source=quiz&intent=employer",
+  employerLarge: "/contact?source=quiz&intent=employer-lg",
+  broker: "/contact?source=quiz&intent=broker",
 } as const;
+
+export type DpcQuizScheduleKey = keyof typeof dpcQuizScheduleFallbacks;
+
+const DPC_QUIZ_SCHEDULE_ENV_KEYS: Record<DpcQuizScheduleKey, string> = {
+  individual: "NEXT_PUBLIC_SCHEDULE_INDIVIDUAL_INTRO",
+  family: "NEXT_PUBLIC_SCHEDULE_FAMILY_INTRO",
+  senior: "NEXT_PUBLIC_SCHEDULE_SENIOR_INTRO",
+  employerSmall: "NEXT_PUBLIC_SCHEDULE_SMALL_EMPLOYER_INTRO",
+  employerCore: "NEXT_PUBLIC_SCHEDULE_EMPLOYER_INTRO",
+  employerLarge: "NEXT_PUBLIC_SCHEDULE_EMPLOYER_STRATEGY",
+  broker: "NEXT_PUBLIC_SCHEDULE_BROKER_CONVERSATION",
+};
+
+/** @deprecated Use getDpcQuizScheduleLink — kept for backward-compatible imports */
+export const dpcQuizScheduleLinks = dpcQuizScheduleFallbacks;
+
+export function getDpcQuizScheduleLink(key: DpcQuizScheduleKey): string {
+  const envKey = DPC_QUIZ_SCHEDULE_ENV_KEYS[key];
+  const envUrl = process.env[envKey]?.trim();
+  if (envUrl) return envUrl;
+  return dpcQuizScheduleFallbacks[key];
+}
 
 export const QUIZ_MEDICAL_DISCLAIMER =
   "This quiz does not provide medical advice. If you are having a medical emergency, call 911.";
@@ -215,7 +250,7 @@ export const QUIZ_STEPS: QuizStep[] = [
     audiences: ["employer"],
     choices: [
       { id: "absenteeism", label: "Employees struggle to get timely care", scoreDelta: { fit: 3, readiness: 2 } },
-      { id: "cost", label: "Reduce friction and unnecessary ER/urgent use", scoreDelta: { fit: 2, readiness: 2 } },
+      { id: "cost", label: "Reduce friction when employees need timely everyday care", scoreDelta: { fit: 2, readiness: 2 } },
       { id: "retention", label: "Offer a meaningful benefit without a full overhaul", scoreDelta: { fit: 2, readiness: 2 } },
       { id: "partnership", label: "Explore a deeper employer partnership", scoreDelta: { fit: 2, readiness: 3 } },
     ],
@@ -269,7 +304,7 @@ export const QUIZ_RESULTS: Record<QuizResultId, QuizResultConfig> = {
     ],
     primaryCta: {
       label: "Book a 30-Minute Virtual Intro Meeting",
-      href: dpcQuizScheduleLinks.individual,
+      href: getDpcQuizScheduleLink("individual"),
     },
     secondaryCta: { label: "View Individual Plans", href: "/membership" },
     scheduleKey: "individual",
@@ -287,7 +322,7 @@ export const QUIZ_RESULTS: Record<QuizResultId, QuizResultConfig> = {
     ],
     primaryCta: {
       label: "Book a 30-Minute Family Intro Meeting",
-      href: dpcQuizScheduleLinks.family,
+      href: getDpcQuizScheduleLink("family"),
     },
     secondaryCta: { label: "View Family Membership Options", href: "/membership#membership-plans" },
     scheduleKey: "family",
@@ -305,7 +340,7 @@ export const QUIZ_RESULTS: Record<QuizResultId, QuizResultConfig> = {
     ],
     primaryCta: {
       label: "Book a 30-Minute Virtual Intro Meeting",
-      href: dpcQuizScheduleLinks.senior,
+      href: getDpcQuizScheduleLink("senior"),
     },
     secondaryCta: { label: "Read Medicare FAQ", href: "/what-is-dpc#faq" },
     scheduleKey: "senior",
@@ -323,7 +358,7 @@ export const QUIZ_RESULTS: Record<QuizResultId, QuizResultConfig> = {
     ],
     primaryCta: {
       label: "Book a 30-Minute Small Employer Intro Call",
-      href: dpcQuizScheduleLinks.employerSmall,
+      href: getDpcQuizScheduleLink("employerSmall"),
     },
     secondaryCta: { label: "Download Employer Summary", href: "/brokers" },
     scheduleKey: "employerSmall",
@@ -341,7 +376,7 @@ export const QUIZ_RESULTS: Record<QuizResultId, QuizResultConfig> = {
     ],
     primaryCta: {
       label: "Book a 30-Minute Employer Intro Call",
-      href: dpcQuizScheduleLinks.employerCore,
+      href: getDpcQuizScheduleLink("employerCore"),
     },
     secondaryCta: { label: "Explore Employer Partnerships", href: "/employers" },
     scheduleKey: "employerCore",
@@ -359,7 +394,7 @@ export const QUIZ_RESULTS: Record<QuizResultId, QuizResultConfig> = {
     ],
     primaryCta: {
       label: "Book a 30-Minute Employer Strategy Call",
-      href: dpcQuizScheduleLinks.employerLarge,
+      href: getDpcQuizScheduleLink("employerLarge"),
     },
     secondaryCta: { label: "Request Employer Buyer Checklist", href: "/brokers" },
     scheduleKey: "employerLarge",
@@ -377,7 +412,7 @@ export const QUIZ_RESULTS: Record<QuizResultId, QuizResultConfig> = {
     ],
     primaryCta: {
       label: "Book a 30-Minute Broker Conversation",
-      href: dpcQuizScheduleLinks.broker,
+      href: getDpcQuizScheduleLink("broker"),
     },
     secondaryCta: { label: "Tour the Clinic", href: "/contact" },
     scheduleKey: "broker",

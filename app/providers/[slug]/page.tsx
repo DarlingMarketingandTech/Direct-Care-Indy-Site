@@ -7,7 +7,6 @@ import { getProviderBySlug, getMedicalDirector, PROVIDERS } from "@/lib/data/pro
 import { ProfilePageSchema } from "@/components/StructuredData";
 import { PhysicianOversightBadge } from "@/components/PhysicianOversightBadge";
 import IndyBreathEasy from "@/components/IndyBreathEasy";
-import { SharedFooter } from "@/components/SharedFooter";
 import { SITE_ASSETS } from "@/lib/images";
 import { absoluteUrl } from "@/lib/site";
 
@@ -307,8 +306,6 @@ export default async function ProviderPage({ params }: ProviderPageProps) {
           </div>
         </section>
 
-        {/* Footer */}
-        <SharedFooter />
       </div>
     </>
   );

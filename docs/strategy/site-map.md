@@ -1,6 +1,8 @@
 # Site Map Strategy
 
-## Public Route Structure
+> **Canonical source:** [`PROJECT_MEMORY.md`](../PROJECT_MEMORY.md) — route rules and pricing live there.
+
+## Public routes (snapshot)
 
 - `/` — quiz-first homepage with concise membership preview
 - `/membership` — canonical membership pricing and plan detail page

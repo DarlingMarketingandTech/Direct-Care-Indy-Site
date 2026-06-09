@@ -88,6 +88,54 @@ export const MEMBERSHIP_PLANS = [
   },
 ] as const satisfies readonly MembershipPlan[];
 
+export function getMembershipPlan(id: MembershipPlanId): MembershipPlan | undefined {
+  return MEMBERSHIP_PLANS.find((plan) => plan.id === id);
+}
+
+export function formatMembershipPrice(
+  id: MembershipPlanId,
+  options?: { familyPrefix?: boolean }
+): string {
+  const plan = getMembershipPlan(id);
+  if (!plan) return "";
+  const prefix = options?.familyPrefix && id === "family" ? "from " : "";
+  return `${prefix}${plan.monthlyPrice}${plan.priceNote}`;
+}
+
+export const WHAT_IS_DPC_PRICING_HIGHLIGHTS = [
+  {
+    label: "Adults 18–64",
+    price: getMembershipPlan("individual")?.monthlyPrice ?? "$79",
+    note: getMembershipPlan("individual")?.priceNote ?? "/month",
+  },
+  {
+    label: "Families",
+    price: `from ${getMembershipPlan("family")?.monthlyPrice ?? "$200"}`,
+    note: getMembershipPlan("family")?.priceNote ?? "/month",
+  },
+  {
+    label: "Seniors 65+",
+    price: getMembershipPlan("senior")?.monthlyPrice ?? "$119",
+    note: getMembershipPlan("senior")?.priceNote ?? "/month",
+  },
+] as const;
+
+export const MEMBERSHIP_PRICING_FAQ_BULLETS = MEMBERSHIP_PLANS.map((plan) => {
+  if (plan.id === "family") {
+    return `Families with children ages 12 and older: starting as low as ${plan.monthlyPrice}${plan.priceNote} for one dependent, with additional children at discounted monthly rates`;
+  }
+  if (plan.id === "senior") {
+    return `Senior adults ages 65 and older: ${plan.monthlyPrice}${plan.priceNote}, with additional cash-pay services as needed`;
+  }
+  return `Individuals ages 18 to 64: ${plan.monthlyPrice}${plan.priceNote}, with additional cash-pay services as needed`;
+});
+
+export const AFFORDABLE_PLANS_PRICING_SENTENCE = (() => {
+  const individual = getMembershipPlan("individual");
+  const family = getMembershipPlan("family");
+  return `Individual plans start at ${individual?.monthlyPrice ?? "$79"}${individual?.priceNote ?? "/month"} for adults ages 18 to 64, with family plans starting as low as ${family?.monthlyPrice ?? "$200"}${family?.priceNote ?? "/month"} for families with children ages 12 and older. Senior adult plans are also available for adults ages 65 and older.`;
+})();
+
 export const MEMBERSHIP_PLANS_INTRO =
   "Our Direct Primary Care clinic offers three affordable and flexible membership plans, with individual memberships at $79/month.";
 

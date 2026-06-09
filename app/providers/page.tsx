@@ -4,7 +4,6 @@ import { Metadata } from "next";
 import { Users, Shield } from "lucide-react";
 import { PROVIDERS, getMedicalDirector, getLeadPAs } from "@/lib/data/providers";
 import { RoundTableOverview } from "@/components/RoundTableOverview";
-import { SharedFooter } from "@/components/SharedFooter";
 import { SITE_ASSETS } from "@/lib/images";
 
 export const metadata: Metadata = {
@@ -229,8 +228,6 @@ export default function ProvidersPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <SharedFooter />
     </div>
   );
 }

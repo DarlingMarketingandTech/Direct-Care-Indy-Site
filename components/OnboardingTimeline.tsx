@@ -31,7 +31,7 @@ const steps: TimelineStep[] = [
   },
   {
     title: "Enjoy Ongoing Care",
-    description: "Unlimited visits, wholesale labs, secure messaging, and after-hours support — all included in your membership.",
+    description: "Included visits based on your plan, discounted labs when available, secure messaging, and care-team support — designed around your membership.",
     icon: Heart,
     detail: "No copays, no deductibles, no surprise bills. Just great care when you need it.",
   },

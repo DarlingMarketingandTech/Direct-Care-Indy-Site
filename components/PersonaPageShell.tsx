@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Star, Users, Shield, Heart } from "lucide-react";
+import { MapPin, Phone, Shield, Users } from "lucide-react";
+import { BUSINESS_INFO } from "@/lib/constants";
 
 interface PersonaPageProps {
   persona: {
@@ -21,9 +24,9 @@ interface PersonaPageProps {
       title: string;
       steps: string[];
     };
-    proof: {
+    trustSignals?: {
       title: string;
-      stats: { label: string; value: string }[];
+      items: readonly string[];
     };
     cta: {
       primary: { text: string; href: string };
@@ -38,17 +41,27 @@ interface PersonaPageProps {
   setUserPersona?: (persona: string) => void;
 }
 
+const DEFAULT_TRUST_SIGNALS = {
+  title: "Why families trust Direct Care Indy",
+  items: [
+    "Member of the DPC Alliance",
+    "Specialist-led clinical team based in Indianapolis",
+    "Transparent membership pricing — DPC is not insurance",
+  ],
+} as const;
+
 export function PersonaPageShell({
   persona,
   userPersona,
-  setUserPersona
+  setUserPersona,
 }: PersonaPageProps) {
-  // Set persona on page load if not already set
   React.useEffect(() => {
     if (setUserPersona && (!userPersona || userPersona !== persona.id)) {
       setUserPersona(persona.id);
     }
   }, [persona.id, userPersona, setUserPersona]);
+
+  const trustSignals = persona.trustSignals ?? DEFAULT_TRUST_SIGNALS;
 
   return (
     <div className="min-h-screen bg-background">
@@ -65,7 +78,10 @@ export function PersonaPageShell({
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             {persona.hero.painPoints.map((point, idx) => (
-              <div key={idx} className="flex items-center gap-2 bg-card text-card-foreground px-4 py-2 rounded-full text-sm border border-border">
+              <div
+                key={idx}
+                className="flex items-center gap-2 bg-card text-card-foreground px-4 py-2 rounded-full text-sm border border-border"
+              >
                 <span className="text-red-500">✗</span>
                 {point}
               </div>
@@ -97,7 +113,8 @@ export function PersonaPageShell({
             <div className="text-center mb-16">
               <h2 className="heading-2 mb-4">Why Choose DPC for {persona.title}</h2>
               <p className="body-large text-muted-foreground">
-                Direct Primary Care is designed specifically for families like yours.
+                Direct Primary Care is designed to support everyday care with a local team you can
+                reach directly.
               </p>
             </div>
 
@@ -141,24 +158,41 @@ export function PersonaPageShell({
         </div>
       </section>
 
-      {/* Proof/Social Proof */}
+      {/* Trust signals — replaces unsupported stats and fabricated ratings */}
       <section className="section-padding">
         <div className="content-container">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="heading-2 mb-4">{persona.proof.title}</h2>
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              {persona.proof.stats.map((stat, idx) => (
-                <div key={idx} className="section-card text-center">
-                  <div className="text-3xl font-bold text-secondary mb-2">{stat.value}</div>
-                  <div className="text-muted-foreground">{stat.label}</div>
-                </div>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="heading-2 text-center mb-8">{trustSignals.title}</h2>
+            <ul className="grid gap-4 sm:grid-cols-3 mb-10">
+              {trustSignals.items.map((item) => (
+                <li
+                  key={item}
+                  className="section-card flex items-start gap-3 text-sm text-muted-foreground"
+                >
+                  <Shield className="mt-0.5 h-5 w-5 shrink-0 text-secondary" aria-hidden />
+                  <span>{item}</span>
+                </li>
               ))}
-            </div>
-            <div className="flex items-center justify-center gap-1 text-secondary">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-current" />
-              ))}
-              <span className="ml-2 text-muted-foreground font-medium">4.9/5 from {persona.title.toLowerCase()} members</span>
+            </ul>
+
+            <div className="section-card mx-auto max-w-lg text-center">
+              <p className="text-sm font-semibold text-foreground">{BUSINESS_INFO.name}</p>
+              <p className="mt-2 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 shrink-0 text-secondary" aria-hidden />
+                {BUSINESS_INFO.address.full}
+              </p>
+              <p className="mt-2 flex items-center justify-center gap-2 text-sm">
+                <Phone className="h-4 w-4 shrink-0 text-secondary" aria-hidden />
+                <a href="tel:+13179566288" className="font-medium text-secondary hover:underline">
+                  {BUSINESS_INFO.phone}
+                </a>
+              </p>
+              <Link
+                href="/providers"
+                className="mt-4 inline-block text-sm font-semibold text-secondary hover:underline"
+              >
+                Meet the care team
+              </Link>
             </div>
           </div>
         </div>
@@ -184,9 +218,10 @@ export function PersonaPageShell({
       {/* Final CTA */}
       <section className="section-padding">
         <div className="content-container-narrow text-center">
-          <h2 className="heading-3 mb-4">Ready to Join {persona.title} Who&apos;ve Made the Switch?</h2>
+          <h2 className="heading-3 mb-4">Ready to explore membership options?</h2>
           <p className="body-base text-muted-foreground mb-8">
-            Experience healthcare designed for families like yours.
+            Review current plans, take the quiz, or contact the clinic with questions. Pricing and
+            availability are subject to change.
           </p>
           <Link
             href={persona.cta.primary.href}

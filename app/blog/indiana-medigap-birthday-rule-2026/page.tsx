@@ -4,6 +4,13 @@ import { Calendar, ShieldCheck, DollarSign, Phone } from "lucide-react";
 import { SeniorSavingsCalculator } from "@/components/SeniorSavingsCalculator";
 import { HsaStatusTracker } from "@/components/HsaStatusTracker";
 import { SITE_ASSETS } from "@/lib/images";
+import { MEMBERSHIP_PLANS } from "@/lib/content/membership-pricing";
+
+const seniorPlan = MEMBERSHIP_PLANS.find((plan) => plan.id === "senior");
+const seniorMembershipPriceLabel = seniorPlan
+  ? `${seniorPlan.monthlyPrice}${seniorPlan.priceNote}`
+  : "$119/month";
+const seniorMembershipPriceShort = seniorPlan?.monthlyPrice ?? "$119";
 
 export default function BirthdayRuleBlog() {
   return (
@@ -72,13 +79,13 @@ export default function BirthdayRuleBlog() {
                   <div className="flex items-start gap-3">
                     <div className="bg-secondary text-secondary-foreground rounded-full w-8 h-8 flex items-center justify-center shrink-0 font-bold">2</div>
                     <div>
-                      <strong className="text-foreground">Direct Care Indy (Your 90%):</strong> Handles day-to-day care, same-day sick visits, and complex chronic management with Dr. Pike&apos;s Pulmonary expertise—all for $109/month.
+                      <strong className="text-foreground">Direct Care Indy (Your 90%):</strong> Handles day-to-day care, same-day sick visits, and complex chronic management with Dr. Pike&apos;s Pulmonary expertise—all for {seniorMembershipPriceLabel}.
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="bg-secondary text-secondary-foreground rounded-full w-8 h-8 flex items-center justify-center shrink-0 font-bold">3</div>
                     <div>
-                      <strong className="text-foreground">HSA (Tax-Free Savings):</strong> Thanks to the 2026 One Big Beautiful Bill Act (OBBBA), your DPC membership is now a qualified medical expense. Use your HSA to pay your $109 membership tax-free, saving up to 30% depending on your tax bracket.
+                      <strong className="text-foreground">HSA (Tax-Free Savings):</strong> Thanks to the 2026 One Big Beautiful Bill Act (OBBBA), your DPC membership is now a qualified medical expense. Use your HSA to pay your {seniorMembershipPriceShort} membership tax-free, saving up to 30% depending on your tax bracket.
                     </div>
                   </div>
                 </div>
@@ -126,14 +133,14 @@ export default function BirthdayRuleBlog() {
               </div>
 
               <p className="text-foreground mb-6">
-                Since Direct Care Indy&apos;s Senior Tier is $109/month—well under the $150 federal cap—you can use your HSA to pay for your membership with pre-tax dollars, effectively reducing your out-of-pocket cost by up to 30%.
+                Since Direct Care Indy&apos;s Senior Tier is {seniorMembershipPriceLabel}—well under the $150 federal cap—you can use your HSA to pay for your membership with pre-tax dollars, effectively reducing your out-of-pocket cost by up to 30%.
               </p>
 
               <h2 className="text-3xl font-bold text-foreground mt-8 mb-4">Next Steps for January Birthday Seniors</h2>
               <ol className="list-decimal list-inside space-y-3 text-foreground mb-6">
                 <li><strong>Contact a Medigap broker</strong> to compare plans during your Birthday Rule window (you have 60 days from your birthday month)</li>
                 <li><strong>Review your current Medigap premium</strong> and identify lower-cost alternatives with the same coverage level</li>
-                <li><strong>Enroll in Direct Care Indy</strong> at $109/month—your membership is HSA-eligible as of 2026</li>
+                <li><strong>Enroll in Direct Care Indy</strong> at {seniorMembershipPriceLabel}—your membership is HSA-eligible as of 2026</li>
                 <li><strong>Use your HSA funds</strong> to pay for your DPC membership tax-free</li>
                 <li><strong>Lock in your savings</strong> for the entire year</li>
               </ol>
@@ -143,7 +150,7 @@ export default function BirthdayRuleBlog() {
                 Dr. James D. Pike, D.O., FCCP, FACP, brings specialized Pulmonary Medicine expertise directly to your primary care. This is particularly valuable for the 65+ demographic, who often face complex respiratory conditions, COPD, and chronic lung disease. As a Fellow of the American College of Chest Physicians, Dr. Pike provides specialist-level knowledge without the specialist copays, referral delays, or fragmented care coordination.
               </p>
               <p className="text-foreground mb-6">
-                Combined with the convenience and affordability of Direct Primary Care, our $109/month senior membership represents market-leading value for complex care management.
+                Combined with the convenience and affordability of Direct Primary Care, our {seniorMembershipPriceLabel} senior membership represents market-leading value for complex care management.
               </p>
 
               {/* Call to Action */}

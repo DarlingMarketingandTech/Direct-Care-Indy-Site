@@ -48,8 +48,12 @@ CLAUDE.local.md
 .claude/**/settings.local.json
 .claude/local/
 .claude/sessions/
+.claude/state/
 .claude/transcripts/
 .claude/cache/
+
+# CodeGraph local index
+.codegraph/
 
 # Local tool state
 Thumbs.db

@@ -1,15 +1,29 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { ArrowRight, Calendar, CheckCircle2 } from "lucide-react";
 import type { QuizResultConfig } from "@/lib/dpc-fit-quiz";
-import { QUIZ_MEDICAL_DISCLAIMER } from "@/lib/dpc-fit-quiz";
+import { getDpcQuizScheduleLink, QUIZ_MEDICAL_DISCLAIMER } from "@/lib/dpc-fit-quiz";
+import { trackEvent } from "@/lib/analytics";
 
 interface DpcQuizResultCardProps {
   result: QuizResultConfig;
 }
 
 export function DpcQuizResultCard({ result }: DpcQuizResultCardProps) {
+  const primaryHref =
+    result.id === "unsureEducation"
+      ? result.primaryCta.href
+      : getDpcQuizScheduleLink(result.scheduleKey);
+
+  React.useEffect(() => {
+    trackEvent("quiz_result_viewed", {
+      resultType: result.id,
+      recommendedCta: result.primaryCta.label,
+    });
+  }, [result.id, result.primaryCta.label]);
+
   return (
     <div
       className="space-y-5"
@@ -43,7 +57,13 @@ export function DpcQuizResultCard({ result }: DpcQuizResultCardProps) {
 
       <div className="flex flex-col gap-3 sm:flex-row">
         <Link
-          href={result.primaryCta.href}
+          href={primaryHref}
+          onClick={() =>
+            trackEvent("membership_cta_clicked", {
+              ctaLabel: result.primaryCta.label,
+              resultType: result.id,
+            })
+          }
           className="interactive-element inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3.5 text-sm font-semibold text-secondary-foreground shadow-md hover:bg-secondary/90"
         >
           <Calendar className="h-4 w-4" aria-hidden />

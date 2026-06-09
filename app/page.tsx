@@ -1,5 +1,9 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { homeMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = homeMetadata;
 import {
   ArrowRight,
   BookOpen,
