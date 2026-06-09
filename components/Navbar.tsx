@@ -1,26 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { mainNav } from '@/lib/nav';
-
-const PATIENT_PORTAL_URL = "https://directcareindy.hint.com/login";
+import { mainNav, PATIENT_PORTAL_URL } from '@/lib/nav';
+import { DpcQuizTrigger } from '@/components/dpc-fit-quiz';
+import { SiteLogo } from '@/components/SiteLogo';
 
 export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg shadow-sm border-b border-gray-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2" aria-label="Direct Care Indy">
-            <Image
-              src="/images/logos/dci-logo-primary.svg"
-              alt="Direct Care Indy logo"
-              width={160}
-              height={40}
-              priority
-              className="h-auto w-auto object-contain"
-            />
-          </Link>
+        <div className="flex h-16 items-center justify-between gap-3">
+          <SiteLogo size="nav" priority />
 
           <div className="hidden lg:flex items-center space-x-1">
             {mainNav.map((item) => (
@@ -34,7 +24,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center space-x-3">
+          <div className="hidden lg:flex items-center space-x-3 shrink-0">
             <a
               href={PATIENT_PORTAL_URL}
               target="_blank"
@@ -43,21 +33,21 @@ export default function Navbar() {
             >
               Patient Login
             </a>
-            <Link
-              href="/join"
-              className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
-            >
-              Join Now
-            </Link>
+            <DpcQuizTrigger
+              label="Is DPC Right for You?"
+              sublabel="Take the 60-second quiz"
+              variant="primary"
+              className="!bg-teal-600 hover:!bg-teal-700 !text-white !px-5 !py-2 !rounded-full !shadow-lg hover:!shadow-xl"
+            />
           </div>
 
-          <div className="lg:hidden flex items-center">
-            <Link
-              href="/join"
-              className="text-sm bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-full font-semibold shadow-md transition-colors"
-            >
-              Join
-            </Link>
+          <div className="lg:hidden flex items-center shrink-0">
+            <DpcQuizTrigger
+              label="Take the DPC Quiz"
+              shortLabel="Take the DPC Quiz"
+              variant="compact"
+              className="!bg-teal-600 hover:!bg-teal-700 !text-white !px-4 !py-2 !rounded-full !shadow-md"
+            />
           </div>
         </div>
       </div>

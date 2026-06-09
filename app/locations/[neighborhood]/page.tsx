@@ -172,9 +172,8 @@ export default async function NeighborhoodPage({ params }: NeighborhoodPageProps
       <div className="min-h-screen bg-background">
 
         {/* Hero with Dynamic Background */}
-        <section className="relative text-white py-20 overflow-hidden">
-          {/* Dynamic Hero Image Background */}
-          <div className="absolute inset-0">
+        <section className="relative overflow-hidden bg-teal-900 py-20 text-white">
+          <div className="absolute inset-0 z-0">
             <Image
               src={
                 neighborhoodKey === 'carmel' ? SITE_ASSETS.locations.carmel :
@@ -340,7 +339,7 @@ export default async function NeighborhoodPage({ params }: NeighborhoodPageProps
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-primary text-white">
+        <section className="bg-primary py-16 text-primary-foreground">
           <div className="container mx-auto px-4 text-center">
             <h3 className="text-3xl font-bold mb-6">
               Ready to Experience Better Healthcare?

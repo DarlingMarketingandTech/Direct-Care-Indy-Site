@@ -13,6 +13,7 @@ import { SharedFooter } from "@/components/SharedFooter";
 import BackToTop from "@/components/BackToTop";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import { Toaster } from "sonner";
+import { DpcQuizProvider, DpcQuizMobileSticky } from "@/components/dpc-fit-quiz";
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -42,7 +43,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="DPC Indy" />
-        <link rel="apple-touch-icon" href="/images/logos/dci-icon-192.png" />
+        <link rel="apple-touch-icon" href="/images/logos/dci-icon-192.png" sizes="192x192" />
       </head>
       <body className={`${sans.variable} ${display.variable} antialiased`}>
         <GoogleTagManager gtmId="GTM-KKFRX4Z3" />
@@ -50,34 +51,39 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          {/* SEO & Structured Data */}
-          <FaqSchema />
-          <OrganizationSchema />
-          <PhysicianSchema />
-          <ServiceSchema />
+          <DpcQuizProvider>
+            {/* SEO & Structured Data */}
+            <FaqSchema />
+            <OrganizationSchema />
+            <PhysicianSchema />
+            <ServiceSchema />
 
-          {/* Navigation Layer */}
-          <Navbar />
+            {/* Navigation Layer */}
+            <Navbar />
 
-          {/* Main Content */}
-          <div id="main-content" className="pt-20 pb-20 md:pb-0">
-            {children}
-          </div>
+            {/* Main Content */}
+            <div id="main-content" className="pt-20 pb-20 md:pb-0">
+              {children}
+            </div>
 
-          {/* Footer */}
-          <SharedFooter />
+            {/* Footer */}
+            <SharedFooter />
 
-          {/* Mobile App Bar (Bottom Navigation) */}
-          <MobileAppBar />
+            {/* Mobile App Bar (Bottom Navigation) */}
+            <MobileAppBar />
 
-          {/* PWA Install Prompt */}
-          <PWAInstallPrompt />
+            {/* Mobile quiz CTA */}
+            <DpcQuizMobileSticky />
 
-          {/* Sticky Value Hook */}
-          <StickySavingsBar />
+            {/* PWA Install Prompt */}
+            <PWAInstallPrompt />
 
-          {/* Back to Top Button */}
-          <BackToTop />
+            {/* Sticky Value Hook */}
+            <StickySavingsBar />
+
+            {/* Back to Top Button */}
+            <BackToTop />
+          </DpcQuizProvider>
         </ThemeProvider>
 
         <Toaster position="top-right" richColors closeButton />

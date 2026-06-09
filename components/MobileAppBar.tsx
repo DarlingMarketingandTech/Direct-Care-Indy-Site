@@ -1,147 +1,190 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
-  Home,
-  Stethoscope,
-  Calendar,
-  FileText,
-  MessageSquare,
-} from 'lucide-react';
+  BadgeDollarSign,
+  Building2,
+  CircleHelp,
+  LogIn,
+  Menu,
+  X,
+} from "lucide-react";
+import { MobileFullMenu } from "@/components/MobileFullMenu";
+import { mobileBottomNav, PATIENT_PORTAL_URL } from "@/lib/nav";
 
-interface NavItem {
-  icon: React.ComponentType<{ className?: string }>;
-  label: string;
+const bottomNavIcons: Record<string, typeof BadgeDollarSign> = {
+  "/membership": BadgeDollarSign,
+  "/employers": Building2,
+  "/what-is-dpc": CircleHelp,
+  [PATIENT_PORTAL_URL]: LogIn,
+};
+
+function BottomNavItem({
+  href,
+  label,
+  external,
+  isActive,
+  onNavigate,
+}: {
   href: string;
-  badge?: number;
-}
+  label: string;
+  external?: boolean;
+  isActive: boolean;
+  onNavigate: () => void;
+}) {
+  const Icon = bottomNavIcons[href as keyof typeof bottomNavIcons] ?? CircleHelp;
 
-const navItems: NavItem[] = [
-  { icon: Home, label: 'Home', href: '/' },
-  { icon: Stethoscope, label: 'Services', href: '/services' },
-  { icon: Calendar, label: 'Schedule', href: '/join' },
-  { icon: FileText, label: 'Portal', href: 'https://directcareindy.hint.com/login' },
-  { icon: MessageSquare, label: 'Contact', href: 'mailto:info@directcareindy.com' },
-];
+  const content = (
+    <>
+      {isActive && (
+        <div className="absolute top-0 left-1/2 h-1 w-10 -translate-x-1/2 rounded-full bg-teal-600" />
+      )}
+      <Icon
+        className={`h-5 w-5 shrink-0 transition-all duration-200 ${
+          isActive ? "scale-110 text-teal-600" : "text-slate-600"
+        }`}
+        aria-hidden
+      />
+      <span
+        className={`mt-1 line-clamp-2 text-center text-[10px] font-medium leading-tight ${
+          isActive ? "font-semibold text-teal-600" : "text-slate-600"
+        }`}
+      >
+        {label}
+      </span>
+    </>
+  );
+
+  const className =
+    "relative flex min-h-[60px] min-w-0 flex-1 flex-col items-center justify-center rounded-xl px-0.5 py-1.5 transition-colors hover:bg-gray-50 active:bg-gray-100 touch-manipulation";
+
+  if (external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onNavigate}
+        className={className}
+        aria-label={label}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      onClick={onNavigate}
+      className={className}
+      aria-label={label}
+      aria-current={isActive ? "page" : undefined}
+    >
+      {content}
+    </Link>
+  );
+}
 
 export default function MobileAppBar() {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
+  const toggleMenu = useCallback(() => setMenuOpen((open) => !open), []);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Show bar when scrolling up or at top
       if (currentScrollY < lastScrollY || currentScrollY < 100) {
         setIsVisible(true);
-      }
-      // Hide when scrolling down and past 100px
-      else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       }
 
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    setIsVisible(true);
+  }, [menuOpen]);
+
   return (
-    <nav
-      className={`
-        md:hidden fixed bottom-0 left-0 right-0 z-50
-        bg-white/95 backdrop-blur-lg border-t border-gray-200
-        shadow-[0_-4px_20px_rgba(0,0,0,0.08)]
-        transition-transform duration-300 ease-in-out
-        ${isVisible ? 'translate-y-0' : 'translate-y-full'}
-      `}
-      role="navigation"
-      aria-label="Mobile bottom navigation"
-    >
-      <div className="safe-area-inset-bottom">
-        <div className="flex items-center justify-around px-2 py-2">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive =
-              pathname === item.href ||
-              (item.href !== '/' && pathname.startsWith(item.href));
-            const isExternal = item.href.startsWith('http') || item.href.startsWith('mailto');
+    <>
+      <MobileFullMenu open={menuOpen} onClose={closeMenu} />
 
-            const content = (
-              <>
-                <div className="relative">
-                  <Icon
-                    className={`
-                      h-6 w-6 transition-all duration-200
-                      ${isActive
-                        ? 'text-teal-600 scale-110'
-                        : 'text-slate-600'
-                      }
-                    `}
-                  />
-                  {item.badge && (
-                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                      {item.badge}
-                    </span>
-                  )}
-                </div>
-                <span
-                  className={`
-                    text-xs font-medium mt-1 transition-all duration-200
-                    ${isActive
-                      ? 'text-teal-600 font-semibold'
-                      : 'text-slate-600'
-                    }
-                  `}
-                >
-                  {item.label}
-                </span>
-                {isActive && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-teal-600 rounded-full" />
-                )}
-              </>
-            );
+      <nav
+        className={`
+          md:hidden fixed bottom-0 left-0 right-0 z-50
+          bg-white/95 backdrop-blur-lg border-t border-gray-200
+          shadow-[0_-4px_20px_rgba(0,0,0,0.08)]
+          transition-transform duration-300 ease-in-out
+          ${isVisible || menuOpen ? "translate-y-0" : "translate-y-full"}
+        `}
+        role="navigation"
+        aria-label="Mobile bottom navigation"
+      >
+        <div className="pb-[env(safe-area-inset-bottom)]">
+          <div className="flex items-stretch justify-around px-0.5 py-1.5">
+            {mobileBottomNav.map((item) => {
+              const isActive =
+                !item.external &&
+                (pathname === item.href ||
+                  (item.href !== "/" && pathname.startsWith(item.href)));
 
-            if (isExternal) {
               return (
-                <a
+                <BottomNavItem
                   key={item.href}
                   href={item.href}
-                  target={item.href.startsWith('http') ? '_blank' : undefined}
-                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="relative flex flex-col items-center justify-center min-w-[60px] min-h-[60px] rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors touch-manipulation"
-                  aria-label={item.label}
-                >
-                  {content}
-                </a>
+                  label={item.label}
+                  external={item.external}
+                  isActive={isActive}
+                  onNavigate={closeMenu}
+                />
               );
-            }
+            })}
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="relative flex flex-col items-center justify-center min-w-[60px] min-h-[60px] rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors touch-manipulation"
-                aria-label={item.label}
-                aria-current={isActive ? 'page' : undefined}
+            <button
+              type="button"
+              onClick={toggleMenu}
+              className={`relative flex min-h-[60px] min-w-0 flex-1 flex-col items-center justify-center rounded-xl px-0.5 py-1.5 transition-colors touch-manipulation ${
+                menuOpen
+                  ? "bg-teal-50 text-teal-600"
+                  : "text-slate-600 hover:bg-gray-50 active:bg-gray-100"
+              }`}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-full-menu"
+            >
+              {menuOpen && (
+                <div className="absolute top-0 left-1/2 h-1 w-10 -translate-x-1/2 rounded-full bg-teal-600" />
+              )}
+              {menuOpen ? (
+                <X className="h-5 w-5 shrink-0 scale-110" aria-hidden />
+              ) : (
+                <Menu className="h-5 w-5 shrink-0" aria-hidden />
+              )}
+              <span
+                className={`mt-1 text-[10px] font-medium leading-tight ${
+                  menuOpen ? "font-semibold text-teal-600" : "text-slate-600"
+                }`}
               >
-                {content}
-              </Link>
-            );
-          })}
+                Menu
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
-
-      <style jsx>{`
-        .safe-area-inset-bottom {
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-      `}</style>
-    </nav>
+      </nav>
+    </>
   );
 }

@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { Phone, Mail, MapPin, Award, Shield, Users } from "lucide-react";
+import { SiteLogoMark } from "@/components/SiteLogoMark";
 import { useEffect, useState } from "react";
 import { MEMBER_COUNT } from "@/lib/constants";
+import { footerNav } from "@/lib/nav";
 
 export function SharedFooter() {
   const [memberCount, setMemberCount] = useState(MEMBER_COUNT);
@@ -61,7 +63,10 @@ export function SharedFooter() {
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h4 className="text-xl font-semibold mb-4 text-foreground">Direct Care Indy</h4>
+            <div className="mb-4 flex items-center gap-3">
+              <SiteLogoMark size="sm" />
+              <h4 className="text-xl font-semibold text-foreground">Direct Care Indy</h4>
+            </div>
             <p className="text-muted-foreground">
               Direct Primary Care for Indianapolis families. Transparent,
               accessible, and affordable healthcare without the insurance
@@ -81,7 +86,7 @@ export function SharedFooter() {
               </li>
               <li>
                 <Link
-                  href="/faq"
+                  href="/what-is-dpc#faq"
                   className="text-muted-foreground hover:text-secondary transition-colors"
                 >
                   FAQ
@@ -119,6 +124,16 @@ export function SharedFooter() {
                   Partnerships
                 </Link>
               </li>
+              {footerNav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-muted-foreground hover:text-secondary transition-colors"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

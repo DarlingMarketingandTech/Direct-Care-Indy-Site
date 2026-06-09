@@ -132,6 +132,26 @@
     font-family: var(--font-heading);
   }
 
+  /* Inverse typography for primary/dark hero bands (avoids text-foreground override) */
+  .heading-1-inverse {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-primary-foreground;
+    font-family: var(--font-heading);
+  }
+
+  .heading-2-inverse {
+    @apply text-3xl md:text-4xl font-bold tracking-tight leading-tight text-primary-foreground;
+    font-family: var(--font-heading);
+  }
+
+  .heading-3-inverse {
+    @apply text-2xl md:text-3xl font-semibold tracking-tight leading-tight text-primary-foreground;
+    font-family: var(--font-heading);
+  }
+
+  .body-large-inverse {
+    @apply text-lg md:text-xl leading-relaxed text-primary-foreground/90;
+  }
+
   .heading-4 {
     @apply text-xl md:text-2xl font-semibold tracking-tight leading-tight;
     font-family: var(--font-heading);

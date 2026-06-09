@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 
 export const metadata: Metadata = {
   title: "Contact Us | Direct Care Indy",
@@ -17,7 +18,13 @@ export default function ContactPage() {
           We would love to hear from you.
         </p>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <DpcQuizCtaBand
+          headline="Not sure who to contact?"
+          body="Not sure who to contact? Take the quiz and we'll route you."
+          variant="muted"
+        />
+
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
           <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-slate-900 mb-2">Email</h2>
             <a

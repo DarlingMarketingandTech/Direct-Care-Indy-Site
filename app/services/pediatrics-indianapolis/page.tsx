@@ -128,7 +128,7 @@ export default function PediatricsIndianapolisPage() {
                   Start enrollment
                 </Link>
                 <Link
-                  href="/pricing"
+                  href="/membership"
                   className="px-6 py-3 rounded-lg font-semibold border border-border text-foreground hover:bg-muted transition-colors"
                 >
                   View pricing

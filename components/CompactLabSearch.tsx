@@ -82,7 +82,7 @@ export function CompactLabSearch() {
 
       {query && filteredLabs.length > 0 && (
         <p className="mt-3 text-xs text-gray-500 text-center">
-          Showing top results. <a href="/pricing" className="text-teal-400 hover:underline">View all labs</a>
+          Showing top results. <a href="/membership#cash-services" className="text-teal-400 hover:underline">View all labs</a>
         </p>
       )}
     </div>

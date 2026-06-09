@@ -191,7 +191,7 @@ export function PricingCalculator() {
                 Patient Portal
               </a>
               <Link
-                href="/faq"
+                href="/what-is-dpc#faq"
                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold underline underline-offset-4"
               >
                 See what is included
