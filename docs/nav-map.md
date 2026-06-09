@@ -29,7 +29,8 @@ Bottom bar (`mobileBottomNav`): Membership Pricing, For Employers, What Is DPC?,
 | Route | Role |
 |-------|------|
 | `/` | Audience-first routing homepage |
-| `/individuals`, `/families` | Planned audience pages — see ROUTE-MAP |
+| `/families` | Active family audience page — see ROUTE-MAP |
+| `/individuals` | Planned audience page — see ROUTE-MAP |
 | `/quiz` | Secondary DPC fit quiz — decision support |
 | `/brokers` | Footer / campaign landing only |
 | `/how-it-works`, `/services`, `/about`, `/wraparound` | Active pages — see ROUTE-MAP |

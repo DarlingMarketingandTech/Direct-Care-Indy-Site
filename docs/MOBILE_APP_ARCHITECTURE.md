@@ -9,7 +9,7 @@ Active reference for the mobile-first app shell — bottom bar, overflow menu, P
 
 ```
 RootLayout
-├── Navbar                    # fixed top — desktop links (global header quiz CTA being removed per strategy)
+├── Navbar                    # fixed top — desktop links + Patient Login (no global quiz CTA)
 ├── main (#main-content)      # pt-20 pb-20 md:pb-0
 ├── SharedFooter
 ├── MobileAppBar              # md:hidden — bottom bar + Menu

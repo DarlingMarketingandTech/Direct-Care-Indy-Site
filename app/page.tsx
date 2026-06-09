@@ -41,40 +41,40 @@ const audienceCards: Array<{
   {
     title: "Individuals",
     headline: "Everyday care without the insurance runaround",
-    pain: "Better appointment access, clearer cost expectations, less urgent care dependence, and a more practical next step when high-deductible frustration keeps piling up.",
+    pain: "For adults who want clearer pricing, easier access, and a practical primary care relationship without relying on urgent care for everyday needs.",
     primaryHref: individualsRoute,
     primaryLabel: "Explore Individual Membership",
-    secondaryHref: "/contact?source=homepage&intent=individual-pricing-guide",
-    secondaryLabel: "Get the Pricing Guide",
+    secondaryHref: "/membership#membership-plans",
+    secondaryLabel: "See Membership Pricing",
     icon: HeartPulse,
   },
   {
     title: "Families",
     headline: "Care access for busy households",
-    pain: "Get a clearer family care path for sick kids, urgent care detours, pricing questions, and the peace of mind busy households usually have to chase down.",
+    pain: "For parents and households who want a clearer plan when someone gets sick, with local primary care access and family membership details in one place.",
     primaryHref: familiesRoute,
     primaryLabel: "Explore Family Membership",
-    secondaryHref: "/contact?source=homepage&intent=family-care-roadmap",
+    secondaryHref: "/families#family-care-roadmap",
     secondaryLabel: "Get the Family Care Roadmap",
     icon: Users,
   },
   {
     title: "Employers",
     headline: "A practical healthcare access benefit for your team",
-    pain: "Support retention, reduce missed-work friction, and give employees a more usable first stop for everyday care alongside major medical coverage.",
+    pain: "For small employers looking for a simpler way to support everyday care access, employee experience, and benefit conversations without replacing major medical coverage.",
     primaryHref: "/employers",
     primaryLabel: "Explore Employer Options",
-    secondaryHref: "/contact?source=homepage&intent=employer-overview",
+    secondaryHref: "/employers",
     secondaryLabel: "Get the Employer Overview",
     icon: Building2,
   },
   {
     title: "Brokers",
     headline: "Resources for benefits advisors",
-    pain: "Bring clients a clearer local care access option for renewal pressure, alternative funding conversations, and plan differentiation.",
+    pain: "For advisors who need client-ready language, plan-fit context, and a local primary care partner for employer conversations.",
     primaryHref: "/brokers",
     primaryLabel: "Visit Broker Resources",
-    secondaryHref: "/contact?source=homepage&intent=broker-toolkit",
+    secondaryHref: "/brokers",
     secondaryLabel: "Get the Broker Toolkit",
     icon: BriefcaseBusiness,
   },
@@ -124,9 +124,9 @@ export default function HomePage() {
               Direct Primary Care, built around how you actually need care
             </h1>
             <p className="body-large-inverse mx-auto mt-5 max-w-3xl font-medium text-white/90">
-              Start with the care path that fits your situation. Direct Care Indy helps
-              individuals, families, employers, and benefits advisors choose a clearer next step
-              without forcing every visitor through the same starting point.
+              DirectCare Indy helps individuals, families, employers, and benefits advisors
+              understand whether membership-based primary care is a practical fit. Start with the
+              care path that matches your situation.
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
