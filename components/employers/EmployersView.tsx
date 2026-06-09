@@ -28,7 +28,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SITE_ASSETS } from "@/lib/images";
-import { pricing } from "@/lib/pricing";
 import {
   EMPLOYER_AVOID_ITEMS,
   EMPLOYER_CONTACT_MAILTO,
@@ -38,6 +37,7 @@ import {
   EMPLOYER_FIT_INDUSTRIES,
   EMPLOYER_GAINS,
   EMPLOYER_GET_ITEMS,
+  EMPLOYER_STARTING_RATE_BADGE,
   EMPLOYER_STATS,
   LARGER_BUSINESS_PLANS,
   PARTNERSHIP_MODELS,
@@ -192,7 +192,7 @@ export function EmployersView() {
             <ul className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm">
               {[
                 "10–100 employee teams",
-                `From $${pricing.employerPerEmployee}/employee/mo`,
+                EMPLOYER_STARTING_RATE_BADGE,
                 "Not insurance — everyday care layer",
               ].map((label) => (
                 <li

@@ -3,6 +3,7 @@
 import { ShieldCheck, Info, CheckCircle2, Calendar } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { motion } from "framer-motion";
+import { MEMBERSHIP_PLANS } from "@/lib/content/membership-pricing";
 
 export function HsaStatusTracker() {
   // Get HSA limits from environment variables with fallbacks
@@ -12,6 +13,9 @@ export function HsaStatusTracker() {
   const hsaLimitFamily = process.env.NEXT_PUBLIC_HSA_LIMIT_FAMILY
     ? parseInt(process.env.NEXT_PUBLIC_HSA_LIMIT_FAMILY, 10)
     : 300;
+  const currentPlanSummary = MEMBERSHIP_PLANS.map(
+    (plan) => `${plan.name} ${plan.monthlyPrice}${plan.priceNote}`,
+  ).join(" | ");
 
   return (
     <motion.div
@@ -45,9 +49,9 @@ export function HsaStatusTracker() {
           <p className="text-xs text-gray-500 mt-1">Individual</p>
         </div>
         <div className="bg-white/5 backdrop-blur-sm p-4 rounded-2xl border border-teal-500/20">
-          <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Your Plan</p>
-          <p className="text-2xl font-bold text-white">$69-$109<span className="text-sm font-normal text-gray-500">/mo</span></p>
-          <p className="text-xs text-gray-500 mt-1">Well Under Limit</p>
+          <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Current Plans</p>
+          <p className="text-lg font-bold text-white">{currentPlanSummary}</p>
+          <p className="text-xs text-gray-500 mt-1">Confirm plan details with the clinic</p>
         </div>
       </div>
 
@@ -67,4 +71,3 @@ export function HsaStatusTracker() {
     </motion.div>
   );
 }
-

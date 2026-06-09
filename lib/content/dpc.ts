@@ -108,7 +108,7 @@ export const DPC_CONTENT = {
         'Employee healthcare costs',
       ],
       valueFit: [
-        'Per-employee pricing starting at $69/month',
+        'Predictable per-employee membership pricing',
         'No complex insurance paperwork',
         'Direct access to specialist care',
         'Predictable healthcare costs',

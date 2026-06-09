@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const SECTIONS = [
   { id: "membership-plans", label: "Plans" },
   { id: "whats-included", label: "Included" },
-  { id: "cash-services", label: "Cash rates" },
+  { id: "rates-pricing", label: "Rates & pricing" },
   { id: "ninety-ten", label: "90/10 model" },
   { id: "is-this-right-for-me", label: "Fit check" },
   { id: "membership-faq", label: "FAQ" },

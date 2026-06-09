@@ -12,7 +12,6 @@ import {
   Users,
   XCircle,
 } from "lucide-react";
-import { ComplianceNote } from "@/components/ComplianceNote";
 import { PricingDisclaimer } from "@/components/PricingDisclaimer";
 import { ScrollTransition } from "@/components/ScrollTransition";
 import { MembershipFaq } from "@/components/membership/MembershipFaq";
@@ -20,14 +19,20 @@ import { MembershipSectionNav } from "@/components/membership/MembershipSectionN
 import { NinetyTenModelSection } from "@/components/shared/NinetyTenModelSection";
 import { SITE_ASSETS } from "@/lib/images";
 import {
-  DISCOUNTED_LABS,
-  DISCOUNTED_MEDICATIONS,
+  ADDITIONAL_PRICING_DISCLAIMER,
+  DISCOUNTED_BLOODWORK,
+  DISCOUNTED_LAB_WORK,
+  DISCOUNTED_VACCINES_INJECTIONS,
   FIT_CRITERIA,
+  IN_CLINIC_PHARMACY_PRICING,
   INCLUDED_SERVICES,
   JOINING_STEPS,
+  MEMBERSHIP_HELP_COPY,
+  MEMBERSHIP_PLANS_INTRO,
   MEMBERSHIP_PLANS,
   NOT_FIT_CRITERIA,
   NOT_INCLUDED,
+  PHARMACY_PRICING_DISCLAIMER,
 } from "@/lib/content/membership-pricing";
 import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 
@@ -42,6 +47,43 @@ const HERO_PILLS = [
   "No co-pays for included care",
   "No surprise bills for covered services",
 ] as const;
+
+function PricingTable({
+  rows,
+}: {
+  rows: readonly {
+    service: string;
+    clinicPrice: string;
+    retailPrice: string;
+  }[];
+}) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border/80">
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-border/70">
+          <thead className="bg-muted/60">
+            <tr className="text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <th className="px-4 py-3">Service</th>
+              <th className="px-4 py-3">Our Clinic</th>
+              <th className="px-4 py-3">Typical Retail</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border/60 bg-white">
+            {rows.map((row) => (
+              <tr key={row.service} className="align-top">
+                <td className="px-4 py-3 text-sm font-medium text-foreground">{row.service}</td>
+                <td className="px-4 py-3 text-sm font-semibold text-secondary">
+                  {row.clinicPrice}
+                </td>
+                <td className="px-4 py-3 text-sm text-muted-foreground">{row.retailPrice}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
 
 function SectionHeading({
   id,
@@ -189,10 +231,10 @@ export function MembershipPricingView() {
           <ScrollTransition id="membership-plans-intro">
             <SectionHeading title="Membership Plans">
               <p>
-                Choose the option that fits your situation. Every plan includes everyday primary
-                care, follow-up support, direct communication, and discounted cash-pay services
-                when needed.
+                Choose the DirectCare Indy plan that works best for your health, your well-being,
+                and your budget.
               </p>
+              <p>{MEMBERSHIP_PLANS_INTRO}</p>
             </SectionHeading>
           </ScrollTransition>
 
@@ -222,31 +264,27 @@ export function MembershipPricingView() {
                   </div>
 
                   <h3 className="mt-5 text-xl font-bold text-foreground">{plan.name}</h3>
-                  <p
-                    className={`mt-4 font-black text-secondary ${
-                      plan.id === "family" ? "text-2xl leading-tight" : "text-3xl"
-                    }`}
-                  >
-                    {plan.price}
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-secondary">
+                    {plan.audienceLabel}
+                  </p>
+                  <p className="mt-4 text-3xl font-black text-secondary">
+                    {plan.monthlyPrice}
                     <span className="text-base font-normal text-muted-foreground">
                       {plan.priceNote}
                     </span>
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {plan.summary}
+                    {plan.description}
                   </p>
-                  {"detail" in plan && plan.detail && (
-                    <p className="mt-3 text-sm text-muted-foreground">{plan.detail}</p>
-                  )}
                   {"medicareNote" in plan && plan.medicareNote && (
                     <p className="mt-3 rounded-xl border border-border bg-muted/40 p-3 text-xs leading-relaxed text-muted-foreground">
                       {plan.medicareNote}
                     </p>
                   )}
 
-                  <p className="mt-6 text-sm font-semibold text-foreground">Best for</p>
+                  <p className="mt-6 text-sm font-semibold text-foreground">Plan benefits</p>
                   <ul className="mt-3 flex-1 space-y-2">
-                    {plan.bestFor.map((item) => (
+                    {plan.benefits.map((item) => (
                       <li
                         key={item}
                         className="flex items-start gap-2 text-sm text-muted-foreground"
@@ -264,6 +302,17 @@ export function MembershipPricingView() {
                 </article>
               );
             })}
+          </div>
+
+          <div className="mx-auto mt-8 max-w-4xl rounded-3xl border border-secondary/20 bg-secondary/5 px-6 py-6 text-center">
+            <p className="text-sm leading-relaxed text-muted-foreground">{MEMBERSHIP_HELP_COPY}</p>
+            <a
+              href="tel:+13179566288"
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+            >
+              <Phone className="h-4 w-4" aria-hidden />
+              Call or Text (317) 956-6288
+            </a>
           </div>
         </div>
       </section>
@@ -333,49 +382,45 @@ export function MembershipPricingView() {
       </section>
 
       {/* Cash-priced services */}
-      <section id="cash-services" className="section-padding scroll-mt-28">
+      <section id="rates-pricing" className="section-padding scroll-mt-28">
         <div className="content-container">
           <ScrollTransition id="membership-cash-services">
-            <SectionHeading eyebrow="Transparent add-ons" title="Commonly used cash-priced services">
+            <SectionHeading eyebrow="Transparent pricing" title="Discounted Rates &amp; Pricing">
               <p>
-                Some labs, medications, and procedures may be available at discounted transparent
-                cash-pay rates when they fall outside included membership services.
-              </p>
-              <p className="text-sm">
-                Prices may vary based on supplier cost, availability, dosage, and clinical need.
+                Learn about transparent pricing on additional services, with significant discounts
+                for members.
               </p>
             </SectionHeading>
 
-            <div className="mx-auto mt-10 grid max-w-5xl gap-6 md:grid-cols-2">
+            <div className="mx-auto mt-10 grid max-w-6xl gap-6">
               <div className="section-card">
-                <h3 className="font-semibold text-foreground">Discounted labs may include</h3>
+                <h3 className="text-lg font-semibold text-foreground">Discounted Lab Work</h3>
                 <div className="mt-4">
-                  <BulletList items={DISCOUNTED_LABS} />
+                  <PricingTable rows={DISCOUNTED_LAB_WORK} />
                 </div>
               </div>
+
               <div className="section-card">
-                <h3 className="font-semibold text-foreground">Discounted medications may include</h3>
+                <h3 className="text-lg font-semibold text-foreground">Discounted Bloodwork</h3>
                 <div className="mt-4">
-                  <BulletList items={DISCOUNTED_MEDICATIONS} />
+                  <PricingTable rows={DISCOUNTED_BLOODWORK} />
+                </div>
+              </div>
+
+              <div className="section-card">
+                <h3 className="text-lg font-semibold text-foreground">
+                  Discounted Vaccines &amp; Injections
+                </h3>
+                <div className="mt-4">
+                  <PricingTable rows={DISCOUNTED_VACCINES_INJECTIONS} />
                 </div>
               </div>
             </div>
 
-            <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-muted-foreground">
-              <strong className="text-foreground">Important:</strong> Availability may change.
-              Confirm final prices with the clinic before service.
-            </p>
-            <div className="mt-8 text-center">
-              <Link
-                href="/services-included"
-                className="inline-flex items-center gap-2 font-semibold text-secondary hover:underline"
-              >
-                View Discounted Service Rates
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </div>
-            <div className="mt-8 text-center">
-              <ComplianceNote />
+            <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-border bg-muted/35 px-6 py-4">
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {ADDITIONAL_PRICING_DISCLAIMER}
+              </p>
             </div>
           </ScrollTransition>
         </div>
@@ -385,23 +430,24 @@ export function MembershipPricingView() {
       <section className="section-padding bg-muted/40">
         <div className="content-container">
           <ScrollTransition id="membership-pharmacy">
-            <div className="mx-auto max-w-4xl section-card">
+            <div className="mx-auto max-w-6xl section-card">
               <div className="flex flex-col gap-6 md:flex-row md:items-start">
                 <div className="shrink-0 rounded-2xl bg-secondary/10 p-4 text-secondary">
                   <Pill className="h-8 w-8" aria-hidden />
                 </div>
-                <div className="space-y-4">
-                  <SectionHeading align="left" title="In-clinic pharmacy access">
+                <div className="min-w-0 flex-1">
+                  <SectionHeading align="left" title="In-Clinic Pharmacy">
                     <p>
-                      When appropriate, providers can prescribe common medications and may dispense
-                      select generics directly from the clinic — so you can leave with what you need
-                      without a pharmacy line or checkout surprise.
-                    </p>
-                    <p>
-                      When a medication is not available in clinic, we send the prescription to your
-                      preferred pharmacy and help you look for cost-conscious options.
+                      Through our in-clinic pharmacy, DirectCare Indy members receive near-wholesale
+                      pricing on common generic medications when available.
                     </p>
                   </SectionHeading>
+                  <div className="mt-6">
+                    <PricingTable rows={IN_CLINIC_PHARMACY_PRICING} />
+                  </div>
+                  <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                    {PHARMACY_PRICING_DISCLAIMER}
+                  </p>
                 </div>
               </div>
             </div>
@@ -458,6 +504,9 @@ export function MembershipPricingView() {
                 <Phone className="h-4 w-4" aria-hidden />
                 Call With Questions
               </a>
+              <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                {MEMBERSHIP_HELP_COPY}
+              </p>
             </div>
           </ScrollTransition>
         </div>

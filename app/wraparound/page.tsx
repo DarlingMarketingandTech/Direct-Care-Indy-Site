@@ -1,13 +1,61 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import {
+  CheckCircle2,
+  Mail,
+  MapPin,
+  Phone,
+  Shield,
+  Stethoscope,
+  Wallet,
+} from "lucide-react";
 import { CatastrophicPartners } from "@/components/CatastrophicPartners";
-import { TheWraparoundGuide } from "@/components/TheWraparoundGuide";
 import { HsaStatusTracker } from "@/components/HsaStatusTracker";
+
+const WRAPAROUND_STEPS = [
+  {
+    title: "Start with your everyday care plan",
+    subtitle: "Use Direct Care Indy as your routine first stop",
+    description:
+      "Choose the membership plan that fits your household, then use the clinic for many day-to-day primary care needs.",
+    bullets: [
+      "Review current membership pricing directly with the clinic",
+      "Use the membership for annual wellness support and follow-up care",
+      "Ask about transparent add-on pricing for labs, vaccines, imaging, and pharmacy items",
+      "Confirm availability and pricing before enrolling because details can change",
+    ],
+    icon: Stethoscope,
+  },
+  {
+    title: "Pair it with major medical protection",
+    subtitle: "Keep a plan for hospital, specialist, and emergency needs",
+    description:
+      "Wraparound coverage can support the larger medical events that fall outside a primary care membership.",
+    bullets: [
+      "Compare employer coverage, ACA options, healthshares, or other major medical strategies",
+      "Review deductible, network, and HSA rules with your carrier or advisor",
+      "Make sure you understand what stays with the clinic and what belongs with insurance",
+      "Choose the structure that matches your budget and risk tolerance",
+    ],
+    icon: Shield,
+  },
+  {
+    title: "Build a simpler care path",
+    subtitle: "Use the clinic first, then step out when the need is bigger",
+    description:
+      "This approach can make everyday care easier to access while keeping a plan in place for larger medical needs.",
+    bullets: [
+      "Keep one local clinic relationship for routine questions and follow-ups",
+      "Use transparent cash-pay pricing when additional services are needed",
+      "Ask for guidance when imaging, specialist care, or hospital care is the next step",
+      "Confirm current pricing, coverage, and availability directly before making decisions",
+    ],
+    icon: Wallet,
+  },
+] as const;
 
 export default function Wraparound() {
   return (
     <div className="min-h-screen bg-background">
-
       {/* Hero Section */}
       <section className="bg-background py-20 border-b border-border">
         <div className="container mx-auto px-4">
@@ -16,10 +64,10 @@ export default function Wraparound() {
               Complete Your Healthcare Stack
             </h2>
             <p className="text-2xl mb-4 text-foreground">
-              Direct Care Indy handles the 90%. Choose a catastrophic wraparound for the 10%.
+              Pair everyday primary care access with major medical protection that fits your situation.
             </p>
             <p className="text-xl text-muted-foreground">
-              The &quot;DPC Stack&quot;: Affordable primary care + catastrophic protection = Complete coverage at 60% lower cost.
+              Direct Care Indy can be the routine care layer while a separate wraparound option helps cover larger medical events.
             </p>
           </div>
         </div>
@@ -34,10 +82,68 @@ export default function Wraparound() {
         </div>
       </section>
 
-      {/* The Wraparound Guide */}
+      {/* Wraparound Guide */}
       <section className="py-16 bg-background border-b border-border">
         <div className="container mx-auto px-4">
-          <TheWraparoundGuide />
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center">
+              <h3 className="text-4xl font-bold text-foreground">
+                A simpler way to think about primary care and backup coverage
+              </h3>
+              <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">
+                Use Direct Care Indy for many everyday primary care needs, then compare separate
+                options for the larger medical costs a clinic membership does not replace.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+              {WRAPAROUND_STEPS.map((step, index) => {
+                const Icon = step.icon;
+
+                return (
+                  <div
+                    key={step.title}
+                    className="rounded-3xl border border-border bg-card p-8 shadow-sm"
+                  >
+                    <div className="mb-5 flex items-center gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
+                        <Icon className="h-7 w-7" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
+                          Step {index + 1}
+                        </p>
+                        <h4 className="text-xl font-bold text-foreground">{step.title}</h4>
+                      </div>
+                    </div>
+
+                    <p className="text-sm font-semibold text-foreground/80">{step.subtitle}</p>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                      {step.description}
+                    </p>
+
+                    <ul className="mt-6 space-y-3">
+                      {step.bullets.map((bullet) => (
+                        <li key={bullet} className="flex items-start gap-3 text-sm text-muted-foreground">
+                          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-secondary" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-10 rounded-3xl border border-border bg-muted/40 p-6 text-center text-sm text-muted-foreground">
+              <p className="font-semibold text-foreground">Important:</p>
+              <p className="mt-2">
+                Direct Care Indy is not insurance. Pricing, plan details, partner options, and
+                availability are subject to change. Confirm current membership pricing and outside
+                coverage details directly before enrolling or switching plans.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -55,7 +161,7 @@ export default function Wraparound() {
             Ready to Build Your Complete Healthcare Stack?
           </h3>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Start with Direct Care Indy for your routine care, then add a catastrophic wraparound for complete protection.
+            Start with Direct Care Indy for routine care, then talk through the right backup coverage for larger medical needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -148,4 +254,3 @@ export default function Wraparound() {
     </div>
   );
 }
-

@@ -41,9 +41,9 @@ const techStack: TechItem[] = [
     name: "Hint Health",
     subtitle: "The Business Brain",
     feature: "Employer Playbooks",
-    benefit: "Handles corporate contracts & family caps.",
+    benefit: "Handles corporate contracts and membership billing structures.",
     detail:
-      "Hint manages all membership billing, employer contracts, and family pricing caps. It automates recurring charges and provides real-time revenue dashboards.",
+      "Hint manages membership billing, employer contracts, and recurring charges while providing real-time revenue dashboards.",
     icon: Briefcase,
   },
   {
