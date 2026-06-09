@@ -9,6 +9,7 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 | Route | File | Status | Notes |
 |-------|------|--------|-------|
 | `/` | `app/page.tsx` | Active | Audience-first routing homepage; concise membership preview from `MEMBERSHIP_PLANS`; quiz is secondary |
+| `/families` | `app/families/page.tsx` | Active | Family audience page — sick-day scenario, governed pricing preview, local clinic access, provider trust, and Family Care Roadmap lead form |
 | `/membership` | `app/membership/page.tsx` | Active | Canonical membership pricing, benefits, additional-service pricing, pharmacy section |
 | `/quiz` | `app/quiz/page.tsx` | Active | Secondary DPC fit quiz — decision support, not primary site CTA |
 | `/contact` | `app/contact/page.tsx` | Active | Single-clinic contact (7911 N. Michigan Rd.); quiz-intent-aware query params; form → `/api/leads`. Rename to **Location & Contact** planned |
@@ -25,7 +26,6 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 | Route | File | Status | Notes |
 |-------|------|--------|-------|
 | `/individuals` | `app/individuals/page.tsx` | Planned | Individuals audience page — membership, local care team, gated pricing guide resource |
-| `/families` | `app/families/page.tsx` | Planned | Families audience page — family membership, Family Care Roadmap resource |
 
 ## Employer and Support Routes
 

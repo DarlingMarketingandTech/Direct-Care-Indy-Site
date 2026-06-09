@@ -183,6 +183,18 @@ export const employersMetadata: Metadata = {
   },
 };
 
+export const familiesMetadata: Metadata = {
+  title: "Direct Primary Care for Families in Indianapolis | DirectCare Indy",
+  description:
+    "See how DirectCare Indy helps busy households understand family membership, local primary care access, and what to do when someone in the house gets sick.",
+  openGraph: {
+    title: "Direct Primary Care for Families in Indianapolis | DirectCare Indy",
+    description:
+      "Explore family membership, local clinic access, and practical next steps for busy households at DirectCare Indy.",
+    url: absoluteUrl("/families"),
+  },
+};
+
 export const brokersMetadata: Metadata = {
   title: "For Brokers",
   description:

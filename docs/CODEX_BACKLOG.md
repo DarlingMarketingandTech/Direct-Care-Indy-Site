@@ -49,7 +49,9 @@ Each task should be a focused branch with build + lint verification before merge
 
 ## Task 4: Families page
 
-**Branch:** `codex/audience-pages` (or `codex/families`)
+Status: Completed on `codex/families-page`
+
+**Branch:** `codex/families-page`
 
 - Build or improve `/families`
 - Family membership focus, family resource CTA

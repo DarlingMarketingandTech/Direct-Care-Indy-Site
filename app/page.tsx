@@ -26,8 +26,7 @@ export const metadata: Metadata = homeMetadata;
 
 // TODO: Swap to /individuals when the dedicated audience page ships.
 const individualsRoute = "/membership";
-// TODO: Swap to /families when the dedicated audience page ships.
-const familiesRoute = "/membership";
+const familiesRoute = "/families";
 
 const audienceCards: Array<{
   title: string;
