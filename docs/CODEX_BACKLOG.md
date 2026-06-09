@@ -11,6 +11,8 @@ Each task should be a focused branch with build + lint verification before merge
 
 ## Task 1: Homepage CTA cleanup and quiz demotion
 
+Status: Completed on `codex/homepage-cta-cleanup`
+
 **Branch:** `codex/homepage-cta-cleanup`
 
 - Remove global header quiz CTA
@@ -18,6 +20,7 @@ Each task should be a focused branch with build + lint verification before merge
 - Demote quiz to secondary “not sure where to start?” placement
 - Stop repeating “Is DPC Right for You? Take the 60-second quiz” on audience cards and sticky surfaces
 - Use single-clinic location labels (Michigan Rd) where location CTAs appear
+- Families audience card links to `/families`; secondary roadmap link uses `/families#family-care-roadmap`
 
 **Key files:** `app/page.tsx`, `components/Navbar.tsx`, `components/StickySavingsBar.tsx`, `components/dpc-fit-quiz/*`
 
