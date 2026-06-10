@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Class-based dark mode — must match next-themes attribute="class" in layout.tsx.
+   Without this, Tailwind v4 applies dark: utilities from prefers-color-scheme,
+   which can force light-gray headings on a light-themed page. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -118,17 +123,17 @@
 
   /* Typography Scale - Consistent heading hierarchy */
   .heading-1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-gray-900 dark:text-gray-100;
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-foreground;
     font-family: var(--font-heading);
   }
 
   .heading-2 {
-    @apply text-3xl md:text-4xl font-bold tracking-tight leading-tight text-gray-900 dark:text-gray-100;
+    @apply text-3xl md:text-4xl font-bold tracking-tight leading-tight text-foreground;
     font-family: var(--font-heading);
   }
 
   .heading-3 {
-    @apply text-2xl md:text-3xl font-semibold tracking-tight leading-tight text-gray-900 dark:text-gray-100;
+    @apply text-2xl md:text-3xl font-semibold tracking-tight leading-tight text-foreground;
     font-family: var(--font-heading);
   }
 
