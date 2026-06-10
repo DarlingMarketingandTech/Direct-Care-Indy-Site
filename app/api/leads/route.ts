@@ -30,10 +30,34 @@ interface LeadData {
   biggestFamilyCareConcern?: string;
   currentInsuranceSituation?: string;
   preferredContactMethod?: string;
+  // Individuals resource
+  ageRange?: string;
+  insuranceStatus?: string;
+  biggestCareFrustration?: string;
+  // Employers resource
+  company?: string;
+  role?: string;
+  employeeCountBand?: string;
+  currentBenefitsSituation?: string;
+  renewalMonth?: string;
+  biggestWorkforceHealthcareConcern?: string;
+  // Brokers resource
+  firm?: string;
+  clientSizeBand?: string;
+  primaryClientIndustries?: string;
+  fundingModelFocus?: string;
+  wantsCobrandedMaterials?: string;
 }
 
+const AUDIENCE_RESOURCE_IDS = new Set([
+  "family_care_roadmap",
+  "membership_pricing_guide",
+  "employer_dpc_overview",
+  "broker_toolkit",
+]);
+
 function isOptionalPhoneLead(body: LeadData): boolean {
-  return body.source === "DPC Fit Quiz" || body.resource === "family_care_roadmap";
+  return body.source === "DPC Fit Quiz" || (body.resource ? AUDIENCE_RESOURCE_IDS.has(body.resource) : false);
 }
 
 function buildLeadHtml(body: LeadData): string {
@@ -54,7 +78,75 @@ function buildLeadHtml(body: LeadData): string {
     biggestFamilyCareConcern,
     currentInsuranceSituation,
     preferredContactMethod,
+    ageRange,
+    insuranceStatus,
+    biggestCareFrustration,
+    company,
+    role,
+    employeeCountBand,
+    currentBenefitsSituation,
+    renewalMonth,
+    biggestWorkforceHealthcareConcern,
+    firm,
+    clientSizeBand,
+    primaryClientIndustries,
+    fundingModelFocus,
+    wantsCobrandedMaterials,
   } = body;
+
+  const resourceSection = (() => {
+    switch (resource) {
+      case "family_care_roadmap":
+        return `
+      <hr />
+      <h3>Family Care Roadmap Details</h3>
+      <p><strong>Audience:</strong> ${audience || "family"}</p>
+      <p><strong>Household Size:</strong> ${householdSize || "Not provided"}</p>
+      <p><strong>Children ages 12+:</strong> ${childrenAges12Plus || "Not provided"}</p>
+      <p><strong>Biggest Family Care Concern:</strong> ${biggestFamilyCareConcern || "Not provided"}</p>
+      <p><strong>Current Insurance Situation:</strong> ${currentInsuranceSituation || "Not provided"}</p>
+      <p><strong>Preferred Contact Method:</strong> ${preferredContactMethod || "Not provided"}</p>
+    `;
+      case "membership_pricing_guide":
+        return `
+      <hr />
+      <h3>Membership Pricing Guide Details</h3>
+      <p><strong>Audience:</strong> ${audience || "individual"}</p>
+      <p><strong>Age Range:</strong> ${ageRange || "Not provided"}</p>
+      <p><strong>Insurance Status:</strong> ${insuranceStatus || "Not provided"}</p>
+      <p><strong>Biggest Care Frustration:</strong> ${biggestCareFrustration || "Not provided"}</p>
+      <p><strong>Preferred Contact Method:</strong> ${preferredContactMethod || "Not provided"}</p>
+    `;
+      case "employer_dpc_overview":
+        return `
+      <hr />
+      <h3>Employer DPC Overview Details</h3>
+      <p><strong>Audience:</strong> ${audience || "employer"}</p>
+      <p><strong>Company:</strong> ${company || "Not provided"}</p>
+      <p><strong>Role:</strong> ${role || "Not provided"}</p>
+      <p><strong>Employee Count:</strong> ${employeeCountBand || "Not provided"}</p>
+      <p><strong>Current Benefits Situation:</strong> ${currentBenefitsSituation || "Not provided"}</p>
+      <p><strong>Renewal Month:</strong> ${renewalMonth || "Not provided"}</p>
+      <p><strong>Biggest Workforce Healthcare Concern:</strong> ${biggestWorkforceHealthcareConcern || "Not provided"}</p>
+      <p><strong>Preferred Contact Method:</strong> ${preferredContactMethod || "Not provided"}</p>
+    `;
+      case "broker_toolkit":
+        return `
+      <hr />
+      <h3>Broker Toolkit Details</h3>
+      <p><strong>Audience:</strong> ${audience || "broker"}</p>
+      <p><strong>Firm:</strong> ${firm || "Not provided"}</p>
+      <p><strong>Role:</strong> ${role || "Not provided"}</p>
+      <p><strong>Typical Client Size:</strong> ${clientSizeBand || "Not provided"}</p>
+      <p><strong>Primary Client Industries:</strong> ${primaryClientIndustries || "Not provided"}</p>
+      <p><strong>Funding Model Focus:</strong> ${fundingModelFocus || "Not provided"}</p>
+      <p><strong>Co-branded Materials Interest:</strong> ${wantsCobrandedMaterials || "Not provided"}</p>
+      <p><strong>Preferred Contact Method:</strong> ${preferredContactMethod || "Not provided"}</p>
+    `;
+      default:
+        return "";
+    }
+  })();
 
   return `
     <h1>New Lead from Direct Care Indy</h1>
@@ -72,16 +164,7 @@ function buildLeadHtml(body: LeadData): string {
       <p><strong>Health Goal:</strong> ${goal || healthGoal || 'General Interest'}</p>
       <p><strong>Persona:</strong> ${persona || 'Individual'}</p>
     `}
-    ${resource === "family_care_roadmap" ? `
-      <hr />
-      <h3>Family Care Roadmap Details</h3>
-      <p><strong>Audience:</strong> ${audience || "family"}</p>
-      <p><strong>Household Size:</strong> ${householdSize || "Not provided"}</p>
-      <p><strong>Children ages 12+:</strong> ${childrenAges12Plus || "Not provided"}</p>
-      <p><strong>Biggest Family Care Concern:</strong> ${biggestFamilyCareConcern || "Not provided"}</p>
-      <p><strong>Current Insurance Situation:</strong> ${currentInsuranceSituation || "Not provided"}</p>
-      <p><strong>Preferred Contact Method:</strong> ${preferredContactMethod || "Not provided"}</p>
-    ` : ""}
+    ${resourceSection}
     <hr />
     ${body.quizResult ? `
       <h3>Quiz Result</h3>

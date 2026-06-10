@@ -73,6 +73,30 @@ export function MobileFullMenu({ open, onClose }: MobileFullMenuProps) {
         </header>
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5">
+          <div className="mb-6">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Who are you here for?
+            </p>
+            <ul className="grid grid-cols-2 gap-2">
+              {[
+                { label: "Individuals", href: "/individuals" },
+                { label: "Families", href: "/families" },
+                { label: "Employers", href: "/employers" },
+                { label: "Brokers", href: "/brokers" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={onClose}
+                    className="flex items-center justify-center rounded-xl border border-border bg-card px-3 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div className="mb-6 rounded-2xl border border-secondary/25 bg-secondary/5 p-4">
             <p className="text-sm font-semibold text-foreground">Need a little guidance first?</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

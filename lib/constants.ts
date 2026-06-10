@@ -1,7 +1,5 @@
 // Global constants for the Direct Care Indy site
 
-export const MEMBER_COUNT = 200; // Update this to keep footer synchronized
-
 export const BUSINESS_INFO = {
   name: "Direct Care Indy",
   physician: "James D. Pike, D.O., FCCP, FACP",

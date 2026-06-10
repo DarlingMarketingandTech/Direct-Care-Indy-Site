@@ -22,6 +22,16 @@ const nextConfig = {
         destination: "/what-is-dpc#faq",
         permanent: true,
       },
+      {
+        source: "/team",
+        destination: "/providers",
+        permanent: true,
+      },
+      {
+        source: "/team/:path*",
+        destination: "/providers",
+        permanent: true,
+      },
     ];
   },
   images: {

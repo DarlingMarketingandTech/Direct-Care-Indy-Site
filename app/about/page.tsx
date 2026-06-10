@@ -149,10 +149,10 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/team"
+              href="/providers"
               className="bg-card text-card-foreground border border-border px-8 py-4 rounded-lg font-semibold text-lg hover:bg-card/90 transition-colors"
             >
-              Meet the Team
+              Meet the Care Team
             </Link>
             <Link
               href="/join"

@@ -46,7 +46,9 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/images/logos/dci-icon-192.png" sizes="192x192" />
       </head>
       <body className={`${sans.variable} ${display.variable} antialiased`}>
-        <GoogleTagManager gtmId="GTM-KKFRX4Z3" />
+        {process.env.NEXT_PUBLIC_GTM_ID ? (
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+        ) : null}
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>

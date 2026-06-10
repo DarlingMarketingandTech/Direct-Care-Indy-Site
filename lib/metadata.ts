@@ -160,13 +160,13 @@ export const whatIsDpcMetadata: Metadata = {
 export const faqMetadata = whatIsDpcMetadata;
 
 export const contactMetadata: Metadata = {
-  title: "Contact Us",
+  title: "Location & Contact",
   description:
-    "Contact Direct Care Indy by phone, text, or email. Schedule a membership intro, employer conversation, or broker partnership discussion at our Indianapolis clinic.",
+    "Visit Direct Care Indy at 7911 N. Michigan Rd., Indianapolis, IN 46268. Call, text, or email for membership intros, employer conversations, or broker partnership discussions.",
   openGraph: {
-    title: "Contact Direct Care Indy",
+    title: "Location & Contact | Direct Care Indy",
     description:
-      "Call (317) 956-6288, text, or message our team about membership, employer plans, or broker resources.",
+      "Find our Michigan Rd clinic, hours, and contact options. Call (317) 956-6288, text, or message our team.",
     url: absoluteUrl("/contact"),
   },
 };
@@ -180,6 +180,18 @@ export const employersMetadata: Metadata = {
     description:
       "Explore employer-paid, shared, and voluntary DPC options for teams in Indianapolis.",
     url: absoluteUrl("/employers"),
+  },
+};
+
+export const individualsMetadata: Metadata = {
+  title: "Direct Primary Care for Individuals in Indianapolis | DirectCare Indy",
+  description:
+    "See how DirectCare Indy helps adults understand individual membership, local primary care access, and practical next steps for everyday care.",
+  openGraph: {
+    title: "Direct Primary Care for Individuals in Indianapolis | DirectCare Indy",
+    description:
+      "Explore individual membership, local clinic access, and transparent pricing guidance at DirectCare Indy.",
+    url: absoluteUrl("/individuals"),
   },
 };
 

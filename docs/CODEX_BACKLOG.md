@@ -281,27 +281,26 @@ Complete the audience-first routing model. Phase 2B and 2C can run in parallel a
 
 ### Task 4.1: Providers / team consolidation
 
-**Status:** Planned
+**Status:** Done (2026-06-10)
 
 **Branch:** `codex/providers-team-consolidation`
 
 **Scope:**
 
 - Center provider trust on `/providers` and `/providers/[slug]`
-- Decide fate of `/team`:
-  - **Recommended:** 301 redirect `/team` → `/providers` in `next.config.mjs`
-  - **Alternative:** Merge Round Table story into `/about` or `/providers`, then redirect
-- Confirm nav “Our Team” → `/providers` (already the case in `lib/nav.ts`)
-- Update sitemap policy if needed
-- Remove duplicate trust blocks where pages repeat the same provider cards
+- `/team` removed; 301 redirect `/team` and `/team/:path*` → `/providers` in `next.config.mjs`
+- Nav “Our Team” → `/providers` (already the case in `lib/nav.ts`)
+- `/about` CTA updated to `/providers`
+
+**Deferred (separate branch):** Improve `/providers` hub layout and individual `/providers/[slug]` bios — not in this pass.
 
 **Acceptance criteria:**
 
-- [ ] One canonical provider directory path
-- [ ] No conflicting team stories across `/team` and `/providers`
-- [ ] Build + lint pass
+- [x] One canonical provider directory path
+- [x] No conflicting team stories across `/team` and `/providers`
+- [x] Build + lint pass
 
-**Key files:** `app/team/page.tsx`, `app/providers/**`, `lib/nav.ts`, `next.config.mjs`, `app/sitemap.ts`
+**Key files:** `app/providers/**`, `lib/nav.ts`, `next.config.mjs`, `app/about/page.tsx`
 
 ---
 

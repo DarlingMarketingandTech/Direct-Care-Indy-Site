@@ -11,6 +11,9 @@ export type AnalyticsEventName =
   | "employer_inquiry_clicked"
   | "broker_resource_clicked"
   | "family_care_roadmap_submitted"
+  | "membership_pricing_guide_submitted"
+  | "employer_dpc_overview_submitted"
+  | "broker_toolkit_submitted"
   | "contact_form_submitted";
 
 export type AnalyticsEventPayload = Record<

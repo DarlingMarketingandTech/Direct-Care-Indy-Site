@@ -24,8 +24,7 @@ import { getLeadPAs, getMedicalDirector } from "@/lib/data/providers";
 
 export const metadata: Metadata = homeMetadata;
 
-// TODO: Swap to /individuals when the dedicated audience page ships.
-const individualsRoute = "/membership";
+const individualsRoute = "/individuals";
 const familiesRoute = "/families";
 
 const audienceCards: Array<{
@@ -44,8 +43,8 @@ const audienceCards: Array<{
     pain: "For adults who want clearer pricing, easier access, and a practical primary care relationship without relying on urgent care for everyday needs.",
     primaryHref: individualsRoute,
     primaryLabel: "Explore Individual Membership",
-    secondaryHref: "/membership#membership-plans",
-    secondaryLabel: "See Membership Pricing",
+    secondaryHref: "/individuals#membership-pricing-guide",
+    secondaryLabel: "Get the Pricing Guide",
     icon: HeartPulse,
   },
   {
@@ -64,7 +63,7 @@ const audienceCards: Array<{
     pain: "For small employers looking for a simpler way to support everyday care access, employee experience, and benefit conversations without replacing major medical coverage.",
     primaryHref: "/employers",
     primaryLabel: "Explore Employer Options",
-    secondaryHref: "/employers",
+    secondaryHref: "/employers#employer-overview",
     secondaryLabel: "Get the Employer Overview",
     icon: Building2,
   },
@@ -74,7 +73,7 @@ const audienceCards: Array<{
     pain: "For advisors who need client-ready language, plan-fit context, and a local primary care partner for employer conversations.",
     primaryHref: "/brokers",
     primaryLabel: "Visit Broker Resources",
-    secondaryHref: "/brokers",
+    secondaryHref: "/brokers#broker-toolkit",
     secondaryLabel: "Get the Broker Toolkit",
     icon: BriefcaseBusiness,
   },

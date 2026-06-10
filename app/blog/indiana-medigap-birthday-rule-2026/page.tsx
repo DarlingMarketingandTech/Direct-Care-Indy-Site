@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, ShieldCheck, DollarSign, Phone } from "lucide-react";
-import { SeniorSavingsCalculator } from "@/components/SeniorSavingsCalculator";
 import { HsaStatusTracker } from "@/components/HsaStatusTracker";
 import { SITE_ASSETS } from "@/lib/images";
 import { MEMBERSHIP_PLANS } from "@/lib/content/membership-pricing";
@@ -112,14 +111,35 @@ export default function BirthdayRuleBlog() {
                 <li>Lock in savings for the entire year</li>
               </ul>
 
-              <h2 className="text-3xl font-bold text-foreground mt-8 mb-4">Calculate Your Savings</h2>
+              <h2 className="text-3xl font-bold text-foreground mt-8 mb-4">Review membership pricing first</h2>
               <p className="text-foreground mb-6">
-                Use the calculator below to see how much you can save by combining Medigap plan switching with HSA-eligible Direct Primary Care:
+                Savings depend on your Medigap plan, HSA status, and care needs. Use the governed senior
+                membership pricing as a starting point, then call or text the clinic to talk through what
+                may fit your situation. Direct Primary Care is not insurance.
               </p>
 
-              {/* Senior Savings Calculator */}
-              <div className="my-8" id="calculator">
-                <SeniorSavingsCalculator />
+              <div
+                className="my-8 rounded-2xl border border-border bg-card p-6 shadow-sm"
+                id="calculator"
+              >
+                <p className="text-foreground mb-4">
+                  Senior membership starts at {seniorMembershipPriceLabel}. Pricing and availability are
+                  subject to change.
+                </p>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    href="/membership#membership-plans"
+                    className="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-secondary/90"
+                  >
+                    View membership pricing
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                  >
+                    Talk with our local care team
+                  </Link>
+                </div>
               </div>
 
               <h2 className="text-3xl font-bold text-foreground mt-8 mb-4">Understanding HSA Eligibility</h2>

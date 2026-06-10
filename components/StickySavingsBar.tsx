@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, TrendingUp } from "lucide-react";
-import { DpcQuizTrigger } from "@/components/dpc-fit-quiz";
 
 export function StickySavingsBar() {
   const pathname = usePathname();
@@ -53,22 +52,22 @@ export function StickySavingsBar() {
             <div>
               <div className="font-semibold text-foreground">See Membership Plans</div>
               <div className="text-sm text-muted-foreground">
-                Review current membership options, add-on pricing, and quiz guidance
+                Review current membership options and add-on pricing
               </div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <DpcQuizTrigger
-              label="Need help choosing a path?"
-              shortLabel="Use the guide"
-              variant="primary"
-              className="!px-6 !py-2 !text-sm hover:scale-105 transition-transform shadow"
-            />
             <Link
               href="/membership"
-              className="hidden md:inline-flex px-5 py-2 rounded-full font-semibold text-sm border border-border text-foreground hover:bg-muted transition-colors interactive-element"
+              className="inline-flex px-6 py-2 rounded-full font-semibold text-sm bg-secondary text-secondary-foreground hover:bg-secondary/90 transition-colors interactive-element shadow"
             >
               View Membership
+            </Link>
+            <Link
+              href="/contact"
+              className="hidden md:inline-flex px-5 py-2 rounded-full font-semibold text-sm border border-border text-foreground hover:bg-muted transition-colors interactive-element"
+            >
+              Location &amp; Contact
             </Link>
             <button
               onClick={handleDismiss}

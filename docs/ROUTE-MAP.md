@@ -64,11 +64,11 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 | `/tech-strategy` | `app/tech-strategy/page.tsx` | Internal — excluded from sitemap |
 | `/api/**` | `app/api/**` | Webhooks, calculations, integrations, secrets |
 
-## `/team` Consolidation Decision
+## `/team` Redirect
 
 | Route | File | Status | Notes |
 |-------|------|--------|-------|
-| `/team` | `app/team/page.tsx` | Active (legacy) | **Not redirected yet** — serves a simplified “Round Table” story page; `/providers` is the canonical provider directory. Keep both until content is merged or `/team` is redirected to `/providers`. Excluded from sitemap. |
+| `/team` | — | Redirect | 301 → `/providers` (`next.config.mjs`). Provider directory and bios are canonical. |
 
 ## Sitemap Policy
 
@@ -77,7 +77,7 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 - Redirected persona routes (`/seniors`, `/uninsured`, `/hdhp-families`)
 - Deprecated routes (`/pricing`, `/faq`)
 - Enrollment (`/join`, `/join/success`)
-- Internal/demo (`/team`, `/tech-strategy`, `/resources/hint-health-demo`, `/offline`)
+- Internal/demo (`/tech-strategy`, `/resources/hint-health-demo`, `/offline`)
 
 ## Pricing Claim Watchlist
 

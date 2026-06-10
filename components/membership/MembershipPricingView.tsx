@@ -35,6 +35,7 @@ import {
   PHARMACY_PRICING_DISCLAIMER,
 } from "@/lib/content/membership-pricing";
 import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
+import { getDpcQuizScheduleLink } from "@/lib/dpc-fit-quiz";
 
 const PLAN_ICONS = {
   individual: User,
@@ -214,16 +215,6 @@ export function MembershipPricingView() {
       </section>
 
       <MembershipSectionNav />
-
-      <section className="section-padding-sm">
-        <div className="content-container max-w-4xl mx-auto">
-          <DpcQuizCtaBand
-            headline="Not sure which membership option fits?"
-            body="Not sure which membership option fits? Take the quiz."
-            variant="muted"
-          />
-        </div>
-      </section>
 
       {/* Plans */}
       <section id="membership-plans" className="section-padding scroll-mt-28">
@@ -589,10 +580,10 @@ export function MembershipPricingView() {
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
             <Link
-              href="/contact"
+              href={getDpcQuizScheduleLink("individual")}
               className="interactive-element inline-flex items-center gap-2 rounded-full border border-white/70 px-8 py-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-white/10"
             >
-              Talk With Our Team
+              Talk With Our Local Care Team
             </Link>
           </div>
         </div>

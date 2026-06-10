@@ -3,8 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Clock, Loader2, Mail, MapPin, MessageSquare, Phone } from "lucide-react";
-import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
+import { Loader2, Mail, MapPin, MessageSquare, Phone } from "lucide-react";
 import {
   CONTACT_ADDRESS,
   CONTACT_EMAIL,
@@ -96,7 +95,17 @@ export function ContactPageContent() {
           </p>
         )}
         <h1 className="text-4xl font-bold text-slate-900 mb-4">{copy.headline}</h1>
-        <p className="text-lg text-slate-600 mb-8">{copy.intro}</p>
+        <p className="text-lg text-slate-600 mb-6">{copy.intro}</p>
+
+        <div className="mb-8 rounded-2xl border border-teal-200 bg-teal-50 p-6 shadow-sm">
+          <div className="mb-2 flex items-center gap-2 text-slate-900">
+            <MapPin className="h-5 w-5 text-teal-600" aria-hidden />
+            <h2 className="text-xl font-semibold">Our clinic</h2>
+          </div>
+          <p className="text-slate-700 font-medium">{CONTACT_ADDRESS.full}</p>
+          <p className="mt-2 text-sm text-slate-600">{OFFICE_HOURS}</p>
+          <p className="mt-2 text-sm text-slate-500">Call or text for current hours if you are unsure.</p>
+        </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <a
@@ -140,24 +149,6 @@ export function ContactPageContent() {
             </a>
           </div>
 
-          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <div className="mb-2 flex items-center gap-2 text-slate-900">
-              <MapPin className="h-5 w-5 text-teal-600" aria-hidden />
-              <h2 className="text-xl font-semibold">Clinic</h2>
-            </div>
-            <p className="text-slate-600 text-sm leading-relaxed">{CONTACT_ADDRESS.full}</p>
-          </div>
-        </div>
-
-        <div className="mt-4 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="mb-2 flex items-center gap-2 text-slate-900">
-            <Clock className="h-5 w-5 text-teal-600" aria-hidden />
-            <h2 className="text-xl font-semibold">Office hours</h2>
-          </div>
-          <p className="text-slate-600">{OFFICE_HOURS}</p>
-          <p className="mt-2 text-sm text-slate-500">
-            Call or text for current hours if you are unsure.
-          </p>
         </div>
 
         <section className="mt-10 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -276,13 +267,25 @@ export function ContactPageContent() {
           )}
         </section>
 
-        <div className="mt-10">
-          <DpcQuizCtaBand
-            headline="Not sure who to contact?"
-            body="Take the quiz and we'll route you to the right next step."
-            variant="muted"
-          />
-        </div>
+        <p className="mt-10 text-sm text-slate-600">
+          Not sure where to start?{" "}
+          <Link href="/quiz" className="font-semibold text-teal-700 hover:underline">
+            Use the 60-second guide
+          </Link>{" "}
+          or explore{" "}
+          <Link href="/individuals" className="font-semibold text-teal-700 hover:underline">
+            individuals
+          </Link>
+          ,{" "}
+          <Link href="/families" className="font-semibold text-teal-700 hover:underline">
+            families
+          </Link>
+          , and{" "}
+          <Link href="/employers" className="font-semibold text-teal-700 hover:underline">
+            employer
+          </Link>{" "}
+          pages.
+        </p>
 
         <div className="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-900 mb-2">Patient Portal</h2>

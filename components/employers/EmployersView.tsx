@@ -47,6 +47,9 @@ import {
 import { trackEvent } from "@/lib/analytics";
 import { EmployerPersonaBoot } from "./EmployerPersonaBoot";
 import { EmployersSectionNav } from "./EmployersSectionNav";
+import { AudienceResourceForm } from "@/components/audience/AudienceResourceForm";
+import { AUDIENCE_RESOURCE_CONFIGS } from "@/lib/content/audience-resources";
+import { getDpcQuizScheduleLink } from "@/lib/dpc-fit-quiz";
 import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 
 const STAT_ICONS = [Hospital, TrendingDown, Activity] as const;
@@ -186,11 +189,11 @@ export function EmployersView() {
 
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
               <PrimaryCta
-                href={EMPLOYER_CONTACT_MAILTO}
+                href="#employer-overview"
                 icon={MessageCircle}
                 onTrack={() => trackEvent("employer_inquiry_clicked", { location: "hero" })}
               >
-                Talk About Employer Plans
+                Get the Employer Overview
               </PrimaryCta>
               <PrimaryCta
                 href={SITE_ASSETS.employers.summaryPdf}
@@ -221,18 +224,8 @@ export function EmployersView() {
 
       <EmployersSectionNav />
 
-      <section className="section-padding-sm">
-        <div className="content-container max-w-4xl mx-auto">
-          <DpcQuizCtaBand
-            headline="Exploring healthcare options for your team?"
-            body="Exploring healthcare options for your team? Take the employer DPC quiz."
-            initialAudience="employer"
-          />
-        </div>
-      </section>
-
       {/* Overview */}
-      <section id="overview" className="section-padding scroll-mt-28">
+      <section id="employer-overview" className="section-padding scroll-mt-28">
         <div className="content-container">
           <ScrollTransition id="employers-overview">
             <SectionHeading title="Healthcare that works better for real-world businesses">
@@ -610,6 +603,27 @@ export function EmployersView() {
         </div>
       </section>
 
+      <section className="section-padding-sm">
+        <div className="content-container max-w-5xl">
+          <AudienceResourceForm
+            config={AUDIENCE_RESOURCE_CONFIGS.employers}
+            source="employers_page"
+            sourcePage="/employers"
+          />
+        </div>
+      </section>
+
+      <section className="section-padding-sm">
+        <div className="content-container max-w-4xl mx-auto">
+          <DpcQuizCtaBand
+            headline="Not sure where to start?"
+            body="Take the employer quiz for a personalized next step — employer path preselected."
+            initialAudience="employer"
+            variant="muted"
+          />
+        </div>
+      </section>
+
       {/* FAQ */}
       <section id="faq" className="section-padding scroll-mt-28 bg-muted/40">
         <div className="content-container">
@@ -646,7 +660,7 @@ export function EmployersView() {
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <PrimaryCta
-              href={EMPLOYER_CONTACT_MAILTO}
+              href={getDpcQuizScheduleLink("employerCore")}
               icon={MessageCircle}
               onTrack={() => trackEvent("employer_inquiry_clicked", { location: "footer" })}
             >
