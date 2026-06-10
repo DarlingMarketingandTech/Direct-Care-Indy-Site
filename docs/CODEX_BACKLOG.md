@@ -19,7 +19,7 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | SEO | 6 | Preview noindexed (`IS_DEMO`); Medigap claims fixed in 7.5; orphan routes open |
 | Content | 7 | Core pages governed; 24/7 / savings language on location SEO routes |
 | Documentation | 8 | Strategy docs accurate; this backlog updated post-audit |
-| Maintainability | 7 | Dead calculators remain; minor doc drift in `MOBILE_APP_ARCHITECTURE.md` |
+| Maintainability | 8 | Deprecated savings calculators removed (7.7); minor doc drift in `MOBILE_APP_ARCHITECTURE.md` |
 
 **Top open risks:** Production indexing blocked until Phase 8, location SEO claims (optional follow-up).
 
@@ -46,7 +46,7 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | `/providers` hub + bio polish | Done — PR #43 |
 | Medigap blog claims governance | Done — PR #44 |
 | Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | Done — PR #45 |
-| `/for-employers` sitemap cleanup (redirect exists) | **Done — `codex/employer-route-consolidation` (PR pending)** |
+| `/for-employers` sitemap cleanup (redirect exists) | Done — PR #46 |
 | Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
 
 ---
@@ -55,10 +55,9 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
-| 1 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
-| 2 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
-| 3 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
-| 4 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
+| 1 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
+| 2 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
+| 3 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -244,7 +243,7 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.6: Employer route consolidation
 
-**Status:** Done — branch `codex/employer-route-consolidation` (PR pending)
+**Status:** Done — PR #46 (`codex/employer-route-consolidation`)
 
 **Priority:** P2 — IA / SEO (audit finding #8)
 
@@ -262,21 +261,23 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.7: Dead code cleanup — calculators
 
-**Status:** Planned
+**Status:** Done — branch `codex/dead-code-cleanup` (PR pending)
 
 **Branch:** `codex/dead-code-cleanup`
 
 **Priority:** P3 — maintainability
 
-**Scope:**
+**Delivered:**
 
-- Remove or archive unused `components/SeniorSavingsCalculator.tsx`, `components/EmployerSavingsCalculator.tsx` after grep confirms zero imports
-- Do not re-add calculators to location or blog pages
+- [x] Removed unused `components/SeniorSavingsCalculator.tsx` (zero imports)
+- [x] Removed unused `components/EmployerSavingsCalculator.tsx` (zero imports)
+- [x] Updated `PROJECT_MEMORY.md` and `COMPONENT-MAP.md` deprecated lists
+- [x] No public page imports deprecated calculators
 
 **Acceptance criteria:**
 
-- [ ] No public page imports deprecated calculators
-- [ ] Build + lint pass
+- [x] No public page imports deprecated calculators
+- [x] Build + lint pass
 
 ---
 
@@ -391,9 +392,9 @@ Task 7.2: providers-bio-polish ──────────── DONE (PR #43
     │
     ├──► Task 7.5: medigap-claims-governance ── DONE (PR #44)
     ├──► Task 7.4: quiz-demote-pass-2 ─────── DONE (PR #45)
-    ├──► Task 7.6: employer-route-consolidation ─ DONE (PR pending)
-    ├──► Task 7.7: dead-code-cleanup  ◄── NEXT
-    ├──► Task 7.9: pwa-shortcut-alignment
+    ├──► Task 7.6: employer-route-consolidation ─ DONE (PR #46)
+    ├──► Task 7.7: dead-code-cleanup ─ DONE (PR pending)
+    ├──► Task 7.9: pwa-shortcut-alignment  ◄── NEXT
     └──► Task 7.8: demo-scheduler verification
               │
               ▼
