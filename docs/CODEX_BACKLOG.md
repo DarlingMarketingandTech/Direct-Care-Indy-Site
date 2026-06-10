@@ -47,6 +47,7 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Medigap blog claims governance | Done — PR #44 |
 | Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | Done — PR #45 |
 | `/for-employers` sitemap cleanup (redirect exists) | Done — PR #46 |
+| Unused savings calculators removed | Done — PR #47 |
 | Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
 
 ---
@@ -56,8 +57,7 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
 | 1 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
-| 2 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
-| 3 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
+| 2 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -261,9 +261,7 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.7: Dead code cleanup — calculators
 
-**Status:** Done — branch `codex/dead-code-cleanup` (PR pending)
-
-**Branch:** `codex/dead-code-cleanup`
+**Status:** Done — PR #47 (`codex/dead-code-cleanup`)
 
 **Priority:** P3 — maintainability
 
@@ -283,24 +281,26 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.8: Demo scheduler wiring verification
 
-**Status:** Mostly done — verification pass
+**Status:** Done — branch `codex/demo-scheduler-wiring` (PR pending)
 
 **Branch:** `codex/demo-scheduler-wiring`
 
 **Priority:** P3
 
-**Scope:**
+**Delivered (June 10, 2026 audit):**
 
-- Audit every schedule / “Talk With Our Local Care Team” CTA sitewide
-- Confirm `getDpcQuizScheduleLink()` pattern; no broken `/schedule/*`
-- Document optional env keys in `.env.example` only — no production requirement
+- [x] Grep: zero `/schedule/*` routes in app code; legacy paths documented in `lib/dpc-fit-quiz.ts` only
+- [x] All high-intent schedule CTAs use `getDpcQuizScheduleLink()` with `/contact?source=quiz&intent=…` fallbacks
+- [x] Surfaces verified: `/individuals`, `/families`, `/membership`, `/employers`, `/brokers`, quiz results
+- [x] Optional env keys documented in `.env.example`; inventory added to `docs/DEVELOPMENT.md`
+- [x] `/employers/virtual-intro` remains demo preview (mailto/phone) — not a broken scheduler route
 
 **Acceptance criteria:**
 
-- [ ] All schedule CTAs use fallbacks or env overrides
-- [ ] Build + lint pass
+- [x] All schedule CTAs use fallbacks or env overrides
+- [x] Build + lint pass
 
-**Key files:** `lib/dpc-fit-quiz.ts`, audience pages, `MembershipPricingView.tsx`
+**Key files:** `lib/dpc-fit-quiz.ts`, `.env.example`, `docs/DEVELOPMENT.md`
 
 ---
 
@@ -393,9 +393,9 @@ Task 7.2: providers-bio-polish ──────────── DONE (PR #43
     ├──► Task 7.5: medigap-claims-governance ── DONE (PR #44)
     ├──► Task 7.4: quiz-demote-pass-2 ─────── DONE (PR #45)
     ├──► Task 7.6: employer-route-consolidation ─ DONE (PR #46)
-    ├──► Task 7.7: dead-code-cleanup ─ DONE (PR pending)
-    ├──► Task 7.9: pwa-shortcut-alignment  ◄── NEXT
-    └──► Task 7.8: demo-scheduler verification
+    ├──► Task 7.7: dead-code-cleanup ─ DONE (PR #47)
+    ├──► Task 7.8: demo-scheduler-wiring ─ DONE (PR pending)
+    ├──► Task 7.9: pwa-shortcut-alignment  ◄── NEXT (PR pending on branch)
               │
               ▼
         Phase 8: pre-launch (stakeholder gate)
