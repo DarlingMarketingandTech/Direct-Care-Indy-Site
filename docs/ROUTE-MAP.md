@@ -34,8 +34,10 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 |-------|------|--------|-------|
 | `/employers` | `app/employers/page.tsx` | Active | Employer-facing overview — `#employer-overview` resource form, audience-first CTAs; contextual broker link OK |
 | `/for-employers` | `app/for-employers/page.tsx` | Active | Employer inquiry route |
-| `/providers` | `app/providers/page.tsx` | Active | Provider listing |
-| `/providers/[slug]` | `app/providers/[slug]/page.tsx` | Active | Provider detail |
+| `/providers` | `app/providers/page.tsx` | Active | Care team hub — renders `components/providers/ProvidersView.tsx` |
+| `/providers/james-pike` | `app/providers/[slug]/page.tsx` | Active | Medical Director bio |
+| `/providers/karina-white` | `app/providers/[slug]/page.tsx` | Active | Lead PA bio |
+| `/providers/chase-keirn` | `app/providers/[slug]/page.tsx` | Active | Lead PA bio |
 | `/locations/[neighborhood]` | `app/locations/[neighborhood]/page.tsx` | Active | Local SEO pages |
 | `/blog/indiana-medigap-birthday-rule-2026` | `app/blog/indiana-medigap-birthday-rule-2026/page.tsx` | Active | Educational article |
 
@@ -53,6 +55,7 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 |-------|--------|-------------|
 | `/pricing` | Deprecated redirect | `/membership` |
 | `/faq` | Deprecated redirect | `/what-is-dpc#faq` |
+| `/providers/maddie-klinger` | Deprecated redirect | `/providers` (removed from active roster) |
 
 ## Internal / Noindex / No-Touch Routes
 

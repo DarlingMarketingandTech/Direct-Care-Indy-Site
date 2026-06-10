@@ -28,7 +28,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/providers/chase-keirn",
     "/providers/james-pike",
     "/providers/karina-white",
-    "/providers/maddie-klinger",
     "/pulmonary",
     "/services-included",
     "/services",

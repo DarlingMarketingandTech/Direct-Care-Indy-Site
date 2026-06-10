@@ -29,6 +29,7 @@ import {
 } from "@/lib/content/contact";
 import { MEMBERSHIP_PLANS, NOT_INCLUDED } from "@/lib/content/membership-pricing";
 import { getDpcQuizScheduleLink } from "@/lib/dpc-fit-quiz";
+import { ProviderCard } from "@/components/providers/ProviderCard";
 import { getLeadPAs, getMedicalDirector } from "@/lib/data/providers";
 import { SITE_ASSETS } from "@/lib/images";
 import { familiesMetadata } from "@/lib/metadata";
@@ -480,24 +481,7 @@ export default function FamiliesPage() {
 
           <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-3">
             {familyProviders.map((provider) => (
-              <article key={provider.slug} className="section-card flex flex-col">
-                <div className="rounded-2xl bg-secondary/10 p-3 text-secondary w-fit">
-                  <Stethoscope className="h-6 w-6" aria-hidden />
-                </div>
-                <h3 className="mt-5 text-xl font-bold text-foreground">{provider.name}</h3>
-                <p className="mt-1 text-sm font-semibold text-secondary">{provider.credentials}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{provider.role}</p>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {provider.bio}
-                </p>
-                <Link
-                  href={`/providers/${provider.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:underline"
-                >
-                  View bio
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link>
-              </article>
+              <ProviderCard key={provider.slug} provider={provider} variant="compact" bioPreviewLines={4} />
             ))}
           </div>
 

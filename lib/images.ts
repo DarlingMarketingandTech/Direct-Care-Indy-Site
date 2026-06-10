@@ -45,7 +45,6 @@ export const SITE_ASSETS = {
   providers: {
     jamesPike: cloudinaryAssets.providerJames,
     karinaWhite: cloudinaryAssets.providerKarina,
-    maddieKlinger: "/images/providers/maddie-klinger.webp",
     chaseKeirn: cloudinaryAssets.providerChase,
   },
   /** Broker lead magnets and employer marketing */
