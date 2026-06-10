@@ -3,41 +3,49 @@
 Phased implementation queue for audience-first site buildout.
 
 > **Workflow:** [`CODEX_WORKFLOW.md`](./CODEX_WORKFLOW.md)  
-> **Strategy:** [`PROJECT_MEMORY.md`](./PROJECT_MEMORY.md) § Current CTA and audience strategy
+> **Strategy:** [`PROJECT_MEMORY.md`](./PROJECT_MEMORY.md) § Current CTA and audience strategy  
+> **Last growth audit:** June 10, 2026 (read-only; informs Phase 7+ below)
 
 Each task should be a focused branch with `npm run build` + `npm run lint` verification before merge.
 
 ---
 
-## Current baseline (on `main`)
+## Current baseline (on `main` + open PRs)
 
 | Area | Status |
 |------|--------|
 | Homepage audience routing + quiz demotion | Done — PR #39 |
 | `/families` audience page + Family Care Roadmap form | Done — PR #38 |
-| `/individuals` | Planned — homepage still routes to `/membership` |
-| Shared lead-form architecture | Not started — Families form is one-off |
-| `/employers`, `/brokers` | Active but not fully audience-first; no page anchors for toolkit/overview sections |
-| `/contact` → Location & Contact | Planned |
-| `/team` vs `/providers` | Both exist; `/providers` is canonical |
-| Production scheduler / GA4 | Explicitly deferred |
+| Post-audit implementation (forms, individuals, contact, quiz, team) | Done — PR #40 |
+| Shared audience resource forms (`AudienceResourceForm`) | Done — PR #40 |
+| `/individuals` audience page | Done — PR #40 |
+| `/employers` + `/brokers` audience-first refinement | Done — PR #40 |
+| `/contact` → Location & Contact hub | Done — PR #40 |
+| `/team` → `/providers` redirect | Done — PR #40 |
+| `MEMBER_COUNT` footer + SEO calculators removed | Done — PR #40 |
+| Env-gated GTM (`NEXT_PUBLIC_GTM_ID`) | Done — PR #40 |
+| Dark mode / heading contrast (`@custom-variant dark`) | **Open — PR #41** |
+| `/providers` hub + bio polish | Planned — Phase 7.2 |
+| Quiz demotion pass 2 (membership, employers, mobile sticky) | Planned — Phase 7.4 |
+| Doc sync (`PROJECT_MEMORY`, `ROUTE-MAP`, this file) | Done — Phase 7.3 |
+| Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
 
 ---
 
-## Recommended merge order
+## Recommended merge order (next up)
 
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
-| — | *(done)* | feat: clean up homepage audience CTAs | — |
-| — | *(done)* | feat: add families audience page | — |
-| 1 | `codex/resource-lead-forms` | feat: shared audience resource lead forms | — |
-| 2 | `codex/individuals` | feat: add individuals audience page | Phase 1 |
-| 3 | `codex/employers-refinement` | feat: refine employers audience page | Phase 1 |
-| 4 | `codex/brokers-refinement` | feat: refine brokers campaign landing | Phase 1 |
-| 5 | `codex/location-contact` | feat: reposition contact as location hub | Phase 2 audience pages stable |
-| 6 | `codex/providers-team-consolidation` | chore: consolidate team into providers | — |
-| 7 | `codex/quiz-sitewide-audit` | chore: demote quiz CTAs sitewide | — |
-| 8 | `codex/demo-scheduler-wiring` | chore: standardize demo scheduler fallbacks | Phases 2–3 |
+| 1 | `fix/text-contrast-dark-mode` | fix: class-based dark mode and heading contrast | — *(PR #41 — merge first)* |
+| — | *(done)* | docs: sync PROJECT_MEMORY, ROUTE-MAP, CODEX_BACKLOG after PR #40 | — |
+| 2 | `codex/medigap-claims-governance` | fix: qualify Medigap blog savings claims | — |
+| 3 | `codex/providers-bio-polish` | feat: improve providers hub and provider bios | PR #41 merged |
+| 4 | `codex/quiz-demote-pass-2` | chore: demote quiz on membership and B2B pages | — |
+| 5 | `codex/employer-route-consolidation` | chore: redirect /for-employers to /employers | — |
+| 6 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
+| 7 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
+| 8 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
+| 9 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -49,345 +57,318 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 - Quiz is **secondary** — not the primary CTA on homepage or audience pages
 - No fake testimonials, ratings, savings guarantees, or “unlimited visits/care”
 - No “DPC replaces insurance”, family cap, or exact-price calculators
-- No GA4/GTM or production scheduler env setup unless Phase 6 is explicitly opened
+- No GA4/GTM or production scheduler env setup unless Phase 8 is explicitly opened
 - Prohibited phrase scan on changed app files before merge
 
 ---
 
-## Phase 0 — Foundation (completed)
+## Phases 0–5 — Completed (summary)
 
-Audience-first strategy, homepage routing, and core guardrails.
+<details>
+<summary>Phase 0 — Foundation (PR #38, #39)</summary>
 
-### Task 0.1: Documentation and agent setup
+- [x] Homepage audience-first routing; global header quiz CTA removed
+- [x] `/families` audience page + Family Care Roadmap form
+- [x] Documentation and agent pointer setup
 
-**Status:** Completed
+</details>
 
-- [x] PROJECT_MEMORY updated with CTA/location/scheduler/analytics strategy
-- [x] AGENTS.md and CLAUDE.md aligned as pointers
-- [x] CODEX_WORKFLOW.md and CODEX_BACKLOG.md created
-- [x] Cursor rule for agent guardrails
-- [x] Audience-first doc sync (`codex/audience-first-doc-sync`)
+<details>
+<summary>Phase 1 — Lead capture (PR #40)</summary>
 
-### Task 0.2: Homepage CTA cleanup and quiz demotion
+- [x] `lib/content/audience-resources.ts` — four resource configs
+- [x] `components/audience/AudienceResourceForm.tsx` — shared form
+- [x] `FamilyCareRoadmapForm` refactored to thin wrapper
+- [x] `/api/leads` extended for all resource types + analytics events
 
-**Status:** Completed — merged PR #39 (`codex/homepage-cta-cleanup`)
+</details>
 
-**Branch:** `codex/homepage-cta-cleanup`
+<details>
+<summary>Phase 2 — Audience pages (PR #40)</summary>
 
-- [x] Remove global header quiz CTA
-- [x] Lead homepage with audience-specific routing (individuals, families, employers, brokers, new to DPC)
-- [x] Demote quiz to secondary “not sure where to start?” placement
-- [x] Stop repeating “Is DPC Right for You? Take the 60-second quiz” on audience cards and sticky surfaces
-- [x] Hide sticky quiz/savings bar on homepage (`/`)
-- [x] Use single-clinic location labels (Michigan Rd) where location CTAs appear
-- [x] Families audience card links to `/families`; secondary roadmap link uses `/families#family-care-roadmap`
+- [x] `/individuals` page + `individualsMetadata`; homepage routes to `/individuals`
+- [x] `/employers` — `#employer-overview`, resource form, quiz demoted
+- [x] `/brokers` — toolkit first, `#broker-toolkit`, resource form
 
-**Key files:** `app/page.tsx`, `components/Navbar.tsx`, `components/StickySavingsBar.tsx`, `components/dpc-fit-quiz/*`
+</details>
 
-### Task 0.3: Families audience page
+<details>
+<summary>Phase 3 — Location & Contact (PR #40)</summary>
 
-**Status:** Completed — merged PR #38 (`codex/families-page`)
+- [x] Contact page location-first layout
+- [x] Nav label **Location & Contact** (`lib/nav.ts`)
+- [x] Metadata and copy updates
 
-**Branch:** `codex/families-page`
+</details>
 
-- [x] Build `/families` with audience-first CTAs
-- [x] Sick-day scenario, governed pricing preview, local clinic access, provider trust, FAQ
-- [x] Family Care Roadmap lead form → `/api/leads`
-- [x] Demo scheduler link via `getDpcQuizScheduleLink("family")`
-- [x] Quiz secondary only
+<details>
+<summary>Phase 4 — Trust and quiz (PR #40 + partial)</summary>
 
-**Key files:** `app/families/page.tsx`, `components/families/FamilyCareRoadmapForm.tsx`, `app/api/leads/route.ts`, `lib/metadata.ts`
+- [x] **4.1** `/team` removed; 301 → `/providers`; `/about` CTA updated
+- [x] **4.2 (partial)** Sticky bar → membership/contact; mobile menu audience links; quiz hidden on `/membership`, `/what-is-dpc`
+- [ ] **4.2 (remainder)** Quiz bands on `/membership`, `/employers`, `/brokers`; mobile sticky scope — see Phase 7.4
 
-**Follow-up:** Migrate Family Care Roadmap form to shared architecture in Phase 1.
+</details>
 
----
+<details>
+<summary>Phase 5 — Demo scheduler (PR #40 + verify)</summary>
 
-## Phase 1 — Lead capture foundation
+- [x] `getDpcQuizScheduleLink()` on membership, employers, brokers
+- [ ] Full sitewide audit — see Task 7.8
 
-**Goal:** One reusable pattern for all four audience resources.
-
-### Task 1.1: Audience-specific resource / lead form architecture
-
-**Status:** Next up
-
-**Branch:** `codex/resource-lead-forms`
-
-**Depends on:** Phase 0
-
-**Scope:**
-
-- Create `lib/content/audience-resources.ts` (or similar) with four resource configs per PROJECT_MEMORY
-- Create shared component, e.g. `components/audience/AudienceResourceForm.tsx`
-  - Config-driven fields (text, select, optional phone)
-  - Hidden metadata: `source`, `audience`, `resource`, `sourcePage`
-  - Non-PHI guardrails + emergency disclaimer
-  - Success/error states with call/text/email fallback
-- Extend `app/api/leads/route.ts` with structured email sections per resource type
-- Add minimal no-op-safe analytics events (mirror `family_care_roadmap_submitted` pattern)
-- Refactor `FamilyCareRoadmapForm` to use shared component or thin wrapper
-
-**Resource configs:**
-
-| Audience | Resource | Fields |
-|----------|----------|--------|
-| Individuals | Transparent Membership & Add-On Pricing Guide | name, email, phone (opt), age range, insurance status, biggest care frustration, preferred contact |
-| Families | Family Care Roadmap | name, email, phone (opt), household size, children 12+, biggest family concern, insurance situation, preferred contact |
-| Employers | Employer DPC Overview | name, company, role, email, phone (opt), employee count band, benefits situation, renewal month (opt), workforce concern |
-| Brokers | Broker Toolkit | name, firm, role, email, phone (opt), client size band, industries, funding model focus, co-branded materials interest |
-
-**Acceptance criteria:**
-
-- [ ] All four configs defined in one file
-- [ ] One shared form component renders any config
-- [ ] POST to `/api/leads` works for each resource
-- [ ] No symptoms/diagnosis/urgent/medical history fields
-- [ ] Build + lint pass; prohibited phrase scan clean
-
-**Key files:** `lib/content/audience-resources.ts`, `components/audience/*`, `app/api/leads/route.ts`, `components/families/FamilyCareRoadmapForm.tsx`
-
-**Do not:** Add GA4/GTM, production scheduler URLs, calculators, or hardcoded pricing.
+</details>
 
 ---
 
-## Phase 2 — Audience page buildout
+## Phase 7 — Post-audit growth (active queue)
 
-Complete the audience-first routing model. Phase 2B and 2C can run in parallel after Phase 1 merges.
+Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 
-### Task 2.1: Individuals audience page
+### Task 7.1: Merge dark mode / heading contrast fix
 
-**Status:** Planned
+**Status:** Ready — PR #41 (`fix/text-contrast-dark-mode`)
 
-**Branch:** `codex/individuals`
-
-**Depends on:** Task 1.1 (shared form)
+**Priority:** P0 — blocks trustworthy Vercel QA for OS-dark-mode users
 
 **Scope:**
 
-- Create `app/individuals/page.tsx` + `individualsMetadata`
-- Mirror `/families` structure, tuned for solo adults:
-  - Hero: membership + local care team CTAs
-  - Everyday-care scenario (HDHP frustration, urgent care detours)
-  - Included / not included clarity
-  - Pricing preview from `MEMBERSHIP_PLANS`
-  - Single-clinic access block
-  - Provider trust section
-  - Individuals resource form (shared component)
-  - FAQ accordion; quiz tertiary only
-- Schedule CTA via `getDpcQuizScheduleLink("individual")`
-- Update homepage `individualsRoute` from `/membership` → `/individuals`
-- Add to sitemap; do not add to main nav unless explicitly decided
+- `@custom-variant dark` in `app/globals.css` (class-based, matches `next-themes`)
+- `.heading-1` / `.heading-2` / `.heading-3` use `text-foreground` not `dark:text-gray-100`
 
 **Acceptance criteria:**
 
-- [ ] `/individuals` builds statically
-- [ ] Homepage Individuals card primary → `/individuals`
-- [ ] Pricing from `MEMBERSHIP_PLANS` only; emergency disclaimer present
+- [ ] PR #41 merged to `main`
+- [ ] On Vercel preview with `<html class="light">`, `h2.heading-2` computes to `#0f172a` when OS prefers dark
+
+**Key files:** `app/globals.css`
+
+---
+
+### Task 7.2: Providers hub and bio polish
+
+**Status:** Next major feature branch
+
+**Branch:** `codex/providers-bio-polish`
+
+**Priority:** P1 — highest trust/conversion gap after audience pages
+
+**Depends on:** Task 7.1
+
+**Scope:**
+
+- Improve `/providers` hub layout, hierarchy, and CTAs (membership, contact, audience links)
+- Strengthen each `/providers/[slug]` bio: credentials, care philosophy, patient-fit context
+- Align Round Table story with `/how-it-works` without duplicating full page
+- Cross-link from homepage provider strip and audience pages
+- Do **not** reintroduce `/team`
+
+**Acceptance criteria:**
+
+- [ ] All four provider slugs render improved bios from `lib/data/providers.ts` (or approved content source)
+- [ ] Single canonical care-team path remains `/providers`
 - [ ] Build + lint pass
 
-**Key files:** `app/individuals/page.tsx`, `app/page.tsx`, `lib/metadata.ts`
+**Key files:** `app/providers/page.tsx`, `app/providers/[slug]/page.tsx`, `lib/data/providers.ts`
 
 ---
 
-### Task 2.2: Employers page refinement
-
-**Status:** Planned
-
-**Branch:** `codex/employers-refinement`
-
-**Depends on:** Task 1.1 (employer resource form)
-
-**Scope:**
-
-- Refactor `app/employers/page.tsx` to audience-first layout (not quiz-first)
-- Add section anchor: `id="employer-overview"` for overview + resource form
-- Integrate shared Employer Overview form
-- Primary CTAs: explore options, get overview, talk with team
-- Contextual broker link in page footer section (not main nav)
-- Demo scheduler via `getDpcQuizScheduleLink("employerCore")` (or `employerSmall` / `employerLarge` by team-size band)
-- Audit/remove quiz-primary CTAs on this page
-- Reconcile `/employers` vs `/for-employers` — clarify canonical employer inquiry path
-
-**Acceptance criteria:**
-
-- [ ] Homepage Employers card secondary can land on `#employer-overview`
-- [ ] No quiz as primary CTA; broker link contextual only
-- [ ] Build + lint pass
-
-**Key files:** `app/employers/page.tsx`, `components/employers/*`
-
----
-
-### Task 2.3: Brokers campaign landing refinement
-
-**Status:** Planned
-
-**Branch:** `codex/brokers-refinement`
-
-**Depends on:** Task 1.1 (broker toolkit form)
-
-**Scope:**
-
-- Refactor `app/brokers/page.tsx` as outbound/campaign landing
-- Add `id="broker-toolkit"` section with shared form
-- Client-ready language, plan-fit context, local partner positioning
-- No main nav addition (footer + homepage card + employer contextual links only)
-- Quiz secondary if at all
-
-**Acceptance criteria:**
-
-- [ ] Homepage Brokers card secondary → `/brokers#broker-toolkit`
-- [ ] Campaign-first copy; no fake savings/testimonials
-- [ ] Build + lint pass
-
-**Key files:** `app/brokers/page.tsx`
-
----
-
-## Phase 3 — Location & Contact
-
-**Goal:** Make the single-clinic story unmistakable and align nav language with strategy.
-
-### Task 3.1: Location & Contact page
-
-**Status:** Planned
-
-**Branch:** `codex/location-contact`
-
-**Depends on:** Phase 2 audience pages stable (contact intents from forms/pages)
-
-**Scope:**
-
-- Reposition `/contact` as **Location & Contact**
-  - Page title, metadata, H1
-  - Prominent address: 7911 N. Michigan Rd., Indianapolis, IN 46268
-  - Hours, map/directions, parking/access notes if available
-  - CTAs: “Visit Our Michigan Rd Clinic”, “Talk With Our Local Care Team”
-- Preserve `?source=…&intent=…` query param handling for quiz and audience fallbacks
-- Optional nav label change: `Contact` → `Location & Contact` in `lib/nav.ts`
-- Audit sitewide for multi-location phrasing
-
-**Acceptance criteria:**
-
-- [ ] No “Find a provider near you” in active UI
-- [ ] Contact page reads as single-clinic hub
-- [ ] All existing contact intent URLs still work
-- [ ] Build + lint pass
-
-**Key files:** `app/contact/page.tsx`, `components/contact/*`, `lib/content/contact.ts`, `lib/nav.ts`
-
----
-
-## Phase 4 — Trust, nav, and legacy cleanup
-
-### Task 4.1: Providers / team consolidation
+### Task 7.3: Documentation sync (post PR #40)
 
 **Status:** Done (2026-06-10)
 
-**Branch:** `codex/providers-team-consolidation`
+**Branch:** `codex/doc-sync-post-audit` *(can commit on current branch)*
 
-**Scope:**
+**Priority:** P1 — prevents agents re-implementing completed work
 
-- Center provider trust on `/providers` and `/providers/[slug]`
-- `/team` removed; 301 redirect `/team` and `/team/:path*` → `/providers` in `next.config.mjs`
-- Nav “Our Team” → `/providers` (already the case in `lib/nav.ts`)
-- `/about` CTA updated to `/providers`
+**Scope (completed):**
 
-**Deferred (separate branch):** Improve `/providers` hub layout and individual `/providers/[slug]` bios — not in this pass.
+- [x] `PROJECT_MEMORY.md` — active audience routes, Location & Contact, `/team` redirect, GTM env-gate, quiz demotion status, deprecated patterns
+- [x] `ROUTE-MAP.md` — `/individuals` Active, contact/employers/brokers notes updated
+- [x] `CODEX_BACKLOG.md` — baseline and Phase 7 queue from growth audit
 
-**Acceptance criteria:**
+**Remaining (optional):** Trim `COMPONENT-MAP.md` deprecated component list if agents confuse it with active code.
 
-- [x] One canonical provider directory path
-- [x] No conflicting team stories across `/team` and `/providers`
-- [x] Build + lint pass
-
-**Key files:** `app/providers/**`, `lib/nav.ts`, `next.config.mjs`, `app/about/page.tsx`
+**Key files:** `docs/PROJECT_MEMORY.md`, `docs/ROUTE-MAP.md`, `docs/CODEX_BACKLOG.md`
 
 ---
 
-### Task 4.2: Sitewide CTA and quiz audit
+### Task 7.4: Quiz demotion pass 2
 
 **Status:** Planned
 
-**Branch:** `codex/quiz-sitewide-audit`
+**Branch:** `codex/quiz-demote-pass-2`
+
+**Priority:** P2 — strategy alignment
 
 **Scope:**
 
-- Audit all pages for quiz-primary CTAs: `what-is-dpc`, `how-it-works`, `wraparound`, `membership`, location pages, legacy redirects
-- Replace with audience-appropriate CTAs where needed
-- Standardize sticky behavior: homepage no sticky quiz; deeper pages soft helper only
-- Clean up page-level `DpcQuizTrigger` usage (prefer “Use the 60-second guide” over default label)
-- Normalize line endings / `.gitattributes` if files like `StickySavingsBar.tsx` keep showing whitespace-only diffs
+- Remove or downgrade `DpcQuizCtaBand` on `/membership`, `/employers`, `/brokers` where audience/resource CTAs already lead
+- Narrow `DpcQuizMobileSticky` `HIDDEN_PATHS` to include `/individuals`, `/families`, `/brokers`
+- Keep quiz on `/quiz`, homepage tertiary band, and “New to DPC” card secondary link
+- Verify no mobile CTA stacking conflicts with `MobileAppBar`
 
 **Acceptance criteria:**
 
-- [ ] Quiz appears as secondary helper, not primary, across public pages
-- [ ] No CTA stacking issues on mobile
+- [ ] Quiz is clearly secondary on membership and B2B pages
+- [ ] No quiz-primary placement on audience resource form sections
 - [ ] Build + lint pass
 
-**Key files:** `components/dpc-fit-quiz/*`, `components/StickySavingsBar.tsx`, audience and education pages
+**Key files:** `components/membership/MembershipPricingView.tsx`, `components/employers/EmployersView.tsx`, `app/brokers/page.tsx`, `components/dpc-fit-quiz/DpcQuizMobileSticky.tsx`
 
 ---
 
-## Phase 5 — Demo scheduler wiring
-
-### Task 5.1: Demo scheduler wiring pass
+### Task 7.5: Medigap blog claims governance
 
 **Status:** Planned
+
+**Branch:** `codex/medigap-claims-governance`
+
+**Priority:** P1 — compliance / SEO risk
+
+**Scope:**
+
+- Review `app/blog/indiana-medigap-birthday-rule-2026/page.tsx` and `layout.tsx`
+- Qualify or soften: “Massive Savings”, specific Medigap dollar ranges, “15–25%” savings without attribution
+- Keep senior plan pricing from `MEMBERSHIP_PLANS` only
+- Cross-check `docs/CONTENT-GOVERNANCE.md` and claims register before merge
+- `HsaStatusTracker` / OBBBA copy remains approval-gated (`NEXT_PUBLIC_HSA_APPROVED`)
+
+**Acceptance criteria:**
+
+- [ ] No unqualified guaranteed savings in H1, meta title, or lead paragraph
+- [ ] Pricing still imported from `membership-pricing.ts`
+- [ ] Build + lint pass; prohibited phrase scan clean
+
+**Key files:** `app/blog/indiana-medigap-birthday-rule-2026/**`
+
+---
+
+### Task 7.6: Employer route consolidation
+
+**Status:** Planned
+
+**Branch:** `codex/employer-route-consolidation`
+
+**Priority:** P2 — IA / SEO
+
+**Scope:**
+
+- Canonical B2B path: `/employers`
+- Redirect `/for-employers` → `/employers` (or merge content then redirect)
+- Update `app/sitemap.ts` and internal links
+- Document canonical path in `ROUTE-MAP.md`
+
+**Acceptance criteria:**
+
+- [ ] One employer inquiry destination in nav, sitemap, and CTAs
+- [ ] Build + lint pass
+
+**Key files:** `app/for-employers/page.tsx`, `next.config.mjs`, `app/sitemap.ts`
+
+---
+
+### Task 7.7: Dead code cleanup — calculators
+
+**Status:** Planned
+
+**Branch:** `codex/dead-code-cleanup`
+
+**Priority:** P3 — maintainability
+
+**Scope:**
+
+- Remove or archive unused `components/SeniorSavingsCalculator.tsx`, `components/EmployerSavingsCalculator.tsx` after grep confirms zero imports
+- Do not re-add calculators to location or blog pages
+
+**Acceptance criteria:**
+
+- [ ] No public page imports deprecated calculators
+- [ ] Build + lint pass
+
+---
+
+### Task 7.8: Demo scheduler wiring verification
+
+**Status:** Mostly done — verification pass
 
 **Branch:** `codex/demo-scheduler-wiring`
 
-**Depends on:** Phases 2–3 (all audience pages exist)
+**Priority:** P3
 
 **Scope:**
 
-- Audit every “Talk With Our Local Care Team” / schedule CTA
-- Ensure all use `getDpcQuizScheduleLink(audience)` pattern
-- Extend `dpcQuizScheduleFallbacks` for individual, family, employer, broker intents
-- Document optional env keys in `.env.example` as **future/optional**
-- Keep fallbacks on `/contact?source=…&intent=…` until production URLs approved
+- Audit every schedule / “Talk With Our Local Care Team” CTA sitewide
+- Confirm `getDpcQuizScheduleLink()` pattern; no broken `/schedule/*`
+- Document optional env keys in `.env.example` only — no production requirement
 
 **Acceptance criteria:**
 
-- [ ] No broken `/schedule/*` links
-- [ ] Consistent audience-intent contact fallbacks
+- [ ] All schedule CTAs use fallbacks or env overrides
 - [ ] Build + lint pass
 
-**Key files:** `lib/dpc-fit-quiz.ts`, `.env.example`, audience page CTAs
-
-**Do not:** Require production Cal.com env vars for local dev.
+**Key files:** `lib/dpc-fit-quiz.ts`, audience pages, `MembershipPricingView.tsx`
 
 ---
 
-## Phase 6 — Pre-launch operations (deferred)
+### Task 7.9: PWA manifest shortcut alignment
+
+**Status:** Planned
+
+**Branch:** `codex/pwa-shortcut-alignment`
+
+**Priority:** P3 — mobile conversion clarity
+
+**Scope:**
+
+- `public/manifest.json` shortcut “Book Appointment” currently → `/join` (member enrollment)
+- Repoint prospect scheduling to `/contact` or demo scheduler pattern until production URLs approved
+- Keep Patient Portal shortcut → Hint login
+
+**Acceptance criteria:**
+
+- [ ] PWA shortcuts distinguish member vs prospect paths
+- [ ] Build + lint pass
+
+**Key files:** `public/manifest.json`
+
+---
+
+## Phase 8 — Pre-launch operations (deferred)
 
 **Do not start unless explicitly requested.**
 
-### Task 6.1: Production analytics
-
-**Branch:** `codex/analytics-production`
-
-- GA4/GTM production configuration
-- Tracking taxonomy implementation beyond no-op `trackEvent()`
-
-### Task 6.2: Production scheduler
-
-**Branch:** `codex/scheduler-production`
-
-- Live Cal.com (or equivalent) scheduler URLs via env vars
-
-### Task 6.3: HSA/FSA gates
-
-**Branch:** `codex/hsa-fsa-gates`
-
-- HSA/FSA approval-gated flows (currently no-touch zone)
-
-### Task 6.4: Launch readiness
+### Task 8.1: Production domain and indexing cutover
 
 **Branch:** `codex/launch-readiness`
 
+**Priority:** P0 at launch — currently blocks organic SEO on Vercel preview
+
+**Scope:**
+
+- Set `NEXT_PUBLIC_SITE_URL` to production domain
+- Verify `IS_DEMO === false` so `app/sitemap.ts` and `app/robots.ts` allow indexing
 - Full QA sweep, Lighthouse, accessibility
-- Sitemap/robots, domain canonicalization
 - Final claims audit against approval register
+
+**Key files:** `lib/site.ts`, Vercel env, `app/robots.ts`, `app/sitemap.ts`
+
+### Task 8.2: Production analytics
+
+**Branch:** `codex/analytics-production`
+
+- GA4/GTM production configuration (`NEXT_PUBLIC_GTM_ID` pattern exists)
+
+### Task 8.3: Production scheduler
+
+**Branch:** `codex/scheduler-production`
+
+- Live Cal.com (or equivalent) URLs via env vars in `getDpcQuizScheduleLink()`
+
+### Task 8.4: HSA/FSA gates
+
+**Branch:** `codex/hsa-fsa-gates`
+
+- HSA/FSA approval-gated flows (`NEXT_PUBLIC_HSA_APPROVED`)
 
 ---
 
@@ -395,36 +376,44 @@ Complete the audience-first routing model. Phase 2B and 2C can run in parallel a
 
 | Phase | Branch | When |
 |-------|--------|------|
-| Local SEO audit | `codex/local-seo-audit` | After Phase 3 — ensure `/locations/[neighborhood]` copy does not imply multiple clinics |
-| Membership page polish | `codex/membership-polish` | After Phase 2 — align membership CTAs with audience routes |
-| Mobile nav polish | `codex/mobile-nav-polish` | After Phase 3 — bottom bar labels, menu copy after contact rename |
+| Content marketing | `codex/blog-hub` | After Task 7.5 — blog index + second senior/employer post |
+| Local SEO audit | `codex/local-seo-audit` | Qualify location page copy; internal links from audience pages |
+| Membership page polish | `codex/membership-polish` | After Task 7.4 — align CTAs with audience routes |
+| Mobile nav polish | `codex/mobile-nav-polish` | Bottom bar: Contact or Individuals discoverability |
 | Claims auditor CI | `codex/claims-auditor-ci` | Pre-launch — wire claims auditor into CI |
+| Turbopack root warning | `codex/turbopack-root` | Set `turbopack.root` in `next.config.mjs` (multiple lockfiles) |
 
 ---
 
-## Phase dependency map
+## Phase dependency map (current)
 
 ```
-Phase 0 (done)
+Phases 0–5 (done, PR #38–#40)
     │
     ▼
-Phase 1: resource-lead-forms
+Task 7.1: merge PR #41 (dark mode contrast)
     │
-    ├──► Phase 2.1: individuals
-    ├──► Phase 2.2: employers-refinement  ─┐
-    └──► Phase 2.3: brokers-refinement   ─┤ (2.2 + 2.3 can parallel)
-                                          │
-                                          ▼
-                              Phase 3: location-contact
-                                          │
-                    ┌─────────────────────┴─────────────────────┐
-                    ▼                                           ▼
-        Phase 4.1: providers-team          Phase 4.2: quiz-sitewide-audit
-                    │                                           │
-                    └─────────────────────┬─────────────────────┘
-                                          ▼
-                              Phase 5: demo-scheduler-wiring
-                                          │
-                                          ▼
-                              Phase 6: pre-launch (deferred)
+    ├──► Task 7.3: doc-sync-post-audit
+    ├──► Task 7.2: providers-bio-polish  ◄── highest feature ROI
+    ├──► Task 7.5: medigap-claims-governance
+    │
+    ├──► Task 7.4: quiz-demote-pass-2
+    ├──► Task 7.6: employer-route-consolidation
+    ├──► Task 7.7: dead-code-cleanup
+    ├──► Task 7.9: pwa-shortcut-alignment
+    └──► Task 7.8: demo-scheduler verification
+              │
+              ▼
+        Phase 8: pre-launch (stakeholder gate)
 ```
+
+---
+
+## 90-day roadmap (audit summary)
+
+| Sprint | Weeks | Focus |
+|--------|-------|--------|
+| **A** | 1–2 | Merge PR #41; doc sync (7.3); Medigap claims (7.5); quiz demote pass 2 (7.4) |
+| **B** | 3–6 | Providers bio polish (7.2); cross-links from audience pages |
+| **C** | 7–10 | Employer route consolidation (7.6); dead code (7.7); PWA shortcuts (7.9); blog hub (optional) |
+| **D** | Stakeholder | Phase 8 — domain cutover, scheduler, GA4, HSA gates |

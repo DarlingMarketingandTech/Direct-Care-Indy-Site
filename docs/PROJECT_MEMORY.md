@@ -70,16 +70,18 @@ There is only one physical clinic:
 
 Each audience page should lead with audience-specific CTAs and resources — not the quiz.
 
-| Audience | Route (planned / active) | Primary CTA direction |
-|----------|--------------------------|------------------------|
-| Individuals | `/individuals` (planned) | Membership, local care team, resource download |
-| Families | `/families` (planned) | Family membership, family resource, schedule/contact |
-| Employers | `/employers` | Employer inquiry, rollout conversation |
+| Audience | Route | Primary CTA direction |
+|----------|-------|------------------------|
+| Individuals | `/individuals` | Membership, local care team, pricing guide download |
+| Families | `/families` | Family membership, Family Care Roadmap, schedule/contact |
+| Employers | `/employers` | Employer overview download, rollout conversation |
 | Brokers | `/brokers` (footer/context only) | Broker toolkit, partnership conversation |
 
-### Planned audience lead resources (gated forms)
+Audience pages are **active** — not in main nav; discoverable via homepage cards, footer, and mobile menu quick links.
 
-Each audience gets its own resource CTA and tailored form questions:
+### Audience lead resources (gated forms)
+
+Implemented via `lib/content/audience-resources.ts` and `components/audience/AudienceResourceForm.tsx`. Each audience has its own resource CTA and tailored form questions:
 
 **Individuals** — *Transparent Membership & Add-On Pricing Guide*
 - Collect: name, email, phone (optional), age range, insurance status, biggest care frustration, preferred contact method
@@ -100,17 +102,18 @@ Each audience gets its own resource CTA and tailored form questions:
 - Pattern: `getDpcQuizScheduleLink()` in `lib/dpc-fit-quiz.ts` — env override when set, otherwise `dpcQuizScheduleFallbacks` (currently `/contact?source=quiz&intent=…`).
 - Extend this pattern for audience-page schedule CTAs; keep all demo links safe for development (no broken `/schedule/*` routes).
 
-### Analytics (deferred)
+### Analytics
 
-- This is still a **development demo site** — **do not** set up GA4 or GTM as an active implementation requirement.
-- `lib/analytics.ts` is a lightweight no-op-safe bridge (`trackEvent` does nothing when `dataLayer` is unavailable).
-- Tracking taxonomy may be documented as **future/planned only** — do not add env setup instructions or production integration work unless explicitly requested.
+- **Production GA4/GTM is deferred** — do not require production analytics setup for local dev.
+- GTM is **env-gated**: loads only when `NEXT_PUBLIC_GTM_ID` is set (`app/layout.tsx`). Leave empty locally to disable.
+- `lib/analytics.ts` is a no-op-safe bridge (`trackEvent` does nothing when `dataLayer` is unavailable).
+- Do not add production integration work unless explicitly requested (see `CODEX_BACKLOG.md` Phase 8).
 
 ### Navigation notes
 
-- **Brokers stay out of main nav** (`lib/nav.ts`). OK in footer and employer/resource contextual links.
-- `/team` may be removed or redirected later; provider trust should center on `/providers` and `/providers/[slug]`.
-- Contact will likely become **Location & Contact** — rename/reposition in a future pass.
+- **Brokers stay out of main nav** (`lib/nav.ts`). OK in footer, homepage audience card, and employer contextual links.
+- **Provider trust is canonical on `/providers` and `/providers/[slug]`.** `/team` is removed; 301 redirect to `/providers` (`next.config.mjs`). Nav label “Our Team” → `/providers`.
+- **`/contact` is Location & Contact** — nav label and page copy are location-first (`lib/nav.ts`, `components/contact/ContactPageContent.tsx`).
 
 ---
 
@@ -119,19 +122,20 @@ Each audience gets its own resource CTA and tailored form questions:
 | Route | Purpose |
 |-------|---------|
 | `/` | Homepage (audience routing) |
+| `/individuals` | Individuals audience page (not main nav) |
+| `/families` | Families audience page (not main nav) |
 | `/membership` | **Active pricing route** |
 | `/what-is-dpc` | DPC education |
 | `/employers` | Employer / B2B |
 | `/brokers` | Broker campaign landing (not main nav) |
-| `/providers` | Provider directory |
+| `/providers` | Provider directory (canonical care team) |
 | `/providers/[slug]` | Provider detail |
-| `/contact` | Contact (→ Location & Contact later) |
+| `/contact` | Location & Contact — single-clinic hub |
 | `/quiz` | Standalone DPC fit quiz (secondary tool) |
 
-**Planned audience routes:** `/individuals`, `/families` — build in upcoming Codex tasks.
+**Redirects:** `/pricing` → `/membership`, `/faq` → `/what-is-dpc#faq`, `/team` → `/providers` (`next.config.mjs`).
 
-- `/membership` is the active pricing route; `/pricing` is not primary.
-- `/pricing` should redirect to `/membership` (`next.config.mjs`).
+Full inventory: [`ROUTE-MAP.md`](./ROUTE-MAP.md). Next implementation queue: [`CODEX_BACKLOG.md`](./CODEX_BACKLOG.md) Phase 7+.
 
 ---
 
@@ -142,7 +146,9 @@ Each audience gets its own resource CTA and tailored form questions:
 - `/brokers` = targeted campaign landing for outbound broker outreach.
 - Brokers OK in footer and employer-page contextual links.
 
-Current main nav (may evolve): Membership Pricing, For Employers, What Is DPC?, Our Team, Contact.
+Current main nav (`lib/nav.ts`): Membership Pricing, For Employers, What Is DPC?, Our Team (`/providers`), Location & Contact.
+
+Mobile bottom bar: Membership Pricing, For Employers, What Is DPC?, Patient Login (external). Full menu adds main nav links plus audience quick links.
 
 ---
 
@@ -185,6 +191,7 @@ Homepage and membership page must import from this file; do not hardcode plan pr
 - No medical history or urgent symptoms collection.
 - Include medical disclaimer and 911 emergency guidance.
 - Use `DpcQuizTrigger` / `DpcQuizCtaBand` sparingly — prefer audience-specific CTAs on audience pages.
+- Sitewide demotion (partial): no global header quiz; homepage sticky quiz hidden; `StickySavingsBar` → membership/contact; quiz hidden on `/membership` and `/what-is-dpc` mobile sticky. **Remaining:** quiz bands on some B2B/pricing pages — see `CODEX_BACKLOG.md` Task 7.4.
 
 ---
 
@@ -220,7 +227,9 @@ Report: files changed, build result, lint result, follow-up issues.
 
 Removed files: `MembershipConfigurator`, `PricingCalculator`, `PricingTiers`, `SavingsPersonas`, `Testimonials`/`TestimonialsCarousel`, `TierDisplay`, `ValueBanner`, `LabPharmacySavingsTable`, `TheWraparoundGuide`, `lib/pricing.ts`.
 
-Removed patterns: age-band pricing, family-cap logic, household calculators, active `/pricing` page (redirect only), quiz-first as primary site strategy, global header quiz CTA, “Find a provider near you”.
+Removed patterns: age-band pricing, family-cap logic, household calculators, active `/pricing` page (redirect only), quiz-first as primary site strategy, global header quiz CTA, “Find a provider near you”, `MEMBER_COUNT` footer social proof, savings calculators on SEO pages (`SeniorSavingsCalculator` on locations/blog), `/team` page (redirect to `/providers`).
+
+Unused but still in repo (cleanup queued): `components/SeniorSavingsCalculator.tsx`, `components/EmployerSavingsCalculator.tsx` — do not re-wire to public pages.
 
 ---
 
