@@ -80,7 +80,7 @@ For historical PWA rollout notes, see [`archive/design-reports/PWA_TRANSFORMATIO
 | Component | Viewport | Behavior |
 |-----------|----------|----------|
 | `MobileAppBar` | `< md` | Fixed bottom nav (4 shortcuts + Menu); hides on scroll down |
-| `DpcQuizMobileSticky` | `< md` | Secondary quiz pill above bottom bar — demote per strategy; hidden on `/quiz` and `/contact` |
+| `DpcQuizMobileSticky` | `< md` | Secondary quiz pill above bottom bar — hidden on high-intent routes (see `HIDDEN_PATHS` in `DpcQuizMobileSticky.tsx`) |
 | `StickySavingsBar` | `≥ md` only | Desktop sticky bar — being refactored away from quiz-first; does not render on mobile |
 
 **Audience-first mobile CTA priority:** bottom bar handles navigation; audience-specific CTAs lead on homepage and audience pages. Quiz sticky is secondary support only — do not stack multiple quiz entry points. Avoid a third fixed quiz CTA on the same viewport.
@@ -94,4 +94,6 @@ Touch targets: bottom bar items use `min-h-[60px]`; quiz trigger uses full-width
 3. Lead with **audience-specific CTAs** on homepage and audience pages — do not over-prioritize `DpcQuizTrigger` / `DpcQuizMobileSticky`
 4. Use quiz components sparingly as secondary “not sure where to start?” support, not as the dominant CTA everywhere
 5. If adding a page-specific sticky CTA, add its path to `DpcQuizMobileSticky` `HIDDEN_PATHS` to prevent stacking
+
+**Current `HIDDEN_PATHS`:** `/`, `/quiz`, `/contact`, `/membership`, `/what-is-dpc`, `/providers`, `/individuals`, `/families`, `/employers`, `/brokers`
 6. Run mobile viewport QA from [`QA-CHECKLIST.md`](./QA-CHECKLIST.md)

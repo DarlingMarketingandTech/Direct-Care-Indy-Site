@@ -193,7 +193,8 @@ Homepage and membership page must import from this file; do not hardcode plan pr
 - No medical history or urgent symptoms collection.
 - Include medical disclaimer and 911 emergency guidance.
 - Use `DpcQuizTrigger` / `DpcQuizCtaBand` sparingly — prefer audience-specific CTAs on audience pages.
-- Sitewide demotion (partial): no global header quiz; homepage sticky quiz hidden; `StickySavingsBar` → membership/contact; quiz hidden on `/membership`, `/what-is-dpc`, and `/providers` mobile sticky. **Remaining:** quiz bands on some B2B/pricing pages — see `CODEX_BACKLOG.md` Task 7.4.
+- Sitewide demotion: no global header quiz; homepage sticky quiz hidden; `StickySavingsBar` → membership/contact; no `DpcQuizCtaBand` on `/membership`, `/employers`, or `/brokers`; mobile sticky hidden on `/`, `/quiz`, `/contact`, `/membership`, `/what-is-dpc`, `/providers`, `/individuals`, `/families`, `/employers`, `/brokers`.
+- **Active quiz placements:** `/quiz` page; homepage tertiary band; one contextual band on `/what-is-dpc`; inline text link on `/individuals` and `/families` heroes only.
 
 ---
 

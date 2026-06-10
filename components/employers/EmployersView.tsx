@@ -50,7 +50,6 @@ import { EmployersSectionNav } from "./EmployersSectionNav";
 import { AudienceResourceForm } from "@/components/audience/AudienceResourceForm";
 import { AUDIENCE_RESOURCE_CONFIGS } from "@/lib/content/audience-resources";
 import { getDpcQuizScheduleLink } from "@/lib/dpc-fit-quiz";
-import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 
 const STAT_ICONS = [Hospital, TrendingDown, Activity] as const;
 
@@ -609,17 +608,6 @@ export function EmployersView() {
             config={AUDIENCE_RESOURCE_CONFIGS.employers}
             source="employers_page"
             sourcePage="/employers"
-          />
-        </div>
-      </section>
-
-      <section className="section-padding-sm">
-        <div className="content-container max-w-4xl mx-auto">
-          <DpcQuizCtaBand
-            headline="Not sure where to start?"
-            body="Take the employer quiz for a personalized next step — employer path preselected."
-            initialAudience="employer"
-            variant="muted"
           />
         </div>
       </section>

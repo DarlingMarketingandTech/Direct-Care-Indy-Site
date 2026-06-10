@@ -7,8 +7,6 @@ import { brokersMetadata } from "@/lib/metadata";
 import { AudienceResourceForm } from "@/components/audience/AudienceResourceForm";
 import { AUDIENCE_RESOURCE_CONFIGS } from "@/lib/content/audience-resources";
 import { getDpcQuizScheduleLink } from "@/lib/dpc-fit-quiz";
-import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
-
 export const metadata: Metadata = brokersMetadata;
 
 const brokerResources = [
@@ -82,15 +80,6 @@ export default function BrokersPage() {
             config={AUDIENCE_RESOURCE_CONFIGS.brokers}
             source="brokers_page"
             sourcePage="/brokers"
-          />
-        </div>
-
-        <div className="mt-12">
-          <DpcQuizCtaBand
-            headline="Not sure where to start?"
-            body="Take the broker quiz for a personalized next step — broker path preselected."
-            initialAudience="broker"
-            variant="muted"
           />
         </div>
 
