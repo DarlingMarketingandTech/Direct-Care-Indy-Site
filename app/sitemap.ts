@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/brokers",
     "/contact",
     "/employers",
+    "/families",
     "/for-employers",
     "/how-it-works",
     "/locations/carmel",

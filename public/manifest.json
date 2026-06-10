@@ -28,7 +28,7 @@
       "name": "Patient Portal",
       "short_name": "Portal",
       "description": "Access your medical records and schedule appointments",
-      "url": "/resources/hint-health-demo",
+      "url": "https://directcareindy.hint.com/login",
       "icons": [{ "src": "/images/logos/dci-icon-192.png", "sizes": "192x192" }]
     },
     {
