@@ -4,13 +4,30 @@ Phased implementation queue for audience-first site buildout.
 
 > **Workflow:** [`CODEX_WORKFLOW.md`](./CODEX_WORKFLOW.md)  
 > **Strategy:** [`PROJECT_MEMORY.md`](./PROJECT_MEMORY.md) § Current CTA and audience strategy  
-> **Last growth audit:** June 10, 2026 (read-only; informs Phase 7+ below)
+> **Last growth audit:** June 10, 2026 (post–PR #43; read-only; informs Phase 7+ below)
 
 Each task should be a focused branch with `npm run build` + `npm run lint` verification before merge.
 
 ---
 
-## Current baseline (on `main` + open PRs)
+## Growth audit snapshot (June 10, 2026 — post–PR #43)
+
+| Dimension | Score | Notes |
+|-----------|-------|-------|
+| Architecture | 9 | Providers module, governed pricing, env-gated GTM |
+| Conversion | 8 | Audience routing + resource forms strong; quiz still competes on membership/B2B |
+| SEO | 6 | Preview noindexed (`IS_DEMO`); Medigap claims + orphan routes open |
+| Content | 7 | Core pages governed; 24/7 / savings language on location SEO routes |
+| Documentation | 8 | Strategy docs accurate; this backlog updated post-audit |
+| Maintainability | 7 | Dead calculators remain; minor doc drift in `MOBILE_APP_ARCHITECTURE.md` |
+
+**Top open risks:** Medigap blog savings claims (7.5), quiz on membership/employers/brokers + mobile sticky (7.4), production indexing blocked until Phase 8.
+
+**Verified on `main`:** `npm run build` + `npm run lint` pass; 49 static pages; 3 provider bios.
+
+---
+
+## Current baseline (on `main`)
 
 | Area | Status |
 |------|--------|
@@ -25,9 +42,11 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | `MEMBER_COUNT` footer + SEO calculators removed | Done — PR #40 |
 | Env-gated GTM (`NEXT_PUBLIC_GTM_ID`) | Done — PR #40 |
 | Dark mode / heading contrast (`@custom-variant dark`) | Done — PR #41 |
-| `/providers` hub + bio polish | **Open — `codex/providers-bio-polish`** |
-| Quiz demotion pass 2 (membership, employers, mobile sticky) | Planned — Phase 7.4 |
-| Doc sync (`PROJECT_MEMORY`, `ROUTE-MAP`, this file) | Done — Phase 7.3 |
+| Doc sync (`PROJECT_MEMORY`, `ROUTE-MAP`, `COMPONENT-MAP`) | Done — PR #42 |
+| `/providers` hub + bio polish | Done — PR #43 |
+| Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | Planned — Task 7.4 |
+| Medigap blog claims governance | Planned — Task 7.5 |
+| `/for-employers` sitemap cleanup (redirect exists) | Partial — Task 7.6 |
 | Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
 
 ---
@@ -36,14 +55,13 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
-| 1 | `codex/providers-bio-polish` | feat: redesign providers hub and provider bios | PR #41 merged |
-| 2 | `codex/medigap-claims-governance` | fix: qualify Medigap blog savings claims | — |
-| 4 | `codex/quiz-demote-pass-2` | chore: demote quiz on membership and B2B pages | — |
-| 5 | `codex/employer-route-consolidation` | chore: redirect /for-employers to /employers | — |
-| 6 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
-| 7 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
-| 8 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
-| 9 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
+| 1 | `codex/medigap-claims-governance` | fix: qualify Medigap blog savings claims | — |
+| 2 | `codex/quiz-demote-pass-2` | chore: demote quiz on membership and B2B pages | — |
+| 3 | `codex/employer-route-consolidation` | chore: remove /for-employers from sitemap; update ROUTE-MAP | redirect already on `main` |
+| 4 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
+| 5 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
+| 6 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
+| 7 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -120,11 +138,11 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 ## Phase 7 — Post-audit growth (active queue)
 
-Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
+Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start here:** Task 7.5 (compliance), then Task 7.4 (quiz strategy).
 
 ### Task 7.1: Merge dark mode / heading contrast fix
 
-**Status:** Ready — PR #41 (`fix/text-contrast-dark-mode`)
+**Status:** Done — PR #41 (`fix/text-contrast-dark-mode`)
 
 **Priority:** P0 — blocks trustworthy Vercel QA for OS-dark-mode users
 
@@ -135,16 +153,18 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 
 **Acceptance criteria:**
 
-- [ ] PR #41 merged to `main`
-- [ ] On Vercel preview with `<html class="light">`, `h2.heading-2` computes to `#0f172a` when OS prefers dark
+- [x] PR #41 merged to `main`
+- [x] On Vercel preview with `<html class="light">`, `h2.heading-2` computes to `#0f172a` when OS prefers dark
 
 **Key files:** `app/globals.css`
+
+**Follow-up (optional):** Navbar / `MobileAppBar` still use light-only hardcoded colors; `ThemeToggle` not mounted — see optional `codex/mobile-nav-polish`.
 
 ---
 
 ### Task 7.2: Providers hub and bio polish
 
-**Status:** Done — branch `codex/providers-bio-polish` (PR pending)
+**Status:** Done — PR #43 (`codex/providers-bio-polish`)
 
 **Priority:** P1 — highest trust/conversion gap after audience pages
 
@@ -168,9 +188,9 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 
 ### Task 7.3: Documentation sync (post PR #40)
 
-**Status:** Done (2026-06-10)
+**Status:** Done — PR #42 (`codex/doc-sync-post-audit`, 2026-06-10)
 
-**Branch:** `codex/doc-sync-post-audit` *(can commit on current branch)*
+**Branch:** `codex/doc-sync-post-audit`
 
 **Priority:** P1 — prevents agents re-implementing completed work
 
@@ -188,17 +208,17 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 
 ### Task 7.4: Quiz demotion pass 2
 
-**Status:** Planned
+**Status:** Planned — **P1 from post–PR #43 audit**
 
 **Branch:** `codex/quiz-demote-pass-2`
 
-**Priority:** P2 — strategy alignment
+**Priority:** P1 — strategy alignment (audit: quiz still competes on membership/B2B)
 
 **Scope:**
 
 - Remove or downgrade `DpcQuizCtaBand` on `/membership`, `/employers`, `/brokers` where audience/resource CTAs already lead
-- Narrow `DpcQuizMobileSticky` `HIDDEN_PATHS` to include `/individuals`, `/families`, `/brokers`
-- Keep quiz on `/quiz`, homepage tertiary band, and “New to DPC” card secondary link
+- Extend `DpcQuizMobileSticky` `HIDDEN_PATHS` to include `/individuals`, `/families`, `/employers`, `/brokers`
+- Keep quiz on `/quiz`, homepage tertiary band, one contextual band on `/what-is-dpc`, and “New to DPC” card secondary link
 - Verify no mobile CTA stacking conflicts with `MobileAppBar`
 
 **Acceptance criteria:**
@@ -213,11 +233,11 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 
 ### Task 7.5: Medigap blog claims governance
 
-**Status:** Planned
+**Status:** Planned — **next up (P0 compliance from audit)**
 
 **Branch:** `codex/medigap-claims-governance`
 
-**Priority:** P1 — compliance / SEO risk
+**Priority:** P0 — compliance / SEO risk (audit critical finding #1)
 
 **Scope:**
 
@@ -226,6 +246,7 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 - Keep senior plan pricing from `MEMBERSHIP_PLANS` only
 - Cross-check `docs/CONTENT-GOVERNANCE.md` and claims register before merge
 - `HsaStatusTracker` / OBBBA copy remains approval-gated (`NEXT_PUBLIC_HSA_APPROVED`)
+- **Related (optional same branch or follow-up):** qualify “24/7 Direct Access” on `app/locations/[neighborhood]/page.tsx`, `lib/content/dpc.ts`, `app/pulmonary/page.tsx`; review `public/images/clinical/ninety-ten-model.svg` “Unlimited visits” text
 
 **Acceptance criteria:**
 
@@ -239,25 +260,26 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 
 ### Task 7.6: Employer route consolidation
 
-**Status:** Planned
+**Status:** Partial — redirect done; sitemap cleanup remaining
 
 **Branch:** `codex/employer-route-consolidation`
 
-**Priority:** P2 — IA / SEO
+**Priority:** P2 — IA / SEO (audit finding #8)
 
 **Scope:**
 
-- Canonical B2B path: `/employers`
-- Redirect `/for-employers` → `/employers` (or merge content then redirect)
-- Update `app/sitemap.ts` and internal links
-- Document canonical path in `ROUTE-MAP.md`
+- [x] Canonical B2B path: `/employers`
+- [x] Redirect `/for-employers` → `/employers` (`app/for-employers/page.tsx`)
+- [ ] Remove `/for-employers` from `app/sitemap.ts` (duplicate crawl signal)
+- [ ] Document redirect + canonical path in `ROUTE-MAP.md`
+- [ ] Grep internal links for stale `/for-employers` references
 
 **Acceptance criteria:**
 
 - [ ] One employer inquiry destination in nav, sitemap, and CTAs
 - [ ] Build + lint pass
 
-**Key files:** `app/for-employers/page.tsx`, `next.config.mjs`, `app/sitemap.ts`
+**Key files:** `app/for-employers/page.tsx`, `app/sitemap.ts`, `docs/ROUTE-MAP.md`
 
 ---
 
@@ -371,11 +393,12 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 | Phase | Branch | When |
 |-------|--------|------|
 | Content marketing | `codex/blog-hub` | After Task 7.5 — blog index + second senior/employer post |
-| Local SEO audit | `codex/local-seo-audit` | Qualify location page copy; internal links from audience pages |
+| Local SEO / orphan routes | `codex/local-seo-audit` | Qualify location copy; IA decision on `/pulmonary`, `/services-included`, `/welcome`; update `ROUTE-MAP.md` |
 | Membership page polish | `codex/membership-polish` | After Task 7.4 — align CTAs with audience routes |
-| Mobile nav polish | `codex/mobile-nav-polish` | Bottom bar: Contact or Individuals discoverability |
+| Mobile nav polish | `codex/mobile-nav-polish` | Bottom bar: Our Team or Location discoverability; navbar semantic dark tokens |
 | Claims auditor CI | `codex/claims-auditor-ci` | Pre-launch — wire claims auditor into CI |
 | Turbopack root warning | `codex/turbopack-root` | Set `turbopack.root` in `next.config.mjs` (multiple lockfiles) |
+| Doc hygiene | `codex/mobile-arch-doc-sync` | Align `MOBILE_APP_ARCHITECTURE.md` with `HIDDEN_PATHS` + Location & Contact label |
 
 ---
 
@@ -385,14 +408,13 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 Phases 0–5 (done, PR #38–#40)
     │
     ▼
-Task 7.1: merge PR #41 (dark mode contrast)
+Task 7.1: dark mode contrast ────────────── DONE (PR #41)
+Task 7.3: doc-sync-post-audit ───────────── DONE (PR #42)
+Task 7.2: providers-bio-polish ──────────── DONE (PR #43)
     │
-    ├──► Task 7.3: doc-sync-post-audit
-    ├──► Task 7.2: providers-bio-polish  ◄── highest feature ROI
-    ├──► Task 7.5: medigap-claims-governance
-    │
+    ├──► Task 7.5: medigap-claims-governance  ◄── NEXT (P0 compliance)
     ├──► Task 7.4: quiz-demote-pass-2
-    ├──► Task 7.6: employer-route-consolidation
+    ├──► Task 7.6: employer-route-consolidation (sitemap remainder)
     ├──► Task 7.7: dead-code-cleanup
     ├──► Task 7.9: pwa-shortcut-alignment
     └──► Task 7.8: demo-scheduler verification
@@ -403,11 +425,11 @@ Task 7.1: merge PR #41 (dark mode contrast)
 
 ---
 
-## 90-day roadmap (audit summary)
+## 90-day roadmap (post–PR #43 audit)
 
 | Sprint | Weeks | Focus |
 |--------|-------|--------|
-| **A** | 1–2 | Merge PR #41; doc sync (7.3); Medigap claims (7.5); quiz demote pass 2 (7.4) |
-| **B** | 3–6 | Providers bio polish (7.2); cross-links from audience pages |
-| **C** | 7–10 | Employer route consolidation (7.6); dead code (7.7); PWA shortcuts (7.9); blog hub (optional) |
-| **D** | Stakeholder | Phase 8 — domain cutover, scheduler, GA4, HSA gates |
+| **A** | 1–2 | Medigap claims (7.5); quiz demote pass 2 (7.4); finish employer sitemap (7.6) |
+| **B** | 3–4 | Local SEO / orphan route IA; qualify location 24/7 and savings copy |
+| **C** | 5–8 | Dead code (7.7); PWA shortcuts (7.9); scheduler audit (7.8); optional blog hub |
+| **D** | Stakeholder | Phase 8 — domain cutover, indexing, scheduler, GA4, HSA gates |
