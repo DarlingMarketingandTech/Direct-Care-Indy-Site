@@ -16,12 +16,12 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 |-----------|-------|-------|
 | Architecture | 9 | Providers module, governed pricing, env-gated GTM |
 | Conversion | 8 | Audience routing + resource forms strong; quiz still competes on membership/B2B |
-| SEO | 6 | Preview noindexed (`IS_DEMO`); Medigap claims + orphan routes open |
+| SEO | 6 | Preview noindexed (`IS_DEMO`); Medigap claims fixed in 7.5; orphan routes open |
 | Content | 7 | Core pages governed; 24/7 / savings language on location SEO routes |
 | Documentation | 8 | Strategy docs accurate; this backlog updated post-audit |
 | Maintainability | 7 | Dead calculators remain; minor doc drift in `MOBILE_APP_ARCHITECTURE.md` |
 
-**Top open risks:** Medigap blog savings claims (7.5), quiz on membership/employers/brokers + mobile sticky (7.4), production indexing blocked until Phase 8.
+**Top open risks:** Quiz on membership/employers/brokers + mobile sticky (7.4), production indexing blocked until Phase 8, location SEO claims (optional follow-up).
 
 **Verified on `main`:** `npm run build` + `npm run lint` pass; 49 static pages; 3 provider bios.
 
@@ -45,7 +45,7 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Doc sync (`PROJECT_MEMORY`, `ROUTE-MAP`, `COMPONENT-MAP`) | Done — PR #42 |
 | `/providers` hub + bio polish | Done — PR #43 |
 | Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | Planned — Task 7.4 |
-| Medigap blog claims governance | Planned — Task 7.5 |
+| Medigap blog claims governance | **Open — `codex/medigap-claims-governance`** |
 | `/for-employers` sitemap cleanup (redirect exists) | Partial — Task 7.6 |
 | Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
 
@@ -55,13 +55,12 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
-| 1 | `codex/medigap-claims-governance` | fix: qualify Medigap blog savings claims | — |
-| 2 | `codex/quiz-demote-pass-2` | chore: demote quiz on membership and B2B pages | — |
-| 3 | `codex/employer-route-consolidation` | chore: remove /for-employers from sitemap; update ROUTE-MAP | redirect already on `main` |
-| 4 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
-| 5 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
-| 6 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
-| 7 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
+| 1 | `codex/quiz-demote-pass-2` | chore: demote quiz on membership and B2B pages | — |
+| 2 | `codex/employer-route-consolidation` | chore: remove /for-employers from sitemap; update ROUTE-MAP | redirect already on `main` |
+| 3 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
+| 4 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
+| 5 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
+| 6 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -233,26 +232,21 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.5: Medigap blog claims governance
 
-**Status:** Planned — **next up (P0 compliance from audit)**
-
-**Branch:** `codex/medigap-claims-governance`
+**Status:** Done — branch `codex/medigap-claims-governance` (PR pending)
 
 **Priority:** P0 — compliance / SEO risk (audit critical finding #1)
 
-**Scope:**
+**Delivered:**
 
-- Review `app/blog/indiana-medigap-birthday-rule-2026/page.tsx` and `layout.tsx`
-- Qualify or soften: “Massive Savings”, specific Medigap dollar ranges, “15–25%” savings without attribution
-- Keep senior plan pricing from `MEMBERSHIP_PLANS` only
-- Cross-check `docs/CONTENT-GOVERNANCE.md` and claims register before merge
-- `HsaStatusTracker` / OBBBA copy remains approval-gated (`NEXT_PUBLIC_HSA_APPROVED`)
-- **Related (optional same branch or follow-up):** qualify “24/7 Direct Access” on `app/locations/[neighborhood]/page.tsx`, `lib/content/dpc.ts`, `app/pulmonary/page.tsx`; review `public/images/clinical/ninety-ten-model.svg` “Unlimited visits” text
+- [x] Qualified H1, meta title, description, OG, and Twitter — removed “Massive Savings” / “maximum savings”
+- [x] Removed specific Medigap dollar ranges (`$217`, `15–25%`, `$400–$650`, `$4,560+`)
+- [x] Reframed stack box as illustrative categories with broker/tax-advisor guidance
+- [x] Senior pricing still from `MEMBERSHIP_PLANS` only
+- [x] `HsaStatusTracker` gated behind `NEXT_PUBLIC_HSA_APPROVED`; qualified HSA fallback copy
+- [x] CTA aligned to “Talk with our local care team”; `/seniors` link → `/membership#membership-plans`
+- [x] Strengthened disclaimer (illustrative examples; individual results vary)
 
-**Acceptance criteria:**
-
-- [ ] No unqualified guaranteed savings in H1, meta title, or lead paragraph
-- [ ] Pricing still imported from `membership-pricing.ts`
-- [ ] Build + lint pass; prohibited phrase scan clean
+**Deferred (follow-up `codex/local-seo-audit`):** location pages, `lib/content/dpc.ts`, `ninety-ten-model.svg`
 
 **Key files:** `app/blog/indiana-medigap-birthday-rule-2026/**`
 
@@ -412,8 +406,8 @@ Task 7.1: dark mode contrast ────────────── DONE (PR
 Task 7.3: doc-sync-post-audit ───────────── DONE (PR #42)
 Task 7.2: providers-bio-polish ──────────── DONE (PR #43)
     │
-    ├──► Task 7.5: medigap-claims-governance  ◄── NEXT (P0 compliance)
-    ├──► Task 7.4: quiz-demote-pass-2
+    ├──► Task 7.5: medigap-claims-governance ── DONE (PR pending)
+    ├──► Task 7.4: quiz-demote-pass-2  ◄── NEXT
     ├──► Task 7.6: employer-route-consolidation (sitemap remainder)
     ├──► Task 7.7: dead-code-cleanup
     ├──► Task 7.9: pwa-shortcut-alignment
