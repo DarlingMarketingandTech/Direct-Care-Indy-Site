@@ -21,7 +21,7 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Documentation | 8 | Strategy docs accurate; this backlog updated post-audit |
 | Maintainability | 7 | Dead calculators remain; minor doc drift in `MOBILE_APP_ARCHITECTURE.md` |
 
-**Top open risks:** Production indexing blocked until Phase 8, `/for-employers` sitemap (7.6), location SEO claims (optional follow-up).
+**Top open risks:** Production indexing blocked until Phase 8, location SEO claims (optional follow-up).
 
 **Verified on `main`:** `npm run build` + `npm run lint` pass; 49 static pages; 3 provider bios.
 
@@ -45,8 +45,8 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Doc sync (`PROJECT_MEMORY`, `ROUTE-MAP`, `COMPONENT-MAP`) | Done — PR #42 |
 | `/providers` hub + bio polish | Done — PR #43 |
 | Medigap blog claims governance | Done — PR #44 |
-| Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | **Open — `codex/quiz-demote-pass-2`** |
-| `/for-employers` sitemap cleanup (redirect exists) | Partial — Task 7.6 |
+| Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | Done — PR #45 |
+| `/for-employers` sitemap cleanup (redirect exists) | **Done — `codex/employer-route-consolidation` (PR pending)** |
 | Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
 
 ---
@@ -55,11 +55,10 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
-| 1 | `codex/employer-route-consolidation` | chore: remove /for-employers from sitemap; update ROUTE-MAP | redirect already on `main` |
-| 2 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
-| 3 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
-| 4 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
-| 5 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
+| 1 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
+| 2 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
+| 3 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
+| 4 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -206,7 +205,7 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.4: Quiz demotion pass 2
 
-**Status:** Done — branch `codex/quiz-demote-pass-2` (PR pending)
+**Status:** Done — PR #45 (`codex/quiz-demote-pass-2`)
 
 **Priority:** P1 — strategy alignment (audit: quiz still competes on membership/B2B)
 
@@ -245,24 +244,17 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.6: Employer route consolidation
 
-**Status:** Partial — redirect done; sitemap cleanup remaining
-
-**Branch:** `codex/employer-route-consolidation`
+**Status:** Done — branch `codex/employer-route-consolidation` (PR pending)
 
 **Priority:** P2 — IA / SEO (audit finding #8)
 
-**Scope:**
+**Delivered:**
 
 - [x] Canonical B2B path: `/employers`
 - [x] Redirect `/for-employers` → `/employers` (`app/for-employers/page.tsx`)
-- [ ] Remove `/for-employers` from `app/sitemap.ts` (duplicate crawl signal)
-- [ ] Document redirect + canonical path in `ROUTE-MAP.md`
-- [ ] Grep internal links for stale `/for-employers` references
-
-**Acceptance criteria:**
-
-- [ ] One employer inquiry destination in nav, sitemap, and CTAs
-- [ ] Build + lint pass
+- [x] Removed `/for-employers` from `app/sitemap.ts`
+- [x] Documented redirect in `ROUTE-MAP.md` + sitemap exclusion policy
+- [x] Grep: no stale internal links in app code
 
 **Key files:** `app/for-employers/page.tsx`, `app/sitemap.ts`, `docs/ROUTE-MAP.md`
 
@@ -398,9 +390,9 @@ Task 7.3: doc-sync-post-audit ───────────── DONE (PR #
 Task 7.2: providers-bio-polish ──────────── DONE (PR #43)
     │
     ├──► Task 7.5: medigap-claims-governance ── DONE (PR #44)
-    ├──► Task 7.4: quiz-demote-pass-2 ─────── DONE (PR pending)
-    ├──► Task 7.6: employer-route-consolidation  ◄── NEXT (sitemap remainder)
-    ├──► Task 7.7: dead-code-cleanup
+    ├──► Task 7.4: quiz-demote-pass-2 ─────── DONE (PR #45)
+    ├──► Task 7.6: employer-route-consolidation ─ DONE (PR pending)
+    ├──► Task 7.7: dead-code-cleanup  ◄── NEXT
     ├──► Task 7.9: pwa-shortcut-alignment
     └──► Task 7.8: demo-scheduler verification
               │
