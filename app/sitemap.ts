@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/employers",
     "/families",
-    "/for-employers",
     "/how-it-works",
     "/individuals",
     "/locations/carmel",

@@ -33,7 +33,6 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 | Route | File | Status | Notes |
 |-------|------|--------|-------|
 | `/employers` | `app/employers/page.tsx` | Active | Employer-facing overview — `#employer-overview` resource form, audience-first CTAs; contextual broker link OK |
-| `/for-employers` | `app/for-employers/page.tsx` | Active | Employer inquiry route |
 | `/providers` | `app/providers/page.tsx` | Active | Care team hub — renders `components/providers/ProvidersView.tsx` |
 | `/providers/james-pike` | `app/providers/[slug]/page.tsx` | Active | Medical Director bio |
 | `/providers/karina-white` | `app/providers/[slug]/page.tsx` | Active | Lead PA bio |
@@ -74,11 +73,18 @@ Route and file inventory only. Pricing source of truth: `lib/content/membership-
 |-------|------|--------|-------|
 | `/team` | — | Redirect | 301 → `/providers` (`next.config.mjs`). Provider directory and bios are canonical. |
 
+## `/for-employers` Redirect
+
+| Route | File | Status | Notes |
+|-------|------|--------|-------|
+| `/for-employers` | `app/for-employers/page.tsx` | Redirect | → `/employers` (server redirect). Canonical B2B path is `/employers` only; not in sitemap. |
+
 ## Sitemap Policy
 
 `app/sitemap.ts` includes primary public and SEO routes only. Excludes:
 
 - Redirected persona routes (`/seniors`, `/uninsured`, `/hdhp-families`)
+- Legacy employer alias (`/for-employers` → `/employers`)
 - Deprecated routes (`/pricing`, `/faq`)
 - Enrollment (`/join`, `/join/success`)
 - Internal/demo (`/tech-strategy`, `/resources/hint-health-demo`, `/offline`)
