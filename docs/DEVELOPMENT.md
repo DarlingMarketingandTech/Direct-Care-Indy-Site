@@ -24,6 +24,21 @@ npm run lint
 - `.env.local` is gitignored — never commit it
 - Vercel env setup: `VERCEL_ENV_SETUP.md`, `RESEND_SETUP.md` (repo root)
 
+### Prospect scheduler CTAs (demo-safe)
+
+High-intent “Talk With Our Local Care Team” and quiz result schedule links use `getDpcQuizScheduleLink()` from `lib/dpc-fit-quiz.ts`. When the matching `NEXT_PUBLIC_SCHEDULE_*` env var is empty, each key falls back to `/contact?source=quiz&intent=…` — there are **no** live `/schedule/*` app routes.
+
+| Surface | Schedule key | File |
+|---------|--------------|------|
+| `/individuals` | `individual` | `app/individuals/page.tsx` |
+| `/families` | `family` | `app/families/page.tsx` |
+| `/membership` | `individual` | `components/membership/MembershipPricingView.tsx` |
+| `/employers` | `employerCore` | `components/employers/EmployersView.tsx` |
+| `/brokers` | `broker` | `app/brokers/page.tsx` |
+| Quiz results | per result | `components/dpc-fit-quiz/DpcQuizResultCard.tsx`, `lib/dpc-fit-quiz.ts` |
+
+Generic `/contact` links (homepage, providers, locations, blog) are intentional for location/hours context — not scheduler overrides. Production Cal.com URLs: Phase 8 (`NEXT_PUBLIC_SCHEDULE_*` in `.env.example`).
+
 ## Sensitive areas (no-touch without explicit approval)
 
 See [`PROJECT_MEMORY.md` § No-touch zones](./PROJECT_MEMORY.md#no-touch-zones):

@@ -228,11 +228,9 @@ Report: files changed, build result, lint result, follow-up issues.
 
 ## Deprecated — do not reintroduce
 
-Removed files: `MembershipConfigurator`, `PricingCalculator`, `PricingTiers`, `SavingsPersonas`, `Testimonials`/`TestimonialsCarousel`, `TierDisplay`, `ValueBanner`, `LabPharmacySavingsTable`, `TheWraparoundGuide`, `lib/pricing.ts`, `RoundTableOverview` (replaced by `components/providers/RoundTableModelSection.tsx`).
+Removed files: `MembershipConfigurator`, `PricingCalculator`, `PricingTiers`, `SavingsPersonas`, `Testimonials`/`TestimonialsCarousel`, `TierDisplay`, `ValueBanner`, `LabPharmacySavingsTable`, `TheWraparoundGuide`, `lib/pricing.ts`, `RoundTableOverview` (replaced by `components/providers/RoundTableModelSection.tsx`), `SeniorSavingsCalculator`, `EmployerSavingsCalculator`.
 
-Removed patterns: age-band pricing, family-cap logic, household calculators, active `/pricing` page (redirect only), quiz-first as primary site strategy, global header quiz CTA, “Find a provider near you”, `MEMBER_COUNT` footer social proof, savings calculators on SEO pages (`SeniorSavingsCalculator` on locations/blog), `/team` page (redirect to `/providers`).
-
-Unused but still in repo (cleanup queued): `components/SeniorSavingsCalculator.tsx`, `components/EmployerSavingsCalculator.tsx` — do not re-wire to public pages.
+Removed patterns: age-band pricing, family-cap logic, household calculators, active `/pricing` page (redirect only), quiz-first as primary site strategy, global header quiz CTA, “Find a provider near you”, `MEMBER_COUNT` footer social proof, savings calculators on SEO pages, `/team` page (redirect to `/providers`).
 
 ---
 
