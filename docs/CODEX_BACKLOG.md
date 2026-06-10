@@ -15,13 +15,13 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Dimension | Score | Notes |
 |-----------|-------|-------|
 | Architecture | 9 | Providers module, governed pricing, env-gated GTM |
-| Conversion | 8 | Audience routing + resource forms strong; quiz still competes on membership/B2B |
+| Conversion | 8 | Audience routing + resource forms strong; quiz demotion pass 2 in 7.4 |
 | SEO | 6 | Preview noindexed (`IS_DEMO`); Medigap claims fixed in 7.5; orphan routes open |
 | Content | 7 | Core pages governed; 24/7 / savings language on location SEO routes |
 | Documentation | 8 | Strategy docs accurate; this backlog updated post-audit |
 | Maintainability | 7 | Dead calculators remain; minor doc drift in `MOBILE_APP_ARCHITECTURE.md` |
 
-**Top open risks:** Quiz on membership/employers/brokers + mobile sticky (7.4), production indexing blocked until Phase 8, location SEO claims (optional follow-up).
+**Top open risks:** Production indexing blocked until Phase 8, `/for-employers` sitemap (7.6), location SEO claims (optional follow-up).
 
 **Verified on `main`:** `npm run build` + `npm run lint` pass; 49 static pages; 3 provider bios.
 
@@ -44,8 +44,8 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Dark mode / heading contrast (`@custom-variant dark`) | Done — PR #41 |
 | Doc sync (`PROJECT_MEMORY`, `ROUTE-MAP`, `COMPONENT-MAP`) | Done — PR #42 |
 | `/providers` hub + bio polish | Done — PR #43 |
-| Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | Planned — Task 7.4 |
-| Medigap blog claims governance | **Open — `codex/medigap-claims-governance`** |
+| Medigap blog claims governance | Done — PR #44 |
+| Quiz demotion pass 2 (membership, employers, brokers, mobile sticky) | **Open — `codex/quiz-demote-pass-2`** |
 | `/for-employers` sitemap cleanup (redirect exists) | Partial — Task 7.6 |
 | Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
 
@@ -55,12 +55,11 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
-| 1 | `codex/quiz-demote-pass-2` | chore: demote quiz on membership and B2B pages | — |
-| 2 | `codex/employer-route-consolidation` | chore: remove /for-employers from sitemap; update ROUTE-MAP | redirect already on `main` |
-| 3 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
-| 4 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
-| 5 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
-| 6 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
+| 1 | `codex/employer-route-consolidation` | chore: remove /for-employers from sitemap; update ROUTE-MAP | redirect already on `main` |
+| 2 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
+| 3 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
+| 4 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
+| 5 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -121,7 +120,7 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 - [x] **4.1** `/team` removed; 301 → `/providers`; `/about` CTA updated
 - [x] **4.2 (partial)** Sticky bar → membership/contact; mobile menu audience links; quiz hidden on `/membership`, `/what-is-dpc`
-- [ ] **4.2 (remainder)** Quiz bands on `/membership`, `/employers`, `/brokers`; mobile sticky scope — see Phase 7.4
+- [x] **4.2 (remainder)** Quiz bands removed; mobile sticky scope extended — Task 7.4
 
 </details>
 
@@ -207,24 +206,16 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.4: Quiz demotion pass 2
 
-**Status:** Planned — **P1 from post–PR #43 audit**
-
-**Branch:** `codex/quiz-demote-pass-2`
+**Status:** Done — branch `codex/quiz-demote-pass-2` (PR pending)
 
 **Priority:** P1 — strategy alignment (audit: quiz still competes on membership/B2B)
 
-**Scope:**
+**Delivered:**
 
-- Remove or downgrade `DpcQuizCtaBand` on `/membership`, `/employers`, `/brokers` where audience/resource CTAs already lead
-- Extend `DpcQuizMobileSticky` `HIDDEN_PATHS` to include `/individuals`, `/families`, `/employers`, `/brokers`
-- Keep quiz on `/quiz`, homepage tertiary band, one contextual band on `/what-is-dpc`, and “New to DPC” card secondary link
-- Verify no mobile CTA stacking conflicts with `MobileAppBar`
-
-**Acceptance criteria:**
-
-- [ ] Quiz is clearly secondary on membership and B2B pages
-- [ ] No quiz-primary placement on audience resource form sections
-- [ ] Build + lint pass
+- [x] Removed `DpcQuizCtaBand` from `/membership`, `/employers`, `/brokers`
+- [x] Extended `DpcQuizMobileSticky` `HIDDEN_PATHS` to `/individuals`, `/families`, `/employers`, `/brokers`
+- [x] Kept quiz on `/quiz`, homepage tertiary band, `/what-is-dpc` contextual band, individuals/families inline links
+- [x] Updated `PROJECT_MEMORY.md` §8 and `MOBILE_APP_ARCHITECTURE.md`
 
 **Key files:** `components/membership/MembershipPricingView.tsx`, `components/employers/EmployersView.tsx`, `app/brokers/page.tsx`, `components/dpc-fit-quiz/DpcQuizMobileSticky.tsx`
 
@@ -232,7 +223,7 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.5: Medigap blog claims governance
 
-**Status:** Done — branch `codex/medigap-claims-governance` (PR pending)
+**Status:** Done — PR #44 (`codex/medigap-claims-governance`)
 
 **Priority:** P0 — compliance / SEO risk (audit critical finding #1)
 
@@ -406,9 +397,9 @@ Task 7.1: dark mode contrast ────────────── DONE (PR
 Task 7.3: doc-sync-post-audit ───────────── DONE (PR #42)
 Task 7.2: providers-bio-polish ──────────── DONE (PR #43)
     │
-    ├──► Task 7.5: medigap-claims-governance ── DONE (PR pending)
-    ├──► Task 7.4: quiz-demote-pass-2  ◄── NEXT
-    ├──► Task 7.6: employer-route-consolidation (sitemap remainder)
+    ├──► Task 7.5: medigap-claims-governance ── DONE (PR #44)
+    ├──► Task 7.4: quiz-demote-pass-2 ─────── DONE (PR pending)
+    ├──► Task 7.6: employer-route-consolidation  ◄── NEXT (sitemap remainder)
     ├──► Task 7.7: dead-code-cleanup
     ├──► Task 7.9: pwa-shortcut-alignment
     └──► Task 7.8: demo-scheduler verification

@@ -34,7 +34,6 @@ import {
   NOT_INCLUDED,
   PHARMACY_PRICING_DISCLAIMER,
 } from "@/lib/content/membership-pricing";
-import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 import { getDpcQuizScheduleLink } from "@/lib/dpc-fit-quiz";
 
 const PLAN_ICONS = {
@@ -548,15 +547,6 @@ export function MembershipPricingView() {
               ))}
             </ol>
           </ScrollTransition>
-        </div>
-      </section>
-
-      <section className="section-padding-sm">
-        <div className="content-container max-w-4xl mx-auto">
-          <DpcQuizCtaBand
-            headline="Still deciding?"
-            body="Still deciding? Take the quiz or book a 30-minute intro meeting if your result suggests a fit."
-          />
         </div>
       </section>
 

@@ -4,7 +4,18 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { DpcQuizTrigger } from "./DpcQuizTrigger";
 
-const HIDDEN_PATHS = ["/", "/quiz", "/contact", "/membership", "/what-is-dpc", "/providers"];
+const HIDDEN_PATHS = [
+  "/",
+  "/quiz",
+  "/contact",
+  "/membership",
+  "/what-is-dpc",
+  "/providers",
+  "/individuals",
+  "/families",
+  "/employers",
+  "/brokers",
+];
 
 export function DpcQuizMobileSticky() {
   const pathname = usePathname();
