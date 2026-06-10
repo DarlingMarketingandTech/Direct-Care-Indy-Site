@@ -56,9 +56,8 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
 | 1 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
-| 2 | `codex/pwa-shortcut-alignment` | fix: align PWA schedule shortcut with prospect path | — |
-| 3 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
-| 4 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
+| 2 | `codex/demo-scheduler-wiring` | chore: audit scheduler CTAs (mostly done; verify) | Phases 0–4 |
+| 3 | `codex/launch-readiness` | chore: production domain and indexing cutover | **Stakeholder gate — Phase 8** |
 
 ---
 
@@ -305,24 +304,25 @@ Prioritized from June 10, 2026 growth audits (initial + post–PR #43). **Start 
 
 ### Task 7.9: PWA manifest shortcut alignment
 
-**Status:** Planned
+**Status:** Done — branch `codex/pwa-shortcut-alignment` (PR pending)
 
 **Branch:** `codex/pwa-shortcut-alignment`
 
 **Priority:** P3 — mobile conversion clarity
 
-**Scope:**
+**Delivered:**
 
-- `public/manifest.json` shortcut “Book Appointment” currently → `/join` (member enrollment)
-- Repoint prospect scheduling to `/contact` or demo scheduler pattern until production URLs approved
-- Keep Patient Portal shortcut → Hint login
+- [x] Repointed “Book Appointment” shortcut from `/join` → `/contact` (prospect path)
+- [x] Renamed shortcut to “Talk With Our Care Team” / “Contact” to match site CTA language
+- [x] Patient Portal shortcut unchanged → Hint login
+- [x] Documented shortcut policy in `MOBILE_APP_ARCHITECTURE.md`
 
 **Acceptance criteria:**
 
-- [ ] PWA shortcuts distinguish member vs prospect paths
-- [ ] Build + lint pass
+- [x] PWA shortcuts distinguish member vs prospect paths
+- [x] Build + lint pass
 
-**Key files:** `public/manifest.json`
+**Key files:** `public/manifest.json`, `docs/MOBILE_APP_ARCHITECTURE.md`
 
 ---
 
@@ -391,10 +391,10 @@ Task 7.2: providers-bio-polish ──────────── DONE (PR #43
     │
     ├──► Task 7.5: medigap-claims-governance ── DONE (PR #44)
     ├──► Task 7.4: quiz-demote-pass-2 ─────── DONE (PR #45)
-    ├──► Task 7.6: employer-route-consolidation ─ DONE (PR pending)
-    ├──► Task 7.7: dead-code-cleanup  ◄── NEXT
-    ├──► Task 7.9: pwa-shortcut-alignment
-    └──► Task 7.8: demo-scheduler verification
+    ├──► Task 7.6: employer-route-consolidation ─ DONE (PR #46)
+    ├──► Task 7.7: dead-code-cleanup  ◄── NEXT (PR pending)
+    ├──► Task 7.9: pwa-shortcut-alignment ─ DONE (PR pending)
+    └──► Task 7.8: demo-scheduler verification  ◄── after 7.7 merge
               │
               ▼
         Phase 8: pre-launch (stakeholder gate)

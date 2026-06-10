@@ -32,10 +32,10 @@
       "icons": [{ "src": "/images/logos/dci-icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "Book Appointment",
-      "short_name": "Schedule",
-      "description": "Schedule your next visit",
-      "url": "/join",
+      "name": "Talk With Our Care Team",
+      "short_name": "Contact",
+      "description": "Call, text, or request a conversation about membership — prospect scheduling, not enrollment",
+      "url": "/contact",
       "icons": [{ "src": "/images/logos/dci-icon-192.png", "sizes": "192x192" }]
     },
     {

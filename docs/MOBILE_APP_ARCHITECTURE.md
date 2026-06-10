@@ -64,7 +64,7 @@ File: `components/MobileAppBar.tsx`
 ## PWA (summary)
 
 - Install prompt: `components/PWAInstallPrompt.tsx` (dismissal persisted ~7 days)
-- Manifest shortcuts should target `/membership`, not `/pricing`
+- Manifest shortcuts: **Patient Portal** → Hint login (members); **Contact** → `/contact` (prospects); **Membership** → `/membership` — do not point prospect shortcuts at `/join`
 - Service worker: network-first with cache fallback (`public/sw.js`)
 
 For historical PWA rollout notes, see [`archive/design-reports/PWA_TRANSFORMATION_COMPLETE.md`](./archive/design-reports/PWA_TRANSFORMATION_COMPLETE.md).
