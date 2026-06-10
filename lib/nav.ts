@@ -5,7 +5,7 @@ export const mainNav = [
   { label: "For Employers", href: "/employers" },
   { label: "What Is DPC?", href: "/what-is-dpc" },
   { label: "Our Team", href: "/providers" },
-  { label: "Contact", href: "/contact" },
+  { label: "Location & Contact", href: "/contact" },
 ] as const;
 
 /** Footer-only links — not shown in the main header nav */

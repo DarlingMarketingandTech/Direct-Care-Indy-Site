@@ -384,39 +384,8 @@ export function WhatIsDpcView() {
             index={index}
             muted={index % 2 === 1}
           />
-          {section.id === "comprehensive-care" && (
-            <section className="section-padding-sm scroll-mt-28">
-              <div className="content-container max-w-4xl mx-auto">
-                <DpcQuizCtaBand
-                  headline="Wondering if DPC fits your situation?"
-                  body="Still wondering if DPC fits your situation? Take the quiz and get a personalized next step."
-                  variant="muted"
-                />
-              </div>
-            </section>
-          )}
-          {index === WHAT_IS_DPC_BENEFIT_SECTIONS.length - 1 && (
-            <section className="section-padding-sm scroll-mt-28">
-              <div className="content-container max-w-4xl mx-auto">
-                <DpcQuizCtaBand
-                  headline="Ready for a clearer next step?"
-                  body="Take the 60-second quiz and see whether membership, family care, or employer options may be a fit."
-                />
-              </div>
-            </section>
-          )}
         </div>
       ))}
-
-      <section className="section-padding-sm">
-        <div className="content-container max-w-4xl mx-auto">
-          <DpcQuizCtaBand
-            headline="Questions before you decide?"
-            body="Still wondering if DPC fits your situation? Take the quiz and get a personalized next step."
-            variant="muted"
-          />
-        </div>
-      </section>
 
       {/* FAQ */}
       <section id="faq" className="section-padding scroll-mt-28 bg-muted/40">
@@ -429,13 +398,6 @@ export function WhatIsDpcView() {
               </div>
               <h2 className="heading-2 text-foreground">Common questions about DirectCare Indy</h2>
               <p className="mt-4 text-muted-foreground">{DPC_FAQ_INTRO}</p>
-              <div className="mt-8 text-left">
-                <DpcQuizCtaBand
-                  headline="Not sure which FAQ applies to you?"
-                  body="Not sure which FAQ applies to you? Take the quiz."
-                  variant="muted"
-                />
-              </div>
               <p className="mt-4 text-sm text-muted-foreground">
                 Still have questions? Call or text{" "}
                 <a href="tel:+13179566288" className="font-semibold text-secondary hover:underline">

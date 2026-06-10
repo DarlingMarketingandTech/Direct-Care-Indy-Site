@@ -5,7 +5,6 @@ import { Phone, Mail, MapPin, CheckCircle2, TrendingDown, Clock, DollarSign, Hea
 import { LocalBusinessSchema } from "@/components/StructuredData";
 import { NEIGHBORHOODS, BUSINESS_INFO } from "@/lib/constants";
 import WholesaleLabSearch from "@/components/WholesaleLabSearch";
-import { SeniorSavingsCalculator } from "@/components/SeniorSavingsCalculator";
 import { SITE_ASSETS } from "@/lib/images";
 
 interface NeighborhoodPageProps {
@@ -301,22 +300,34 @@ export default async function NeighborhoodPage({ params }: NeighborhoodPageProps
           </div>
         </section>
 
-        {/* Senior Savings Calculator - For Zionsville and Carmel */}
-        {(neighborhoodKey === 'zionsville' || neighborhoodKey === 'carmel') && (
+        {(neighborhoodKey === "zionsville" || neighborhoodKey === "carmel") && (
           <section className="py-16 bg-background">
             <div className="container mx-auto px-4">
-              <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-primary mb-4">
-                    Calculate Your {neighborhoodKey === 'carmel' ? 'Medigap Birthday Rule' : 'Medicare'} Savings
-                  </h2>
-                  <p className="text-xl text-gray-600 dark:text-gray-300">
-                    {neighborhoodKey === 'carmel'
-                      ? 'See how much you can save by combining Medigap plan switching with HSA-eligible Direct Primary Care'
-                      : 'See how much you can save with HSA-eligible Direct Primary Care for Medicare beneficiaries'}
-                  </p>
+              <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-card p-8 text-center shadow-sm">
+                <h2 className="text-3xl font-bold text-primary mb-4">
+                  {neighborhoodKey === "carmel"
+                    ? "Explore senior membership options"
+                    : "Explore Medicare-friendly primary care access"}
+                </h2>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Pricing and fit depend on your coverage, household, and care needs. Review governed
+                  membership plans as a starting point, then call or text the clinic to confirm what may
+                  work for you. Direct Primary Care is not insurance.
+                </p>
+                <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <Link
+                    href="/membership#membership-plans"
+                    className="inline-flex rounded-full bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-secondary/90"
+                  >
+                    View membership pricing
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="inline-flex rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+                  >
+                    Talk with our local care team
+                  </Link>
                 </div>
-                <SeniorSavingsCalculator />
               </div>
             </div>
           </section>

@@ -1,51 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, Mail, MapPin, Award, Shield, Users } from "lucide-react";
+import { Phone, Mail, MapPin, Award, Shield } from "lucide-react";
 import { SiteLogoMark } from "@/components/SiteLogoMark";
-import { useEffect, useState } from "react";
-import { MEMBER_COUNT } from "@/lib/constants";
 import { footerNav } from "@/lib/nav";
 
 export function SharedFooter() {
-  const [memberCount, setMemberCount] = useState(MEMBER_COUNT);
-
-  useEffect(() => {
-    // Animate member count on mount (could be dynamic in production)
-    const targetCount = MEMBER_COUNT;
-    let currentCount = Math.max(150, targetCount - 50);
-    const increment = 1;
-    const duration = 2000; // 2 seconds
-    const steps = 50;
-    const stepDuration = duration / steps;
-
-    const timer = setInterval(() => {
-      currentCount += increment;
-      if (currentCount >= targetCount) {
-        currentCount = targetCount;
-        clearInterval(timer);
-      }
-      setMemberCount(currentCount);
-    }, stepDuration);
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <footer className="bg-card text-card-foreground border-t border-border">
       <div className="container mx-auto px-4">
         {/* Trust Badges Section */}
         <div className="max-w-6xl mx-auto mb-8 pb-8 border-b border-border">
           <div className="flex flex-wrap items-center justify-center gap-6 mb-6">
-            {/* Member Count Ticker */}
-            <div className="flex items-center gap-2 bg-secondary text-secondary-foreground px-4 py-2 rounded-full">
-              <Users className="w-5 h-5" />
-              <span className="font-bold text-lg">
-                Join {memberCount}+ Indianapolis Families
-              </span>
-            </div>
-
-            {/* Trust Badges */}
             <div className="flex items-center gap-2 bg-muted text-muted-foreground px-4 py-2 rounded-full border border-border">
               <Award className="w-5 h-5 text-secondary" />
               <span className="font-semibold">Member of the DPC Alliance</span>
@@ -98,6 +64,22 @@ export function SharedFooter() {
                   className="text-muted-foreground hover:text-secondary transition-colors"
                 >
                   How It Works
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/individuals"
+                  className="text-muted-foreground hover:text-secondary transition-colors"
+                >
+                  For Individuals
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/families"
+                  className="text-muted-foreground hover:text-secondary transition-colors"
+                >
+                  For Families
                 </Link>
               </li>
               <li>

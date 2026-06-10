@@ -67,7 +67,7 @@ export function isQuizContactIntent(value: string | null): value is QuizContactI
 }
 
 export const DEFAULT_CONTACT_INTRO = {
-  headline: "Contact Us",
+  headline: "Location & Contact",
   intro:
-    "Have questions about Direct Primary Care, membership plans, or employer options? Call, text, or send us a message — we're here to help.",
+    "Visit us at 7911 N. Michigan Rd. in Indianapolis, or call, text, or send a message about membership, employer options, or broker resources.",
 };

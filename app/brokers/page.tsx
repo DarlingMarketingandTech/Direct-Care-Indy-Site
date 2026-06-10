@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 import { LeadMagnetCard } from "@/components/LeadMagnetCard";
 import { SITE_ASSETS } from "@/lib/images";
 import { brokersMetadata } from "@/lib/metadata";
+import { AudienceResourceForm } from "@/components/audience/AudienceResourceForm";
+import { AUDIENCE_RESOURCE_CONFIGS } from "@/lib/content/audience-resources";
+import { getDpcQuizScheduleLink } from "@/lib/dpc-fit-quiz";
 import { DpcQuizCtaBand } from "@/components/dpc-fit-quiz";
 
 export const metadata: Metadata = brokersMetadata;
@@ -45,15 +48,7 @@ export default function BrokersPage() {
           coverage — not replace insurance.
         </p>
 
-        <div className="mt-10">
-          <DpcQuizCtaBand
-            headline="See how DPC may fit your client's plan strategy"
-            body="Take the broker quiz for a personalized next step — broker path preselected."
-            initialAudience="broker"
-          />
-        </div>
-
-        <section className="mt-12">
+        <section id="broker-toolkit" className="mt-10">
           <h2 className="text-2xl font-bold text-foreground">Broker resources</h2>
           <p className="mt-2 text-muted-foreground">
             Downloadable tools for employer conversations — not insurance products.
@@ -82,6 +77,23 @@ export default function BrokersPage() {
           </div>
         </section>
 
+        <div className="mt-12 max-w-5xl">
+          <AudienceResourceForm
+            config={AUDIENCE_RESOURCE_CONFIGS.brokers}
+            source="brokers_page"
+            sourcePage="/brokers"
+          />
+        </div>
+
+        <div className="mt-12">
+          <DpcQuizCtaBand
+            headline="Not sure where to start?"
+            body="Take the broker quiz for a personalized next step — broker path preselected."
+            initialAudience="broker"
+            variant="muted"
+          />
+        </div>
+
         <section className="mt-16 grid gap-6 sm:grid-cols-2">
           <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-foreground">
@@ -102,7 +114,7 @@ export default function BrokersPage() {
               will respond within one business day.
             </p>
             <Link
-              href="/contact?source=quiz&intent=broker"
+              href={getDpcQuizScheduleLink("broker")}
               className="mt-5 inline-flex rounded-full bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
             >
               Request broker conversation

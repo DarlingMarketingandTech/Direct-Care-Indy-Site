@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { DpcQuizTrigger } from "./DpcQuizTrigger";
 
-const HIDDEN_PATHS = ["/", "/quiz", "/contact"];
+const HIDDEN_PATHS = ["/", "/quiz", "/contact", "/membership", "/what-is-dpc"];
 
 export function DpcQuizMobileSticky() {
   const pathname = usePathname();
