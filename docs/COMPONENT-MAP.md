@@ -109,6 +109,8 @@ The following legacy files are no longer part of active pricing architecture:
 - `components/ValueBanner.tsx`
 - `components/LabPharmacySavingsTable.tsx`
 - `components/TheWraparoundGuide.tsx`
+- `components/SeniorSavingsCalculator.tsx`
+- `components/EmployerSavingsCalculator.tsx`
 - `lib/pricing.ts`
 
 Do not recreate these patterns in active UI.
