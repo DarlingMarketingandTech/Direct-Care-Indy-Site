@@ -61,6 +61,19 @@ Component and content-source inventory for membership pricing, quiz flow, and re
 - Uses provider trust data from `lib/data/providers.ts`
 - Uses single-clinic contact details from `lib/content/contact.ts`
 
+## Active Providers Route Composition
+
+| Component | File | Status | Content source |
+|-----------|------|--------|----------------|
+| `ProvidersView` | `components/providers/ProvidersView.tsx` | Active | `/providers` hub — hero, sticky nav, Round Table, MD featured, PA grid, membership/contact CTA |
+| `ProviderBioView` | `components/providers/ProviderBioView.tsx` | Active | `/providers/[slug]` — philosophy, ideal-for, credentials, related clinicians |
+| `ProviderCard` | `components/providers/ProviderCard.tsx` | Active | Shared card (`featured` / `compact` / `inline`) — also homepage, `/individuals`, `/families` |
+| `RoundTableModelSection` | `components/providers/RoundTableModelSection.tsx` | Active | Clinical 90/10 Round Table story (not membership `NinetyTenModelSection`) |
+| `ProvidersSectionNav` | `components/providers/ProvidersSectionNav.tsx` | Active | Sticky in-page nav |
+| Provider data | `lib/data/providers.ts` | Active | **james-pike**, **karina-white**, **chase-keirn** only |
+
+Removed: `components/RoundTableOverview.tsx` (legacy gray/teal layout).
+
 ## Active Audience Lead Form Components
 
 | Component | File | Status | Notes |

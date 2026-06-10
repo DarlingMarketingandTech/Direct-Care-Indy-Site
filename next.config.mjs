@@ -32,6 +32,11 @@ const nextConfig = {
         destination: "/providers",
         permanent: true,
       },
+      {
+        source: "/providers/maddie-klinger",
+        destination: "/providers",
+        permanent: true,
+      },
     ];
   },
   images: {

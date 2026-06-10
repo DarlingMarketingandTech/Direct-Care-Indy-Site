@@ -24,8 +24,8 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 | `/team` → `/providers` redirect | Done — PR #40 |
 | `MEMBER_COUNT` footer + SEO calculators removed | Done — PR #40 |
 | Env-gated GTM (`NEXT_PUBLIC_GTM_ID`) | Done — PR #40 |
-| Dark mode / heading contrast (`@custom-variant dark`) | **Open — PR #41** |
-| `/providers` hub + bio polish | Planned — Phase 7.2 |
+| Dark mode / heading contrast (`@custom-variant dark`) | Done — PR #41 |
+| `/providers` hub + bio polish | **Open — `codex/providers-bio-polish`** |
 | Quiz demotion pass 2 (membership, employers, mobile sticky) | Planned — Phase 7.4 |
 | Doc sync (`PROJECT_MEMORY`, `ROUTE-MAP`, this file) | Done — Phase 7.3 |
 | Production scheduler / GA4 / domain cutover | Explicitly deferred — Phase 8 |
@@ -36,10 +36,8 @@ Each task should be a focused branch with `npm run build` + `npm run lint` verif
 
 | Order | Branch | Suggested PR title | Depends on |
 |-------|--------|-------------------|------------|
-| 1 | `fix/text-contrast-dark-mode` | fix: class-based dark mode and heading contrast | — *(PR #41 — merge first)* |
-| — | *(done)* | docs: sync PROJECT_MEMORY, ROUTE-MAP, CODEX_BACKLOG after PR #40 | — |
+| 1 | `codex/providers-bio-polish` | feat: redesign providers hub and provider bios | PR #41 merged |
 | 2 | `codex/medigap-claims-governance` | fix: qualify Medigap blog savings claims | — |
-| 3 | `codex/providers-bio-polish` | feat: improve providers hub and provider bios | PR #41 merged |
 | 4 | `codex/quiz-demote-pass-2` | chore: demote quiz on membership and B2B pages | — |
 | 5 | `codex/employer-route-consolidation` | chore: redirect /for-employers to /employers | — |
 | 6 | `codex/dead-code-cleanup` | chore: remove unused calculator components | — |
@@ -146,29 +144,25 @@ Prioritized from June 10, 2026 growth audit. **Start here** after PR #41 merges.
 
 ### Task 7.2: Providers hub and bio polish
 
-**Status:** Next major feature branch
-
-**Branch:** `codex/providers-bio-polish`
+**Status:** Done — branch `codex/providers-bio-polish` (PR pending)
 
 **Priority:** P1 — highest trust/conversion gap after audience pages
 
-**Depends on:** Task 7.1
+**Depends on:** Task 7.1 (merged PR #41)
 
-**Scope:**
+**Delivered:**
 
-- Improve `/providers` hub layout, hierarchy, and CTAs (membership, contact, audience links)
-- Strengthen each `/providers/[slug]` bio: credentials, care philosophy, patient-fit context
-- Align Round Table story with `/how-it-works` without duplicating full page
-- Cross-link from homepage provider strip and audience pages
-- Do **not** reintroduce `/team`
+- [x] `components/providers/*` — hub (`ProvidersView`), bios (`ProviderBioView`), shared `ProviderCard`, clinical `RoundTableModelSection`, sticky `ProvidersSectionNav`
+- [x] Mobile-first layout aligned with membership/individuals design tokens
+- [x] Hub + bio CTAs: `/membership` + `/contact` (not quiz-primary)
+- [x] `carePhilosophy` + `idealFor` on active provider bios in `lib/data/providers.ts`
+- [x] Shared `ProviderCard` on homepage, `/individuals`, `/families`
+- [x] Active roster: **james-pike**, **karina-white**, **chase-keirn** only (Maddie Klinger removed; `/providers/maddie-klinger` → `/providers`)
+- [x] Retired `RoundTableOverview.tsx`
+- [x] Quiz mobile sticky hidden on `/providers`
+- [x] Build + lint pass
 
-**Acceptance criteria:**
-
-- [ ] All four provider slugs render improved bios from `lib/data/providers.ts` (or approved content source)
-- [ ] Single canonical care-team path remains `/providers`
-- [ ] Build + lint pass
-
-**Key files:** `app/providers/page.tsx`, `app/providers/[slug]/page.tsx`, `lib/data/providers.ts`
+**Key files:** `components/providers/*`, `app/providers/**`, `lib/data/providers.ts`, `next.config.mjs`
 
 ---
 

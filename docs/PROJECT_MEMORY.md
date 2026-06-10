@@ -113,6 +113,8 @@ Implemented via `lib/content/audience-resources.ts` and `components/audience/Aud
 
 - **Brokers stay out of main nav** (`lib/nav.ts`). OK in footer, homepage audience card, and employer contextual links.
 - **Provider trust is canonical on `/providers` and `/providers/[slug]`.** `/team` is removed; 301 redirect to `/providers` (`next.config.mjs`). Nav label “Our Team” → `/providers`.
+- **Active care team roster** (source: `lib/data/providers.ts`): James D. Pike (Medical Director), Karina White (Lead PA), Chase Keirn (Lead PA). Do not list clinicians who are not on the approved roster (e.g. Maddie Klinger removed pending confirmation). Legacy `/providers/maddie-klinger` → `/providers`.
+- **Providers UI:** `components/providers/*` (`ProvidersView`, `ProviderBioView`, `ProviderCard`, `RoundTableModelSection`). Hub CTAs: `/membership` + `/contact` — not quiz-primary. Quiz mobile sticky hidden on `/providers`.
 - **`/contact` is Location & Contact** — nav label and page copy are location-first (`lib/nav.ts`, `components/contact/ContactPageContent.tsx`).
 
 ---
@@ -133,7 +135,7 @@ Implemented via `lib/content/audience-resources.ts` and `components/audience/Aud
 | `/contact` | Location & Contact — single-clinic hub |
 | `/quiz` | Standalone DPC fit quiz (secondary tool) |
 
-**Redirects:** `/pricing` → `/membership`, `/faq` → `/what-is-dpc#faq`, `/team` → `/providers` (`next.config.mjs`).
+**Redirects:** `/pricing` → `/membership`, `/faq` → `/what-is-dpc#faq`, `/team` → `/providers`, `/providers/maddie-klinger` → `/providers` (`next.config.mjs`).
 
 Full inventory: [`ROUTE-MAP.md`](./ROUTE-MAP.md). Next implementation queue: [`CODEX_BACKLOG.md`](./CODEX_BACKLOG.md) Phase 7+.
 
@@ -191,7 +193,7 @@ Homepage and membership page must import from this file; do not hardcode plan pr
 - No medical history or urgent symptoms collection.
 - Include medical disclaimer and 911 emergency guidance.
 - Use `DpcQuizTrigger` / `DpcQuizCtaBand` sparingly — prefer audience-specific CTAs on audience pages.
-- Sitewide demotion (partial): no global header quiz; homepage sticky quiz hidden; `StickySavingsBar` → membership/contact; quiz hidden on `/membership` and `/what-is-dpc` mobile sticky. **Remaining:** quiz bands on some B2B/pricing pages — see `CODEX_BACKLOG.md` Task 7.4.
+- Sitewide demotion (partial): no global header quiz; homepage sticky quiz hidden; `StickySavingsBar` → membership/contact; quiz hidden on `/membership`, `/what-is-dpc`, and `/providers` mobile sticky. **Remaining:** quiz bands on some B2B/pricing pages — see `CODEX_BACKLOG.md` Task 7.4.
 
 ---
 
@@ -225,7 +227,7 @@ Report: files changed, build result, lint result, follow-up issues.
 
 ## Deprecated — do not reintroduce
 
-Removed files: `MembershipConfigurator`, `PricingCalculator`, `PricingTiers`, `SavingsPersonas`, `Testimonials`/`TestimonialsCarousel`, `TierDisplay`, `ValueBanner`, `LabPharmacySavingsTable`, `TheWraparoundGuide`, `lib/pricing.ts`.
+Removed files: `MembershipConfigurator`, `PricingCalculator`, `PricingTiers`, `SavingsPersonas`, `Testimonials`/`TestimonialsCarousel`, `TierDisplay`, `ValueBanner`, `LabPharmacySavingsTable`, `TheWraparoundGuide`, `lib/pricing.ts`, `RoundTableOverview` (replaced by `components/providers/RoundTableModelSection.tsx`).
 
 Removed patterns: age-band pricing, family-cap logic, household calculators, active `/pricing` page (redirect only), quiz-first as primary site strategy, global header quiz CTA, “Find a provider near you”, `MEMBER_COUNT` footer social proof, savings calculators on SEO pages (`SeniorSavingsCalculator` on locations/blog), `/team` page (redirect to `/providers`).
 

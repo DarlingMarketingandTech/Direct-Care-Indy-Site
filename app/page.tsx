@@ -20,6 +20,7 @@ import {
   MEMBERSHIP_PLANS,
   MEMBERSHIP_PLANS_INTRO,
 } from "@/lib/content/membership-pricing";
+import { ProviderCard } from "@/components/providers/ProviderCard";
 import { getLeadPAs, getMedicalDirector } from "@/lib/data/providers";
 
 export const metadata: Metadata = homeMetadata;
@@ -91,9 +92,6 @@ const audienceCards: Array<{
 
 const medicalDirector = getMedicalDirector();
 const leadProviders = getLeadPAs().slice(0, 2);
-const providerHighlights = [medicalDirector, ...leadProviders].filter(
-  (provider): provider is NonNullable<typeof provider> => Boolean(provider)
-);
 
 export default function HomePage() {
   return (
@@ -462,51 +460,39 @@ export default function HomePage() {
           </SectionHeading>
 
           <div className="mx-auto mt-12 grid max-w-6xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="section-card border-secondary/10 bg-linear-to-br from-secondary/5 to-card">
-              <div className="flex items-start gap-4">
-                <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-secondary/15 text-secondary">
-                  <ShieldCheck className="h-6 w-6" aria-hidden />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground">
-                    {medicalDirector?.name ?? "Clinical leadership you can trust"}
-                  </h2>
-                  <p className="mt-1 text-sm font-medium text-secondary">
-                    {medicalDirector?.credentials}
-                  </p>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                    {medicalDirector?.bio ??
-                      "Experienced clinical leadership helps keep the member experience personal, practical, and grounded in real medical judgment."}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid gap-4">
-              {providerHighlights.map((provider) => (
-                <article
-                  key={provider.slug}
-                  className="section-card flex items-start gap-4 border-border/80"
-                >
-                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-2xl bg-muted">
-                    <Image
-                      src={provider.image}
-                      alt={provider.name}
-                      fill
-                      className="object-cover"
-                      sizes="64px"
-                    />
+            {medicalDirector ? (
+              <ProviderCard
+                provider={medicalDirector}
+                variant="inline"
+                bioPreviewLines={4}
+              />
+            ) : (
+              <div className="section-card border-secondary/10 bg-linear-to-br from-secondary/5 to-card">
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-secondary/15 text-secondary">
+                    <ShieldCheck className="h-6 w-6" aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">{provider.name}</h3>
-                    <p className="text-sm text-secondary">
-                      {provider.credentials} | {provider.role}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {provider.highlights[0]}
+                    <h2 className="text-2xl font-bold text-foreground">
+                      Clinical leadership you can trust
+                    </h2>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                      Experienced clinical leadership helps keep the member experience personal,
+                      practical, and grounded in real medical judgment.
                     </p>
                   </div>
-                </article>
+                </div>
+              </div>
+            )}
+
+            <div className="grid gap-4">
+              {leadProviders.map((provider) => (
+                <ProviderCard
+                  key={provider.slug}
+                  provider={provider}
+                  variant="inline"
+                  highlightPreview={provider.highlights[0]}
+                />
               ))}
             </div>
           </div>
